@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nacimiento</title>
+</head>
+<body>
+    <h1 id="nacimiento">Fecha de nacimiento</h1>
+    <form id="Formulario", name="form1", method="post", action="">
+        <select name="dia" id="dia"></select>
+        <select name="mes" id="mes"></select>
+
+        <select name="anyo" id="anyo"></select>
+
+    </form>
+
+    <script>
+
+        function crearOption(select, desde, hasta, selected){
+            for(let i = desde; i <= hasta; i++){
+                const option = document.createElement("option");
+                option.value = i;
+                option.textContent = i;
+                if(i === selected){
+                    option.selected = true;
+                }
+                select.appendChild(option);
+            }
+        }
+
+        let hoy = new Date();
+        crearOption(document.getElementById("dia"), 1, 31, hoy.getDate());
+        crearOption(document.getElementById("mes"), 1, 12, hoy.getMonth()+1);
+        crearOption(document.getElementById("anyo"), 2000, 2050, hoy.getFullYear());
+
+
+    </script>
+    
+</body>
+</html>

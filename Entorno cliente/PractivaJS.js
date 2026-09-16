@@ -34,3 +34,20 @@ function ClasificarNumero(numero){
 }
 
 console.log(ClasificarNumero(7))
+
+
+let suma = 0;
+for(let i = 1; i <= 100; i++){
+    suma += i;
+}
+console.log(`La suma es ${suma}`)
+
+let  numero = 1;
+while(numero <= 20){
+    if(numero % 2 === 0){
+        console.log(`El numero ${numero} par.`);
+    }
+    numero++;
+}
+
+
