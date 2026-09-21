@@ -1,0 +1,27 @@
+<style>
+    .Caja{
+        width: 500;
+        height: 500;
+        background-color: crimson;
+    }
+</style>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Evento mouse</title>
+</head>
+<body>
+    <div id="Caja" class="Caja"></div>
+    
+    <script>
+        const caja = document.getElementById("Caja");
+        //caja.addEventListener("click", () => alert("Has hecho click."))
+        caja.addEventListener("dblclick", () => alert("Has hecho doble click."))
+        caja.addEventListener("mouseover", () => alert("Has pasado sobre el elemento."))
+        caja.addEventListener("mouseout", () => alert("Te has alido del elemento."))
+    </script>
+</body>
+</html>

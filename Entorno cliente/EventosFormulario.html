@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos de formulario</title>
+</head>
+<body>
+    <form id="form1" name="form1" method="post" action="">
+        <p>
+            <label for="nombre">Nombre Completo:</label>
+            <input type="text" id="nombre" name="nombre">
+    
+        </p>
+        <p>
+            <input type="submit" name="Button" id="button" value="Enviar">
+        </p>
+    </form>
+
+    <script>
+        function mostrarTecla(event){
+            alert(event.key);
+            if(event.ctrlKey){
+                alert("Se ha presionado la tecla Ctrl");
+            }
+        }    
+
+        const form = document.getElementById("form1");
+        const nombre = document.getElementById("nombre");
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            alert("Se ha enviado el formulario");
+        });
+
+        nombre.addEventListener("focus", () => alert("El campo de texto ha entrado en foco"));
+        nombre.addEventListener("blur", () => alert("El campo de texto ha salido de foco"));
+        nombre.addEventListener("change", () => alert("El valor del campo de texto ha cambiado"));
+        nombre.addEventListener("keyup", mostrarTecla);
+        
+    </script>
+</body>
+</html>

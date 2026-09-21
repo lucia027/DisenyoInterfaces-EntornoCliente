@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tablas random</title>
+</head>
+<body>
+    <table id="TablaSucursales" widh = "200" border ="1"></table>
+    <script>
+        const MESES = 12;
+        const tabla = document.getElementById("TablaSucursales");
+
+        let cantidadSucursales = parseInt(prompt("Ingrese el numero de sucursales."), 10)
+        if(isNaN(cantidadSucursales) || cantidadSucursales <= 0){
+            cantidadSucursales = 0;
+        }
+
+        const filaCabecera = document.createElement("tr");
+        const thSucursal= document.createElement("th");
+        thSucursal.textContent = "Sucursal";
+        filaCabecera.appendChild(thSucursal);
+
+        for(let i = 1; i <= MESES; i++){
+            const th = document.createElement("th");
+            th.textContent = `Mes ${i}`;
+            filaCabecera.appendChild(th);
+        }
+        tabla.appendChild(filaCabecera);
+
+        for(let i = 1; i <= cantidadSucursales; i++){
+            const fila = document.createElement("tr");
+            const tdNombre = document.createElement("td");
+            tdNombre.textContent = `Sucu.${i}`;
+            fila.appendChild(tdNombre);
+
+            for(let mes = 0; mes < MESES; mes++){
+                const td = document.createElement("td");
+                const inputMes = document.createElement("input");
+                inputMes.type = "text";
+                inputMes.value = `${i}-${mes+1}`;
+                inputMes.size = 5;
+                td.appendChild(inputMes);
+                fila.appendChild(td);
+
+            }
+            tabla.appendChild(fila);
+        }
+
+
+    </script>
+</body>
+</html>
