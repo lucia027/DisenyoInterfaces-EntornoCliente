@@ -1,12 +1,118 @@
+<style>
+body {
+    margin: 0;
+}
+.Fijo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    background-color: white;
+    z-index: 1000;
+}
+.Encabezado {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+     padding-top: 180px;
+
+    padding: 10px 30px;
+    box-sizing: border-box;
+
+    background-color: rgb(198, 11, 30);
+}
+.Titulo {
+    font-size: xxx-large;
+    color: white;
+    margin-left: auto;
+}
+.Menu {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    padding: 20px 0;
+
+    border-bottom: 5px solid rgb(198, 11, 30);
+}
+.Menu a {
+    flex: 1;
+
+    text-align: center;
+    text-decoration: none;
+
+    color: rgb(58, 58, 58);
+
+    font-size: 18px;
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+.Menu a:hover {
+    color: rgb(198, 11, 30);
+    transform: scale(1.1);
+}
+.Menu::before {
+    content: "";
+
+    position: absolute;
+
+    left: 33.33%;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 2px;
+    height: 30px;
+
+    background-color: rgb(198, 11, 30);
+}
+.Menu::after {
+    content: "";
+
+    position: absolute;
+
+    left: 66.66%;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 2px;
+    height: 30px;
+
+    background-color: rgb(198, 11, 30);
+}
+.Contenedor1{
+    margin-top: 30px;
+}
+</style>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="Ayuda a la infancia.">
-    <title>Document</title>
+    <title>Ayuda a la infancia.</title>
 </head>
 <body>
-    <div class="Contenedor">
+
+    <header class="Fijo">
+        <div class="Encabezado">
+            <img src="Bandera comunidad de madrid.png" width="120" height="80">
+            <div id="Titulo" class="Titulo">Linea de ayuda a la infancia</div>
+            <div id="Telefono" class="Titulo">116 112</div>
+        </div>
+        <div class="Menu">
+            <a>INICIO</a>
+            <a>LINEA TLF.</a>
+            <a>CONTACTO</a>
+        </div>
+    </header>
+    <div class="Contenedor1">
+        <img src="ChicaSola.jpeg" width="1000" height="700">
         <div class=""></div>
 
     </div>
