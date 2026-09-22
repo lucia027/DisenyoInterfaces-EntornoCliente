@@ -1,0 +1,190 @@
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #ffa9dc;
+        margin: 10;
+        padding: 10px;
+        color: #93004e;
+    }
+    li {
+        margin-bottom: 10px;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    .enfoco{
+        background-color: hsl(137, 100%, 84%);
+        border: 2px solid hsl(151, 100%, 29%);
+    }
+    input.error{
+        background-color: hsl(0, 87%, 64%);
+        border: 2px solid hsl(0, 100%, 21%);
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <form id="formRegistro">
+        <ul>
+            <li>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre">
+            </li>
+            <li>
+                <label for="direccion">Direccion:</label>
+                <input type="text" id="direccion" name="direccion">
+            </li>
+            <li>
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email">
+            </li>
+            <li>
+                <label for="edad">Edad:</label>
+                <input type="text" id="edad" name="edad">
+            </li>
+            <li>
+                <label for="estadocivil">Estado Civil:</label>
+                <select id="estadocivil" name="estadocivil" >
+                    <option value="">Seleccione...</option>
+                    <option value="soltero">Soltero</option>
+                    <option value="casado">Casado</option>
+                    <option value="divorciado">Divorciado</option>
+                    <option value="viudo">Viudo</option>
+                </select>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" id="acptoCondiciones" value="Si">
+                    Acepto las condiciones
+                </label>
+            </li>
+        </ul>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        const nombre = document.getElementById('nombre');
+        nombre.addEventListener('focus', () => entroEnFoco(nombre));
+        nombre.addEventListener('blur', () => {
+            salirDeFoco(nombre);
+            revisarObligatorio(nombre);
+            revisarLongitud(nombre, 3);
+        });
+
+        const direccion = document.getElementById('direccion');
+        direccion.addEventListener('focus', () => entroEnFoco(direccion));
+        direccion.addEventListener('blur', () => {
+            salirDeFoco(direccion);
+            revisarObligatorio(direccion);
+            revisarLongitud(direccion, 10);
+        });
+
+        const email = document.getElementById('email');
+        email.addEventListener('focus', () => entroEnFoco(email));
+        email.addEventListener('blur', () => {
+            salirDeFoco(email);
+            revisarObligatorio(email);
+            revisarLongitud(email, 5);
+        });
+
+        const edad = document.getElementById('edad');
+        edad.addEventListener('focus', () => entroEnFoco(edad));
+        edad.addEventListener('blur', () => {
+            salirDeFoco(edad);
+            revisarObligatorio(edad);
+            revisarNumero(edad);
+        });
+
+        const estadocivil = document.getElementById('estadocivil');
+        estadocivil.addEventListener('focus', () => entroEnFoco(estadocivil));
+        estadocivil.addEventListener('blur', () => {salirDeFoco(estadocivil);});
+
+        const formulario = document.getElementById('formRegistro');
+        formulario.addEventListener('submit', (event) => {
+            if(!validar()) {
+                event.preventDefault();
+                alert('Por favor, complete correctamente todos los campos obligatorios antes de enviar el formulario.');
+            } else {
+                alert('Formulario enviado correctamente');
+            }
+        });
+
+        function validar() {
+            let estadoOk = true;
+
+            const nombre = document.getElementById('nombre');
+            const direccion = document.getElementById('direccion');
+            const email = document.getElementById('email');
+            const edad = document.getElementById('edad');
+            const estadocivil = document.getElementById('estadocivil');
+            const acptoCondiciones = document.getElementById('acptoCondiciones');
+
+            if(nombre.value.length < 3) {
+                estadoOk = false;
+            }
+
+            if(direccion.value.length < 10) {
+                estadoOk = false;
+            }
+
+            if(edad.value === '' || isNaN(edad.value)) {
+                estadoOk = false;
+            }
+
+            if(!emailRegex.test(email.value)) {
+                estadoOk = false;
+            }
+
+            if(estadocivil.value === '') {
+                estadoOk = false;
+            }
+
+            if(!acptoCondiciones.checked) {
+                estadoOk = false;
+            }
+
+            if(!estadoOk) {
+               alert('Por favor, complete correctamente todos los campos obligatorios antes de enviar el formulario.'); 
+            }
+
+            return estadoOk;
+        }
+
+        function entroEnFoco(elemento) {
+            elemento.className = 'enfoco';
+        }
+
+        function salirDeFoco(elemento) {
+            elemento.className = '';
+        }
+
+        function revisarObligatorio(elemento) {
+            elemento.className = elemento.value === '' ? 'error' : '';
+        }
+
+        function revisarLongitud(elemento, minimo) {
+            if (elemento.value !== ``) {
+                elemento.className = elemento.value.length < minimo ? 'error' : '';
+            }
+        }
+
+        function revisarNumero(elemento,) {
+            if (elemento.value !== ``) {
+                elemento.className = isNaN(elemento.value) ? 'error' : '';
+            }
+        }
+
+        function revisarEmail(elemento) {
+            if (elemento.value !== ``) {
+                elemento.className = emailRegex.test(elemento.value) ? '' : 'error';
+            }
+        }
+    </script>
+</html>
