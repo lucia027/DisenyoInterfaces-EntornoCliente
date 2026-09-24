@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Pro</title>
+  <link rel="stylesheet" href="Formulario base.css">
+</head>
+<body>
+  <div id="body">
+    <h2 id="titulo">REGISTRO DE USUARIO</h2>
+
+    <form id="formulario">
+      <div>
+        <label class="linea">Nombre y apellidos</label><br>
+        <input class="caja" id="nombre" type="text" placeholder="Nombre y apellidos" maxlength="120">
+        <p class="obligatorio" id="errorNombre">Nombre obligatorio, entre 2 y 120 caracteres</p>
+      </div>
+
+      <div>
+        <label class="linea">Dirección</label><br>
+        <input class="caja" id="direccion" type="text" placeholder="Dirección" maxlength="120">
+        <p class="obligatorio" id="errorDireccion">Dirección obligatoria, entre 4 y 120 caracteres</p>
+      </div>
+
+      <div>
+        <label class="linea">Dirección completa</label><br>
+        <input class="caja" id="direccionCompleta" type="text" placeholder="Dirección completa" maxlength="200">
+        <p class="obligatorio" id="errorDireccionCompleta">Dirección completa obligatoria, entre 4 y 200 caracteres</p>
+      </div>
+
+      <div>
+        <label class="linea">Teléfono</label><br>
+        <input class="caja" id="telefono" type="text" placeholder="Teléfono" maxlength="9">
+        <p class="obligatorio" id="errorTelefono">
+          El teléfono debe tener 9 dígitos y empezar por 6, 7 o 9
+        </p>
+      </div>
+
+      <div>
+        <label class="linea">CP</label><br>
+        <input class="caja" id="codigoPostal" type="text" placeholder="Código postal" maxlength="5">
+        <p class="obligatorio" id="errorCP">
+          Código postal erróneo, 5 dígitos entre 01001 y 52006
+        </p>
+      </div>
+
+      <div>
+        <label class="linea">Ciudad</label><br>
+        <input class="caja" id="ciudad" type="text" placeholder="Ciudad">
+        <p class="obligatorio" id="errorCiudad">No puede quedar vacío</p>
+      </div>
+
+      <div>
+        <label class="linea">Provincia</label><br>
+        <select class="cajaList1" id="provincia">
+          <option value="selecciona" selected>- Selecciona provincia -</option>
+        </select>
+      </div>
+
+      <div class="noCaja">
+        <label class="linea">Preferente</label>
+        <input id="preferente" type="checkbox">
+        <span id="tooltip">Accede a una vida mejor</span>
+      </div>
+
+      <div class="noCaja" id="sexo">
+        <input id="hombre" type="radio" name="sexo" value="H">
+        <label class="linea" for="hombre">Hombre</label>
+
+        <input id="mujer" type="radio" name="sexo" value="M">
+        <label class="linea" for="mujer">Mujer</label>
+      </div>
+
+      <p class="obligatorio" id="obligatorioSexo">Campo obligatorio</p>
+
+      <button id="submit" type="submit">Enviar</button>
+    </form>
+  </div>
+
+  <script src="Validar.js"></script>
+
+  <script>
+    const nombre = document.getElementById("nombre");
+    const direccion = document.getElementById("direccion");
+    const direccionCompleta = document.getElementById("direccionCompleta");
+    const telefono = document.getElementById("telefono");
+    const codigoPostal = document.getElementById("codigoPostal");
+    const ciudad = document.getElementById("ciudad");
+    const provincia = document.getElementById("provincia");
+    const preferente = document.getElementById("preferente");
+    const contenedorSexo = document.getElementById("sexo");
+
+    const provincias = [
+      { nombre: "Álava", codigo: "01" },
+      { nombre: "Albacete", codigo: "02" },
+      { nombre: "Alicante", codigo: "03" },
+      { nombre: "Almería", codigo: "04" },
+      { nombre: "Asturias", codigo: "33" },
+      { nombre: "Ávila", codigo: "05" },
+      { nombre: "Badajoz", codigo: "06" },
+      { nombre: "Barcelona", codigo: "08" },
+      { nombre: "Burgos", codigo: "09" },
+      { nombre: "Cáceres", codigo: "10" },
+      { nombre: "Cádiz", codigo: "11" },
+      { nombre: "Cantabria", codigo: "39" },
+      { nombre: "Castellón", codigo: "12" },
+      { nombre: "Ciudad Real", codigo: "13" },
+      { nombre: "Córdoba", codigo: "14" },
+      { nombre: "Cuenca", codigo: "16" },
+      { nombre: "Girona", codigo: "17" },
+      { nombre: "Granada", codigo: "18" },
+      { nombre: "Guadalajara", codigo: "19" },
+      { nombre: "Guipúzcoa", codigo: "20" },
+      { nombre: "Huelva", codigo: "21" },
+      { nombre: "Huesca", codigo: "22" },
+      { nombre: "Illes Balears", codigo: "07" },
+      { nombre: "Jaén", codigo: "23" },
+      { nombre: "La Coruña", codigo: "15" },
+      { nombre: "La Rioja", codigo: "26" },
+      { nombre: "Las Palmas", codigo: "35" },
+      { nombre: "León", codigo: "24" },
+      { nombre: "Lleida", codigo: "25" },
+      { nombre: "Lugo", codigo: "27" },
+      { nombre: "Madrid", codigo: "28" },
+      { nombre: "Málaga", codigo: "29" },
+      { nombre: "Murcia", codigo: "30" },
+      { nombre: "Navarra", codigo: "31" },
+      { nombre: "Ourense", codigo: "32" },
+      { nombre: "Palencia", codigo: "34" },
+      { nombre: "Pontevedra", codigo: "36" },
+      { nombre: "Salamanca", codigo: "37" },
+      { nombre: "Santa Cruz de Tenerife", codigo: "38" },
+      { nombre: "Segovia", codigo: "40" },
+      { nombre: "Sevilla", codigo: "41" },
+      { nombre: "Soria", codigo: "42" },
+      { nombre: "Tarragona", codigo: "43" },
+      { nombre: "Teruel", codigo: "44" },
+      { nombre: "Toledo", codigo: "45" },
+      { nombre: "Valencia", codigo: "46" },
+      { nombre: "Valladolid", codigo: "47" },
+      { nombre: "Vizcaya", codigo: "48" },
+      { nombre: "Zamora", codigo: "49" },
+      { nombre: "Zaragoza", codigo: "50" }
+    ];
+
+    provincias.forEach((provinciaActual) => {
+      const opcion = document.createElement("option");
+      opcion.value = provinciaActual.codigo;
+      opcion.textContent = provinciaActual.nombre;
+      provincia.appendChild(opcion);
+    });
+
+    function marcarError(campo, esValido, mensajeError) {
+      campo.classList.toggle("campo-error", !esValido);
+
+      if (mensajeError) {
+        mensajeError.classList.toggle("visible", !esValido);
+      }
+    }
+
+    const camposConFoco = [
+      nombre,
+      direccion,
+      direccionCompleta,
+      telefono,
+      codigoPostal,
+      ciudad,
+      provincia
+    ];
+
+    camposConFoco.forEach((campo) => {
+      campo.addEventListener("focus", () => {
+        campo.classList.add("foco");
+      });
+
+      campo.addEventListener("blur", () => {
+        campo.classList.remove("foco");
+      });
+    });
+
+    nombre.addEventListener("blur", comprobarNombre);
+    direccion.addEventListener("blur", comprobarDireccion);
+    direccionCompleta.addEventListener("blur", comprobarDireccionCompleta);
+    telefono.addEventListener("blur", comprobarTelefono);
+    codigoPostal.addEventListener("blur", comprobarCodigoPostal);
+    ciudad.addEventListener("blur", comprobarCiudad);
+    provincia.addEventListener("blur", comprobarProvincia);
+
+    function comprobarNombre() {
+      const esValido = validarLongitud(nombre.value, 2, 120);
+      marcarError(nombre, esValido, document.getElementById("errorNombre"));
+      return esValido;
+    }
+
+    function comprobarDireccion() {
+      const esValido = validarLongitud(direccion.value, 4, 120);
+      marcarError(direccion, esValido, document.getElementById("errorDireccion"));
+      return esValido;
+    }
+
+    function comprobarDireccionCompleta() {
+      const esValido = validarLongitud(direccionCompleta.value, 4, 200);
+      marcarError(
+        direccionCompleta,
+        esValido,
+        document.getElementById("errorDireccionCompleta")
+      );
+      return esValido;
+    }
+
+    function comprobarTelefono() {
+      const esValido = validarTelefono(telefono.value);
+      marcarError(telefono, esValido, document.getElementById("errorTelefono"));
+      return esValido;
+    }
+
+    function comprobarCodigoPostal() {
+      const esValido = validarCodigoPostal(codigoPostal.value);
+      marcarError(codigoPostal, esValido, document.getElementById("errorCP"));
+      return esValido;
+    }
+
+    function comprobarCiudad() {
+      const esValido = validarLongitud(ciudad.value, 1, 50);
+      marcarError(ciudad, esValido, document.getElementById("errorCiudad"));
+      return esValido;
+    }
+
+    function comprobarProvincia() {
+      const esValida = provincia.value !== "selecciona";
+      marcarError(provincia, esValida, null);
+      return esValida;
+    }
+
+    function comprobarSexo() {
+      const marcado = validarRadioMarcado("sexo");
+      const mensajeSexo = document.getElementById("obligatorioSexo");
+
+      contenedorSexo.classList.toggle("campo-error", !marcado);
+      mensajeSexo.classList.toggle("visible", !marcado);
+
+      return marcado;
+    }
+
+    function obtenerResumen() {
+      const sexoSeleccionado = document.querySelector(
+        'input[name="sexo"]:checked'
+      );
+
+      const provinciaSeleccionada =
+        provincia.options[provincia.selectedIndex].text;
+
+      return `Nombre: ${nombre.value}
+Dirección: ${direccion.value}
+Dirección completa: ${direccionCompleta.value}
+Teléfono: ${telefono.value}
+Código postal: ${codigoPostal.value}
+Ciudad: ${ciudad.value}
+Provincia: ${provinciaSeleccionada}
+Preferente: ${preferente.checked ? "Sí" : "No"}
+Sexo: ${sexoSeleccionado ? sexoSeleccionado.value : "No seleccionado"}`;
+    }
+
+    document.getElementById("formulario").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const resultados = [
+        comprobarNombre(),
+        comprobarDireccion(),
+        comprobarDireccionCompleta(),
+        comprobarTelefono(),
+        comprobarCodigoPostal(),
+        comprobarCiudad(),
+        comprobarProvincia(),
+        comprobarSexo()
+      ];
+
+      const formularioValido = resultados.every((resultado) => resultado);
+
+      if (formularioValido) {
+        alert(obtenerResumen());
+      } else {
+        alert("Algunos datos tienen errores. Corríjalos antes de volver a enviar.");
+      }
+    });
+  </script>
+</body>
+</html>
