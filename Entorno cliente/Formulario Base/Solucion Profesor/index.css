@@ -1,0 +1,148 @@
+@charset "utf-8";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Verdana, Arial, sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+}
+
+#body {
+  padding: 40px 20px;
+}
+
+#titulo {
+  text-align: center;
+  color: #2c3e50;
+  font-style: normal;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+#formulario {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border: 1px solid #dcdfe3;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+#formulario > div {
+  margin-bottom: 16px;
+}
+
+.linea {
+  display: block;
+  font-size: 90%;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.caja,
+.cajaList1 {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 95%;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cajaList {
+  width: 100%;
+  padding: 8px;
+  font-size: 95%;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  height: 110px;
+}
+
+.noCaja {
+  padding: 8px 0;
+}
+
+#sexo {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fafafa;
+}
+
+#preferente,
+#mujer {
+  margin-left: 8px;
+}
+
+#tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  font-size: 85%;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+.noCaja:hover #tooltip {
+  visibility: visible;
+}
+
+/* Foco: azul, el color típico de "campo activo" */
+.foco {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+  outline: none;
+}
+
+/* Error: rojo suave */
+.campo-error {
+  border-color: #e74c3c;
+  background-color: #fdf0ef;
+}
+
+/* Válido: verde suave (usado en el grupo de sexo) */
+.campo-valido {
+  border-color: #2ecc71;
+  background-color: #f0fbf3;
+}
+
+.obligatorio {
+  display: none;
+  color: #e74c3c;
+  font-size: 82%;
+  margin-top: 4px;
+}
+
+.obligatorio.visible {
+  display: block;
+}
+
+#submit {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px;
+  font-size: 95%;
+  font-weight: 600;
+  color: #fff;
+  background-color: #4a90e2;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+#submit:hover {
+  background-color: #3d7fcc;
+}

@@ -73,6 +73,7 @@
       </div>
 
       <p class="obligatorio" id="obligatorioSexo">Campo obligatorio</p>
+      
 
       <button id="submit" type="submit">Enviar</button>
     </form>
@@ -252,36 +253,56 @@
         provincia.options[provincia.selectedIndex].text;
 
       return `Nombre: ${nombre.value}
-Dirección: ${direccion.value}
-Dirección completa: ${direccionCompleta.value}
-Teléfono: ${telefono.value}
-Código postal: ${codigoPostal.value}
-Ciudad: ${ciudad.value}
-Provincia: ${provinciaSeleccionada}
-Preferente: ${preferente.checked ? "Sí" : "No"}
-Sexo: ${sexoSeleccionado ? sexoSeleccionado.value : "No seleccionado"}`;
+              Dirección: ${direccion.value}
+              Dirección completa: ${direccionCompleta.value}
+              Teléfono: ${telefono.value}
+              Código postal: ${codigoPostal.value}
+              Ciudad: ${ciudad.value}
+              Provincia: ${provinciaSeleccionada}
+              Preferente: ${preferente.checked ? "Sí" : "No"}
+              Sexo: ${sexoSeleccionado ? sexoSeleccionado.value : "No seleccionado"}`;
+    }
+
+    function obtenerErrores() {
+      const errores = [];
+
+      if (!comprobarNombre()) {
+        errores.push("El nombre debe tener entre 2 y 120 caracteres.");
+      }
+      if (!comprobarDireccion()) {
+        errores.push("La dirección debe tener entre 4 y 120 caracteres.");
+      }
+      if (!comprobarDireccionCompleta()) {
+        errores.push("La dirección completa debe tener entre 4 y 200 caracteres.");
+      }
+      if (!comprobarTelefono()) {
+        errores.push("El teléfono debe tener 9 dígitos y empezar por 6, 7 o 9.");
+      }
+      if (!comprobarCodigoPostal()) {
+        errores.push("El código postal debe estar entre 01001 y 52006.");
+      }
+      if (!comprobarCiudad()) {
+        errores.push("La ciudad es obligatoria y debe tener como máximo 50 caracteres.");
+      }
+      if (!comprobarProvincia()) {
+        errores.push("Debes seleccionar una provincia.");
+      }
+      if (!comprobarSexo()) {
+        errores.push("Debes seleccionar una opción de sexo.");
+      }
+
+      return errores;
     }
 
     document.getElementById("formulario").addEventListener("submit", (event) => {
       event.preventDefault();
 
-      const resultados = [
-        comprobarNombre(),
-        comprobarDireccion(),
-        comprobarDireccionCompleta(),
-        comprobarTelefono(),
-        comprobarCodigoPostal(),
-        comprobarCiudad(),
-        comprobarProvincia(),
-        comprobarSexo()
-      ];
+      const errores = obtenerErrores();
 
-      const formularioValido = resultados.every((resultado) => resultado);
-
-      if (formularioValido) {
+      if (errores.length === 0) {
         alert(obtenerResumen());
       } else {
-        alert("Algunos datos tienen errores. Corríjalos antes de volver a enviar.");
+        alert("Corrige estos errores:\n- " + errores.join("\n- "));
       }
     });
   </script>

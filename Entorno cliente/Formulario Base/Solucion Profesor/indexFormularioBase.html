@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Formulario normalizado</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <div id="body">
+    <h2 id="titulo">REGISTRO DE USUARIO</h2>
+
+    <form id="formulario">
+      <div>
+        <label class="linea">Nombre y apellidos</label><br />
+        <input class="caja" id="nombre" type="text" placeholder="Nombre y apellidos" maxlength="120">
+        <p class="obligatorio" id="errorNombre">Nombre obligatorio, entre 2 y 120 caracteres</p>
+      </div>
+
+      <div>
+        <label class="linea">Direccion</label><br />
+        <input class="caja" id="direccion" type="text" placeholder="Direccion" maxlength="120">
+        <p class="obligatorio" id="errorDireccion">Dirección obligatoria, entre 4 y 120 caracteres</p>
+      </div>
+
+      <div>
+        <label class="linea">Direccion completa</label><br />
+        <input class="caja" id="direccionCompleta" type="text" placeholder="Direccion completa" maxlength="120">
+        <p class="obligatorio" id="errorDireccionCompleta">Máximo 120 caracteres</p>
+      </div>
+
+      <div>
+        <label class="linea">Telefono</label><br />
+        <input class="caja" id="telefono" type="text" placeholder="Telefono" maxlength="9">
+        <p class="obligatorio" id="errorTelefono">Teléfono de 9 dígitos, debe empezar por 6, 7 o 9</p>
+      </div>
+
+      <div>
+        <label class="linea">CP</label><br />
+        <input class="caja" id="codigoPostal" type="text" placeholder="Codigo postal" maxlength="5">
+        <p class="obligatorio" id="errorCP">Código postal erróneo, formato 00000</p>
+      </div>
+
+      <div>
+        <label class="linea">Ciudad</label><br />
+        <input class="caja" id="ciudad" type="text" placeholder="Ciudad">
+      </div>
+
+      <div>
+        <label class="linea">Provincia</label><br />
+        <select class="cajaList1" id="provincia">
+          <option value="selecciona" selected>- Selecciona provincia -</option>
+        </select>
+      </div>
+
+      <div class="noCaja">
+        <label class="linea">Preferente</label>
+        <input id="preferente" type="checkbox">
+        <span id="tooltip">Accede a una vida mejor</span>
+      </div>
+
+      <div class="noCaja" id="sexo">
+        *<input id="hombre" type="radio" name="sexo" value="H">
+        <label class="linea">Hombre</label>
+        <input id="mujer" type="radio" name="sexo" value="M">
+        <label class="linea">Mujer</label>
+      </div>
+      <p class="obligatorio" id="obligatorioSexo">Campo obligatorio</p>
+
+      <div>
+        <label class="linea">Intereses</label><br />
+        <select class="cajaList" id="interes" multiple>
+          <option value="amor">Amor</option>
+          <option value="leer">Leer</option>
+          <option value="deportes">Deportes</option>
+          <option value="peliculas">Peliculas</option>
+          <option value="videojuegos">Videojuegos</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="linea">Usuario</label><br />
+        <input class="caja" id="usuario" type="text" placeholder="Nombre de usuario" maxlength="10">
+        <p class="obligatorio" id="errorUsuario">Usuario obligatorio, entre 1 y 10 caracteres</p>
+      </div>
+
+      <div>
+        <label class="linea">Contraseña</label><br />
+        <input class="caja" id="contrasena" type="password" placeholder="Contraseña de usuario">
+        <p class="obligatorio" id="errorContrasena">Entre 8 y 16 caracteres, con mayúscula, minúscula y número</p>
+      </div>
+
+      <div>
+        <label class="linea">Repetir contraseña</label><br />
+        <input class="caja" id="contrasena2" type="password" placeholder="Repita contraseña">
+        <p class="obligatorio" id="errorRepiteContrasena">Las contraseñas deben coincidir</p>
+      </div>
+
+      <button id="submit" type="submit">Enviar</button>
+    </form>
+  </div>
+
+  <script src="js/validar.js"></script>
+  <script>
+    // --- Referencias a los campos ---
+    const nombre = document.getElementById("nombre");
+    const direccion = document.getElementById("direccion");
+    const direccionCompleta = document.getElementById("direccionCompleta");
+    const telefono = document.getElementById("telefono");
+    const codigoPostal = document.getElementById("codigoPostal");
+    const ciudad = document.getElementById("ciudad");
+    const provincia = document.getElementById("provincia");
+    const preferente = document.getElementById("preferente");
+    const sexo = document.getElementById("sexo");
+    const interes = document.getElementById("interes");
+    const usuario = document.getElementById("usuario");
+    const contrasena = document.getElementById("contrasena");
+    const contrasena2 = document.getElementById("contrasena2");
+
+    const provincias = [{ prefijo: "15", nombre: "A Coruña" }, { prefijo: "01", nombre: "Álava" }, { prefijo: "02", nombre: "Albacete" },
+                { prefijo: "03", nombre: "Alicante" }, { prefijo: "04", nombre: "Almería" }, { prefijo: "33", nombre: "Asturias" },
+                { prefijo: "05", nombre: "Ávila" }, { prefijo: "06", nombre: "Badajoz" }, { prefijo: "08", nombre: "Barcelona" },
+                { prefijo: "09", nombre: "Burgos" }, { prefijo: "10", nombre: "Cáceres" }, { prefijo: "11", nombre: "Cádiz" },
+                { prefijo: "39", nombre: "Cantabria" }, { prefijo: "12", nombre: "Castellón" }, { prefijo: "51", nombre: "Ceuta" },
+                { prefijo: "13", nombre: "Ciudad Real" }, { prefijo: "14", nombre: "Córdoba" }, { prefijo: "16", nombre: "Cuenca" },
+                { prefijo: "17", nombre: "Girona" }, { prefijo: "18", nombre: "Granada" }, { prefijo: "19", nombre: "Guadalajara" },
+                { prefijo: "20", nombre: "Guipúzcoa" }, { prefijo: "21", nombre: "Huelva" }, { prefijo: "22", nombre: "Huesca" },
+                { prefijo: "07", nombre: "Illes Balears" }, { prefijo: "23", nombre: "Jaén" }, { prefijo: "26", nombre: "La Rioja" },
+                { prefijo: "35", nombre: "Las Palmas" }, { prefijo: "24", nombre: "León" }, { prefijo: "25", nombre: "Lleida" },
+                { prefijo: "27", nombre: "Lugo" }, { prefijo: "28", nombre: "Madrid" }, { prefijo: "29", nombre: "Málaga" },
+                { prefijo: "52", nombre: "Melilla" }, { prefijo: "30", nombre: "Murcia" }, { prefijo: "31", nombre: "Navarra" },
+                { prefijo: "32", nombre: "Ourense" }, { prefijo: "34", nombre: "Palencia" }, { prefijo: "36", nombre: "Pontevedra" },
+                { prefijo: "37", nombre: "Salamanca" }, { prefijo: "38", nombre: "Santa Cruz de Tenerife" }, { prefijo: "40", nombre: "Segovia" },
+                { prefijo: "41", nombre: "Sevilla" }, { prefijo: "42", nombre: "Soria" }, { prefijo: "43", nombre: "Tarragona" },
+                { prefijo: "44", nombre: "Teruel" }, { prefijo: "45", nombre: "Toledo" }, { prefijo: "46", nombre: "Valencia" },
+                { prefijo: "47", nombre: "Valladolid" }, { prefijo: "48", nombre: "Vizcaya" }, { prefijo: "49", nombre: "Zamora" },
+                { prefijo: "50", nombre: "Zaragoza" }
+            ];
+
+    provincias.forEach(prov => {
+                    const option = document.createElement("option");
+                    option.value = prov.prefijo;
+                    option.textContent = prov.nombre;
+                    provincia.appendChild(option);
+                })
+
+    function comprobarProvincia() {
+                    return marcarError(provincia, validarProvincia(provincia.value, codigoPostal.value), document.getElementById("error-provincia"));
+                }
+
+    function validarProvincia(provincia, codigoPostal) {
+        return provincia !== "" && provincia === codigoPostal.substring(0, 2);
+    }
+
+    // --- Función genérica para marcar un campo como válido/inválido ---
+    function marcarError(campo, esValido, mensajeError) {
+      campo.classList.toggle("campo-error", !esValido);
+      if (mensajeError) mensajeError.classList.toggle("visible", !esValido);
+      return esValido;
+    }
+
+    // --- Comprobaciones de cada campo ---
+    function comprobarNombre() {
+      return marcarError(nombre, validarLongitud(nombre.value, 2, 120), document.getElementById("errorNombre"));
+    }
+    function comprobarDireccion() {
+      return marcarError(direccion, validarLongitud(direccion.value, 4, 120), document.getElementById("errorDireccion"));
+    }
+    function comprobarDireccionCompleta() {
+      return marcarError(direccionCompleta, validarLongitud(direccionCompleta.value, 0, 120), document.getElementById("errorDireccionCompleta"));
+    }
+    function comprobarTelefono() {
+      return marcarError(telefono, validarTelefono(telefono.value), document.getElementById("errorTelefono"));
+    }
+    function comprobarCodigoPostal() {
+      return marcarError(codigoPostal, validarSoloNumeros(codigoPostal.value, 5), document.getElementById("errorCP"));
+    }
+    function comprobarSexo() {
+      const marcado = validarRadioMarcado("sexo");
+      sexo.classList.toggle("campo-valido", marcado);
+      document.getElementById("obligatorioSexo").classList.toggle("visible", !marcado);
+      return marcado;
+    }
+    function comprobarInteres() {
+      const seleccionado = validarSeleccionMultiple(interes);
+      interes.classList.toggle("campo-error", !seleccionado);
+      return seleccionado;
+    }
+    function comprobarUsuario() {
+      return marcarError(usuario, validarLongitud(usuario.value, 1, 10), document.getElementById("errorUsuario"));
+    }
+    function comprobarContrasena() {
+      return marcarError(contrasena, validarContrasena(contrasena.value), document.getElementById("errorContrasena"));
+    }
+    function comprobarContrasenasIguales() {
+      const iguales = contrasena.value === contrasena2.value;
+      return marcarError(contrasena2, iguales, document.getElementById("errorRepiteContrasena"));
+    }
+
+    // --- Resaltado visual al entrar/salir del foco (mismo efecto para todos los campos) ---
+    const camposConFoco = [nombre, direccion, direccionCompleta, telefono, codigoPostal, ciudad, provincia, interes, usuario, contrasena, contrasena2];
+    camposConFoco.forEach((campo) => {
+      campo.addEventListener("focus", () => campo.classList.add("foco"));
+      campo.addEventListener("blur", () => campo.classList.remove("foco"));
+    });
+
+    // --- Conexión de las validaciones a los eventos ---
+    nombre.addEventListener("blur", comprobarNombre);
+    direccion.addEventListener("blur", comprobarDireccion);
+    direccionCompleta.addEventListener("blur", comprobarDireccionCompleta);
+    telefono.addEventListener("blur", comprobarTelefono);
+    codigoPostal.addEventListener("blur", comprobarCodigoPostal);
+    interes.addEventListener("change", comprobarInteres);
+    usuario.addEventListener("blur", comprobarUsuario);
+    contrasena.addEventListener("blur", comprobarContrasena);
+    contrasena.addEventListener("change", comprobarContrasenasIguales);
+    contrasena2.addEventListener("blur", comprobarContrasenasIguales);
+
+    document.querySelectorAll('input[name="sexo"]').forEach((radio) => {
+      radio.addEventListener("change", comprobarSexo);
+    });
+
+        // --- Comprueba todos los campos y devuelve una lista con un mensaje por cada error ---
+      // --- Comprueba todos los campos y devuelve un texto con un error por línea ---
+    function obtenerErrores() {
+      let errores = "";
+
+      if (!comprobarNombre()) {
+        errores += "- El nombre y apellidos debe tener entre 2 y 120 caracteres.\n";
+      }
+      if (!comprobarDireccion()) {
+        errores += "- La dirección debe tener entre 4 y 120 caracteres.\n";
+      }
+      if (!comprobarDireccionCompleta()) {
+        errores += "- La dirección completa puede tener como máximo 120 caracteres.\n";
+      }
+      if (!comprobarTelefono()) {
+        errores += "- El teléfono debe tener 9 dígitos y empezar por 6, 7 o 9.\n";
+      }
+      if (!comprobarCodigoPostal()) {
+        errores += "- El código postal debe tener 5 dígitos.\n";
+      }
+      if (!comprobarSexo()) {
+        errores += "- Debe indicar si es hombre o mujer.\n";
+      }
+      if (!comprobarInteres()) {
+        errores += "- Debe seleccionar al menos un interés.\n";
+      }
+      if (!comprobarUsuario()) {
+        errores += "- El usuario es obligatorio (entre 1 y 10 caracteres).\n";
+      }
+      if (!comprobarContrasena()) {
+        errores += "- La contraseña debe tener entre 8 y 16 caracteres, con mayúscula, minúscula y número.\n";
+      }
+      if (!comprobarContrasenasIguales()) {
+        errores += "- Las contraseñas no coinciden.\n";
+      }
+
+      return errores;
+    }
+
+    // --- Resumen de datos para mostrar al enviar correctamente ---
+    function obtenerResumen() {
+      let resumen = "";
+
+      resumen += "- Nombre y apellidos: " + nombre.value + "\n";
+      resumen += "- Dirección: " + direccion.value + "\n";
+      resumen += "- Dirección completa: " + direccionCompleta.value + "\n";
+      resumen += "- Teléfono: " + telefono.value + "\n";
+      resumen += "- Código postal: " + codigoPostal.value + "\n";
+      resumen += "- Ciudad: " + ciudad.value + "\n";
+
+      // Provincia: solo se muestra si se ha elegido una
+      if (provincia.value !== "selecciona") {
+        resumen += "- Provincia: " + provincia.options[provincia.selectedIndex].text + "\n";
+      } else {
+        resumen += "- Provincia: (no indicada)\n";
+      }
+
+      // Preferente
+      if (preferente.checked) {
+        resumen += "- Preferente: Sí\n";
+      } else {
+        resumen += "- Preferente: No\n";
+      }
+
+      // Sexo
+      if (document.getElementById("hombre").checked) {
+        resumen += "- Sexo: Hombre\n";
+      } else {
+        resumen += "- Sexo: Mujer\n";
+      }
+
+      // Intereses: se van acumulando en una línea separados por comas
+      let intereses = "";
+      for (let i = 0; i < interes.options.length; i++) {
+        if (interes.options[i].selected) {
+          if (intereses !== "") {
+            intereses += ", ";
+          }
+          intereses += interes.options[i].text;
+        }
+      }
+      resumen += "- Intereses: " + intereses + "\n";
+
+      resumen += "- Usuario: " + usuario.value + "\n";
+
+      return resumen;
+    }
+
+    // --- Validación general al enviar el formulario ---
+    document.getElementById("formulario").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const errores = obtenerErrores();
+
+      if (errores === "") {
+        alert("El formulario se ha enviado correctamente con estos datos:\n\n" + obtenerResumen());
+      } else {
+        alert("El formulario tiene los siguientes errores:\n\n" + errores);
+      }
+    });
+
+    
+  </script>
+</body>
+</html>
