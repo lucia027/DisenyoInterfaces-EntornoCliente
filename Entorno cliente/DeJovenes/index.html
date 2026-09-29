@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Leganés - De Jóvenes</title>
+</head>
+
+<body>
+
+    <!-- LOGO -->
+    <div id="logo">
+
+        <img
+            id="logoImagen"
+            src="Logo.png"
+            alt="Logo De Jóvenes">
+
+        <span>
+            DE JÓVENES
+        </span>
+
+    </div>
+
+
+    <div id="body">
+
+        <!-- TÍTULO -->
+        <div id="encabezado">
+
+            <h1>Leganés</h1>
+
+            <h2>Únete al club</h2>
+
+        </div>
+
+
+        <!-- FORMULARIO -->
+        <form id="formulario">
+
+
+            <!-- NOMBRE -->
+            <div class="grupoCampo" id="grupoNombre">
+
+                <label class="linea" for="nombre">
+                    Nombre
+                </label>
+
+                <input
+                    class="caja"
+                    id="nombre"
+                    type="text"
+                    maxlength="20"
+                    placeholder="Nombre">
+
+                <p class="error" id="errorNombre">
+                    El nombre debe tener entre 2 y 20 caracteres.
+                </p>
+
+            </div>
+
+
+            <!-- APELLIDOS -->
+            <div class="grupoCampo" id="grupoApellidos">
+
+                <label class="linea" for="apellidos">
+                    Apellidos
+                </label>
+
+                <input
+                    class="caja"
+                    id="apellidos"
+                    type="text"
+                    maxlength="30"
+                    placeholder="Apellidos">
+
+                <p class="error" id="errorApellidos">
+                    Los apellidos deben tener entre 2 y 30 caracteres.
+                </p>
+
+            </div>
+
+
+            <!-- DNI -->
+            <div class="grupoCampo" id="grupoDni">
+
+                <label class="linea" for="dni">
+                    DNI
+                </label>
+
+                <input
+                    class="caja"
+                    id="dni"
+                    type="text"
+                    maxlength="9"
+                    placeholder="12345678Z">
+
+                <p class="error" id="errorDni">
+                    El DNI no es válido.
+                </p>
+
+            </div>
+
+
+            <!-- FECHA DE NACIMIENTO -->
+            <div class="grupoCampo" id="grupoFecha">
+
+                <label class="linea" for="fechaNacimiento">
+                    Fecha de nacimiento
+                </label>
+
+                <input
+                    class="caja"
+                    id="fechaNacimiento"
+                    type="text"
+                    maxlength="10"
+                    placeholder="dd/mm/aaaa">
+
+                <p class="error" id="errorFecha">
+                    Introduce una fecha válida con formato dd/mm/aaaa.
+                </p>
+
+            </div>
+
+
+            <!-- SEXO -->
+            <div class="grupoCampo" id="grupoSexo">
+
+                <label class="linea">
+                    Sexo
+                </label>
+
+                <div id="sexo">
+
+                    <input
+                        id="hombre"
+                        type="radio"
+                        name="sexo"
+                        value="hombre">
+
+                    <label for="hombre">
+                        Hombre
+                    </label>
+
+
+                    <input
+                        id="mujer"
+                        type="radio"
+                        name="sexo"
+                        value="mujer">
+
+                    <label for="mujer">
+                        Mujer
+                    </label>
+
+
+                    <input
+                        id="noBinario"
+                        type="radio"
+                        name="sexo"
+                        value="noBinario">
+
+                    <label for="noBinario">
+                        No binario
+                    </label>
+
+                </div>
+
+                <p class="error" id="errorSexo">
+                    Selecciona una opción.
+                </p>
+
+            </div>
+
+
+            <!-- SUBIR DNI -->
+            <div class="grupoCampo" id="grupoArchivo">
+
+                <label class="linea" for="archivoDni">
+                    Subir DNI
+                </label>
+
+                <input
+                    id="archivoDni"
+                    type="file"
+                    accept=".jpg,.jpeg,.png,image/jpeg,image/png">
+
+                <p class="error" id="errorArchivo">
+                    Selecciona una imagen JPG o PNG.
+                </p>
+
+            </div>
+
+
+            <!-- AFICIONES -->
+            <div class="grupoCampo" id="grupoAficiones">
+
+                <label class="linea" for="aficiones">
+                    Aficiones
+                </label>
+
+                <select
+                    class="cajaSeleccion"
+                    id="aficiones">
+
+                    <option value="" selected>
+                        Selecciona una afición
+                    </option>
+
+                    <option value="Deporte">
+                        Deporte
+                    </option>
+
+                    <option value="Música">
+                        Música
+                    </option>
+
+                    <option value="Cine">
+                        Cine
+                    </option>
+
+                    <option value="Videojuegos">
+                        Videojuegos
+                    </option>
+
+                    <option value="Lectura">
+                        Lectura
+                    </option>
+
+                    <option value="Tecnología">
+                        Tecnología
+                    </option>
+
+                </select>
+
+                <p class="ayuda">
+                    Puedes seleccionar varias.
+                </p>
+
+                <p class="error" id="errorAficiones">
+                    Selecciona al menos una afición.
+                </p>
+
+            </div>
+
+
+            <!-- CP Y PROVINCIA -->
+            <div id="direccion">
+
+                <!-- CÓDIGO POSTAL -->
+                <div class="grupoCampo" id="grupoCp">
+
+                    <label class="linea" for="codigoPostal">
+                        Código postal
+                    </label>
+
+                    <input
+                        class="caja"
+                        id="codigoPostal"
+                        type="text"
+                        maxlength="5"
+                        placeholder="28911">
+
+                    <p class="error" id="errorCp">
+                        Introduce un código postal válido.
+                    </p>
+
+                </div>
+
+
+                <!-- PROVINCIA -->
+                <div class="grupoCampo">
+
+                    <label class="linea" for="provincia">
+                        Provincia
+                    </label>
+
+                    <input
+                        class="caja"
+                        id="provincia"
+                        type="text"
+                        readonly>
+
+                </div>
+
+            </div>
+
+
+            <!-- SITUACIÓN LABORAL -->
+            <div class="grupoCampo" id="grupoSituacion">
+
+                <label class="linea" for="situacionLaboral">
+                    Situación laboral
+                </label>
+
+                <select
+                    class="cajaSeleccion"
+                    id="situacionLaboral">
+
+                    <option value="" selected>
+                        Selecciona una opción
+                    </option>
+
+                    <option value="estudiante">
+                        Estudiante
+                    </option>
+
+                    <option value="trabajando">
+                        Trabajando
+                    </option>
+
+                    <option value="desempleado">
+                        Buscando trabajo
+                    </option>
+
+                    <option value="complicado">
+                        Es complicado
+                    </option>
+
+                </select>
+
+                <p class="error" id="errorSituacion">
+                    Selecciona una situación laboral.
+                </p>
+
+            </div>
+
+
+            <!-- CONDICIONES -->
+            <div class="grupoCampo" id="grupoCondiciones">
+
+                <input
+                    id="condiciones"
+                    type="checkbox">
+
+                <label for="condiciones">
+                    Acepto las condiciones
+                </label>
+
+                <p class="error" id="errorCondiciones">
+                    Debes aceptar las condiciones.
+                </p>
+
+            </div>
+
+
+            <!-- BOTÓN -->
+            <button id="submit" type="submit">
+                Inscribirme
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- FUNCIONES GENÉRICAS -->
+    <script src="validar.js"></script>
+
+
+    <!-- JAVASCRIPT ESPECÍFICO -->
+    <script>
+
+        // ==============================
+        // REFERENCIAS
+        // ==============================
+
+        const formulario =
+            document.getElementById("formulario");
+
+        const nombre =
+            document.getElementById("nombre");
+
+        const apellidos =
+            document.getElementById("apellidos");
+
+        const dni =
+            document.getElementById("dni");
+
+        const fechaNacimiento =
+            document.getElementById("fechaNacimiento");
+
+        const archivoDni =
+            document.getElementById("archivoDni");
+
+        const aficiones =
+            document.getElementById("aficiones");
+
+        const codigoPostal =
+            document.getElementById("codigoPostal");
+
+        const provincia =
+            document.getElementById("provincia");
+
+        const situacionLaboral =
+            document.getElementById("situacionLaboral");
+
+        const condiciones =
+            document.getElementById("condiciones");
+
+
+        // ==============================
+        // AFICIONES SELECCIONADAS
+        // ==============================
+
+        const listaAficiones = [];
+
+
+        // ==============================
+        // PROVINCIAS
+        // ==============================
+
+        const provincias = [
+
+            { prefijo: "01", nombre: "Álava" },
+            { prefijo: "02", nombre: "Albacete" },
+            { prefijo: "03", nombre: "Alicante" },
+            { prefijo: "04", nombre: "Almería" },
+            { prefijo: "05", nombre: "Ávila" },
+            { prefijo: "06", nombre: "Badajoz" },
+            { prefijo: "07", nombre: "Illes Balears" },
+            { prefijo: "08", nombre: "Barcelona" },
+            { prefijo: "09", nombre: "Burgos" },
+            { prefijo: "10", nombre: "Cáceres" },
+            { prefijo: "11", nombre: "Cádiz" },
+            { prefijo: "12", nombre: "Castellón" },
+            { prefijo: "13", nombre: "Ciudad Real" },
+            { prefijo: "14", nombre: "Córdoba" },
+            { prefijo: "15", nombre: "A Coruña" },
+            { prefijo: "16", nombre: "Cuenca" },
+            { prefijo: "17", nombre: "Girona" },
+            { prefijo: "18", nombre: "Granada" },
+            { prefijo: "19", nombre: "Guadalajara" },
+            { prefijo: "20", nombre: "Guipúzcoa" },
+            { prefijo: "21", nombre: "Huelva" },
+            { prefijo: "22", nombre: "Huesca" },
+            { prefijo: "23", nombre: "Jaén" },
+            { prefijo: "24", nombre: "León" },
+            { prefijo: "25", nombre: "Lleida" },
+            { prefijo: "26", nombre: "La Rioja" },
+            { prefijo: "27", nombre: "Lugo" },
+            { prefijo: "28", nombre: "Madrid" },
+            { prefijo: "29", nombre: "Málaga" },
+            { prefijo: "30", nombre: "Murcia" },
+            { prefijo: "31", nombre: "Navarra" },
+            { prefijo: "32", nombre: "Ourense" },
+            { prefijo: "33", nombre: "Asturias" },
+            { prefijo: "34", nombre: "Palencia" },
+            { prefijo: "35", nombre: "Las Palmas" },
+            { prefijo: "36", nombre: "Pontevedra" },
+            { prefijo: "37", nombre: "Salamanca" },
+            { prefijo: "38", nombre: "Santa Cruz de Tenerife" },
+            { prefijo: "39", nombre: "Cantabria" },
+            { prefijo: "40", nombre: "Segovia" },
+            { prefijo: "41", nombre: "Sevilla" },
+            { prefijo: "42", nombre: "Soria" },
+            { prefijo: "43", nombre: "Tarragona" },
+            { prefijo: "44", nombre: "Teruel" },
+            { prefijo: "45", nombre: "Toledo" },
+            { prefijo: "46", nombre: "Valencia" },
+            { prefijo: "47", nombre: "Valladolid" },
+            { prefijo: "48", nombre: "Vizcaya" },
+            { prefijo: "49", nombre: "Zamora" },
+            { prefijo: "50", nombre: "Zaragoza" },
+            { prefijo: "51", nombre: "Ceuta" },
+            { prefijo: "52", nombre: "Melilla" }
+
+        ];
+
+
+        // ==============================
+        // MARCAR CAMPO
+        // ==============================
+
+        function marcarCampo(
+            grupo,
+            correcto,
+            mensajeError
+        ) {
+
+            grupo.classList.toggle(
+                "campo-error",
+                !correcto
+            );
+
+            grupo.classList.toggle(
+                "campo-valido",
+                correcto
+            );
+
+            mensajeError.classList.toggle(
+                "visible",
+                !correcto
+            );
+
+            return correcto;
+        }
+
+
+        // ==============================
+        // NOMBRE
+        // ==============================
+
+        function comprobarNombre() {
+
+            return marcarCampo(
+
+                document.getElementById("grupoNombre"),
+
+                validarLongitud(
+                    nombre.value.trim(),
+                    2,
+                    20
+                ),
+
+                document.getElementById("errorNombre")
+            );
+        }
+
+
+        // ==============================
+        // APELLIDOS
+        // ==============================
+
+        function comprobarApellidos() {
+
+            return marcarCampo(
+
+                document.getElementById("grupoApellidos"),
+
+                validarLongitud(
+                    apellidos.value.trim(),
+                    2,
+                    30
+                ),
+
+                document.getElementById("errorApellidos")
+            );
+        }
+
+
+        // ==============================
+        // DNI
+        // ==============================
+
+        function comprobarDni() {
+
+            return marcarCampo(
+
+                document.getElementById("grupoDni"),
+
+                validarDni(
+                    dni.value
+                ),
+
+                document.getElementById("errorDni")
+            );
+        }
+
+
+        // ==============================
+        // FECHA
+        // ==============================
+
+        function comprobarFecha() {
+
+            return marcarCampo(
+
+                document.getElementById("grupoFecha"),
+
+                validarFecha(
+                    fechaNacimiento.value
+                ),
+
+                document.getElementById("errorFecha")
+            );
+        }
+
+
+        // ==============================
+        // SEXO
+        // ==============================
+
+        function comprobarSexo() {
+
+            return marcarCampo(
+
+                document.getElementById("grupoSexo"),
+
+                validarRadioMarcado("sexo"),
+
+                document.getElementById("errorSexo")
+            );
+        }
+
+
+        // ==============================
+        // ARCHIVO DNI
+        // ==============================
+
+        function comprobarArchivo() {
+
+            const tiposPermitidos = [
+                "image/jpeg",
+                "image/png"
+            ];
+
+
+            return marcarCampo(
+
+                document.getElementById("grupoArchivo"),
+
+                validarArchivo(
+                    archivoDni,
+                    tiposPermitidos
+                ),
+
+                document.getElementById("errorArchivo")
+            );
+        }
+
+
+        // ==============================
+        // AFICIONES
+        // ==============================
+
+        function seleccionarAficion() {
+
+            const valor =
+                aficiones.value;
+
+
+            if (valor === "") {
+
+                return;
+
+            }
+
+
+            const opcion =
+                aficiones.options[
+                    aficiones.selectedIndex
+                ];
+
+
+            const posicion =
+                listaAficiones.indexOf(valor);
+
+
+            // Si no estaba seleccionada
+            if (posicion === -1) {
+
+                listaAficiones.push(valor);
+
+
+                opcion.textContent =
+                    "✓ " + valor;
+
+
+                opcion.classList.add(
+                    "seleccionada"
+                );
+
+            }
+
+            // Si ya estaba seleccionada
+            else {
+
+                listaAficiones.splice(
+                    posicion,
+                    1
+                );
+
+
+                opcion.textContent =
+                    valor;
+
+
+                opcion.classList.remove(
+                    "seleccionada"
+                );
+
+            }
+
+
+            aficiones.value = "";
+
+
+            comprobarAficiones();
+        }
+
+
+        function comprobarAficiones() {
+
+            return marcarCampo(
+
+                document.getElementById("grupoAficiones"),
+
+                listaAficiones.length > 0,
+
+                document.getElementById("errorAficiones")
+            );
+        }
+
+
+        // ==============================
+        // PROVINCIA
+        // ==============================
+
+        function rellenarProvincia() {
+
+            provincia.value = "";
+
+
+            if (
+                codigoPostal.value.length < 2
+            ) {
+
+                return;
+
+            }
+
+
+            const prefijo =
+                codigoPostal.value.substring(
+                    0,
+                    2
+                );
+
+
+            const encontrada =
+                provincias.find(
+                    p => p.prefijo === prefijo
+                );
+
+
+            if (encontrada) {
+
+                provincia.value =
+                    encontrada.nombre;
+
+            }
+
+        }
+
+
+        // ==============================
+        // CÓDIGO POSTAL
+        // ==============================
+
+        function comprobarCodigoPostal() {
+
+            const correcto =
+                validarSoloNumeros(
+                    codigoPostal.value,
+                    5
+                ) &&
+                provincia.value !== "";
+
+
+            return marcarCampo(
+
+                document.getElementById("grupoCp"),
+
+                correcto,
+
+                document.getElementById("errorCp")
+            );
+        }
+
+
+        // ==============================
+        // SITUACIÓN LABORAL
+        // ==============================
+
+        function comprobarSituacion() {
+
+            return marcarCampo(
+
+                document.getElementById("grupoSituacion"),
+
+                validarSeleccion(
+                    situacionLaboral.value
+                ),
+
+                document.getElementById("errorSituacion")
+            );
+        }
+
+
+        // ==============================
+        // CONDICIONES
+        // ==============================
+
+        function comprobarCondiciones() {
+
+            return marcarCampo(
+
+                document.getElementById("grupoCondiciones"),
+
+                condiciones.checked,
+
+                document.getElementById("errorCondiciones")
+            );
+        }
+
+
+        // ==============================
+        // OBTENER ERRORES
+        // ==============================
+
+        function obtenerErrores() {
+
+            let errores = "";
+
+
+            if (!comprobarNombre()) {
+
+                errores +=
+                    "- El nombre debe tener entre 2 y 20 caracteres.\n";
+            }
+
+
+            if (!comprobarApellidos()) {
+
+                errores +=
+                    "- Los apellidos deben tener entre 2 y 30 caracteres.\n";
+            }
+
+
+            if (!comprobarDni()) {
+
+                errores +=
+                    "- El DNI no es válido.\n";
+            }
+
+
+            if (!comprobarFecha()) {
+
+                errores +=
+                    "- La fecha de nacimiento no es válida.\n";
+            }
+
+
+            if (!comprobarSexo()) {
+
+                errores +=
+                    "- Debes seleccionar un sexo.\n";
+            }
+
+
+            if (!comprobarArchivo()) {
+
+                errores +=
+                    "- Debes subir el DNI en formato JPG o PNG.\n";
+            }
+
+
+            if (!comprobarAficiones()) {
+
+                errores +=
+                    "- Debes seleccionar al menos una afición.\n";
+            }
+
+
+            if (!comprobarCodigoPostal()) {
+
+                errores +=
+                    "- El código postal no es válido.\n";
+            }
+
+
+            if (!comprobarSituacion()) {
+
+                errores +=
+                    "- Debes seleccionar una situación laboral.\n";
+            }
+
+
+            if (!comprobarCondiciones()) {
+
+                errores +=
+                    "- Debes aceptar las condiciones.\n";
+            }
+
+
+            return errores;
+        }
+
+
+        // ==============================
+        // EVENTOS
+        // ==============================
+
+        nombre.addEventListener(
+            "blur",
+            comprobarNombre
+        );
+
+
+        apellidos.addEventListener(
+            "blur",
+            comprobarApellidos
+        );
+
+
+        dni.addEventListener(
+            "blur",
+            comprobarDni
+        );
+
+
+        fechaNacimiento.addEventListener(
+            "blur",
+            comprobarFecha
+        );
+
+
+        archivoDni.addEventListener(
+            "change",
+            comprobarArchivo
+        );
+
+
+        aficiones.addEventListener(
+            "change",
+            seleccionarAficion
+        );
+
+
+        codigoPostal.addEventListener(
+            "input",
+            rellenarProvincia
+        );
+
+
+        codigoPostal.addEventListener(
+            "blur",
+            comprobarCodigoPostal
+        );
+
+
+        situacionLaboral.addEventListener(
+            "change",
+            comprobarSituacion
+        );
+
+
+        condiciones.addEventListener(
+            "change",
+            comprobarCondiciones
+        );
+
+
+        document
+            .querySelectorAll(
+                'input[name="sexo"]'
+            )
+            .forEach(
+                opcion => {
+
+                    opcion.addEventListener(
+                        "change",
+                        comprobarSexo
+                    );
+
+                }
+            );
+
+
+        // ==============================
+        // ENVÍO
+        // ==============================
+
+        formulario.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const errores =
+                    obtenerErrores();
+
+
+                if (errores === "") {
+
+                    alert(
+                        "¡Inscripción realizada correctamente!"
+                    );
+
+                }
+
+                else {
+
+                    alert(
+                        "Hay algunos campos que debes revisar:\n\n"
+                        + errores
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

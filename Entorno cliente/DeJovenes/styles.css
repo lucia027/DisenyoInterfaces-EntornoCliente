@@ -1,0 +1,451 @@
+@charset "utf-8";
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background-color: #faf4f6;
+
+    color: #49333d;
+}
+
+
+/* ==============================
+   LOGO
+============================== */
+
+#logo {
+    position: absolute;
+
+    top: 20px;
+    left: 25px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: #71384f;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+
+#logoImagen {
+    width: 48px;
+    height: 48px;
+
+    object-fit: contain;
+}
+
+
+/* ==============================
+   CONTENIDO
+============================== */
+
+#body {
+    padding:
+        70px
+        20px
+        40px;
+}
+
+
+/* ==============================
+   CABECERA
+============================== */
+
+#encabezado {
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+
+#encabezado h1 {
+    margin: 0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 45px;
+
+    font-style: italic;
+
+    color: #71384f;
+}
+
+
+#encabezado h2 {
+    margin:
+        5px
+        0
+        0;
+
+    color: #b1607d;
+
+    font-size: 20px;
+
+    font-weight: normal;
+}
+
+
+/* ==============================
+   FORMULARIO
+============================== */
+
+#formulario {
+    max-width: 500px;
+
+    margin: 0 auto;
+
+    padding: 30px;
+
+    background-color: white;
+
+    border:
+        1px
+        solid
+        #eadde2;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0
+        2px
+        8px
+        rgba(
+            113,
+            56,
+            79,
+            0.08
+        );
+}
+
+
+.grupoCampo {
+    margin-bottom: 17px;
+}
+
+
+/* ==============================
+   LABELS
+============================== */
+
+.linea {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #543d47;
+}
+
+
+/* ==============================
+   CAMPOS
+============================== */
+
+.caja,
+.cajaSeleccion {
+    width: 100%;
+
+    padding:
+        10px
+        12px;
+
+    border:
+        1px
+        solid
+        #d8cbd0;
+
+    border-radius: 5px;
+
+    background-color: white;
+
+    color: #49333d;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color
+        0.15s,
+        box-shadow
+        0.15s;
+}
+
+
+.caja:focus,
+.cajaSeleccion:focus {
+    border-color: #b1607d;
+
+    box-shadow:
+        0
+        0
+        0
+        2px
+        rgba(
+            177,
+            96,
+            125,
+            0.12
+        );
+}
+
+
+select {
+    cursor: pointer;
+}
+
+
+/* Afición seleccionada */
+
+#aficiones option.seleccionada {
+    color: #71384f;
+
+    font-weight: bold;
+}
+
+
+/* ==============================
+   SEXO
+============================== */
+
+#sexo {
+    padding:
+        8px
+        0;
+}
+
+
+#sexo input {
+    cursor: pointer;
+
+    accent-color: #9e526d;
+}
+
+
+#sexo label {
+    margin-right: 12px;
+
+    font-size: 13px;
+}
+
+
+/* ==============================
+   ARCHIVO
+============================== */
+
+#archivoDni {
+    width: 100%;
+
+    padding: 8px;
+
+    border:
+        1px
+        solid
+        #d8cbd0;
+
+    border-radius: 5px;
+
+    background-color: white;
+}
+
+
+/* ==============================
+   CP + PROVINCIA
+============================== */
+
+#direccion {
+    display: flex;
+
+    gap: 15px;
+}
+
+
+#direccion > div {
+    width: 50%;
+}
+
+
+#provincia {
+    background-color: #f5f1f2;
+}
+
+
+/* ==============================
+   AYUDA
+============================== */
+
+.ayuda {
+    margin:
+        5px
+        0
+        0;
+
+    font-size: 11px;
+
+    color: #9a858e;
+}
+
+
+/* ==============================
+   CHECKBOX
+============================== */
+
+#condiciones {
+    accent-color: #9e526d;
+
+    cursor: pointer;
+}
+
+
+/* ==============================
+   ERRORES
+============================== */
+
+.error {
+    display: none;
+
+    margin:
+        5px
+        0
+        0;
+
+    color: #a84861;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.error.visible {
+    display: block;
+}
+
+
+/* ==============================
+   CAMPO INCORRECTO
+============================== */
+
+.grupoCampo.campo-error .linea {
+    color: #a84861;
+}
+
+
+.grupoCampo.campo-error .caja,
+.grupoCampo.campo-error .cajaSeleccion,
+.grupoCampo.campo-error #archivoDni {
+    border-color: #a84861;
+
+    background-color: #fff5f7;
+}
+
+
+/* ==============================
+   CAMPO CORRECTO
+============================== */
+
+.grupoCampo.campo-valido .linea {
+    color: #71835f;
+}
+
+
+.grupoCampo.campo-valido .caja,
+.grupoCampo.campo-valido .cajaSeleccion,
+.grupoCampo.campo-valido #archivoDni {
+    border-color: #a5b694;
+}
+
+
+/* ==============================
+   BOTÓN
+============================== */
+
+#submit {
+    width: 100%;
+
+    padding: 11px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background-color: #71384f;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color
+        0.15s;
+}
+
+
+#submit:hover {
+    background-color: #95516a;
+}
+
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 600px) {
+
+    #logo {
+        position: static;
+
+        margin:
+            20px
+            20px
+            0;
+    }
+
+
+    #body {
+        padding-top: 30px;
+    }
+
+
+    #direccion {
+        display: block;
+    }
+
+
+    #direccion > div {
+        width: 100%;
+    }
+
+}
