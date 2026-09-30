@@ -55,7 +55,7 @@
             <div class="grupoCampo" id="grupoFecha">
                 <label class="linea" for="fechaNacimiento">Fecha de nacimiento</label>
                 <input class="caja" id="fechaNacimiento" type="text" maxlength="10" placeholder="dd/mm/aaaa">
-                <p class="error" id="errorFecha"> Introduce una fecha válida con formato dd/mm/aaaa.</p>
+                <p class="error" id="errorFecha">Introduce una fecha válida con formato dd/mm/aaaa.</p>
             </div>
 
             <!-- SEXO -->
@@ -63,13 +63,13 @@
                 <label class="linea">Sexo</label>
 
                 <div id="sexo">
-                    <input id="hombre" type="rad" name="sexo" value="hombre">
+                    <input id="hombre" type="radio" name="sexo" value="Hombre">
                     <label for="hombre">Hombre</label>
 
-                    <input id="mujer" type="radio" name="sexo" value="mujer">
+                    <input id="mujer" type="radio" name="sexo" value="Mujer">
                     <label for="mujer">Mujer</label>
 
-                    <input id="noBinario" type="radio" name="sexo" value="noBinario">
+                    <input id="noBinario" type="radio" name="sexo" value="No binario">
                     <label for="noBinario">No binario</label>
                 </div>
 
@@ -79,7 +79,7 @@
             <!-- SUBIR DNI -->
             <div class="grupoCampo" id="grupoArchivo">
                 <label class="linea" for="archivoDni">Subir DNI</label>
-                <input id="archivoDni" type="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png">
+                <input id="archivoDni" type="file" accept=".jpg,.jpeg,.png">
                 <p class="error" id="errorArchivo">Selecciona una imagen JPG o PNG.</p>
             </div>
 
@@ -125,10 +125,10 @@
 
                 <select class="cajaSeleccion" id="situacionLaboral">
                     <option value="" selected>Selecciona una opción</option>
-                    <option value="estudiante">Estudiante</option>
-                    <option value="trabajando">Trabajando</option>
-                    <option value="desempleado">Buscando trabajo</option>
-                    <option value="complicado">Es complicado</option>
+                    <option value="Estudiante">Estudiante</option>
+                    <option value="Trabajando">Trabajando</option>
+                    <option value="Buscando trabajo">Buscando trabajo</option>
+                    <option value="Es complicado">Es complicado</option>
                 </select>
 
                 <p class="error" id="errorSituacion">Selecciona una situación laboral.</p>
@@ -141,22 +141,17 @@
                 <p class="error" id="errorCondiciones">Debes aceptar las condiciones.</p>
             </div>
 
-            <!-- BOTÓN -->
-            <button id="submit" type="submit">Inscribirme</button>
+            <!-- BOTONES -->
+            <button id="submit" type="submit" disabled>Inscribirme</button>
+            <button id="borrar" type="button">Borrar</button>
 
         </form>
 
     </div>
 
-    <!-- FUNCIONES GENÉRICAS -->
     <script src="validar.js"></script>
 
-    <!-- JAVASCRIPT ESPECÍFICO -->
     <script>
-
-        // ==============================
-        // REFERENCIAS
-        // ==============================
 
         const formulario = document.getElementById("formulario");
         const nombre = document.getElementById("nombre");
@@ -169,18 +164,20 @@
         const provincia = document.getElementById("provincia");
         const situacionLaboral = document.getElementById("situacionLaboral");
         const condiciones = document.getElementById("condiciones");
-
-
-        // ==============================
-        // AFICIONES SELECCIONADAS
-        // ==============================
-
+        const submit = document.getElementById("submit");
+        const borrar = document.getElementById("borrar");
         const listaAficiones = [];
 
+        const tiposPermitidos = [
+            "image/jpeg",
+            "image/png"
+        ];
 
-        // ==============================
-        // PROVINCIAS
-        // ==============================
+        const extensionesPermitidas = [
+            ".jpg",
+            ".jpeg",
+            ".png"
+        ];
 
         const provincias = [
             { prefijo: "01", nombre: "Álava" },
@@ -328,14 +325,15 @@
 
         function comprobarArchivo() {
 
-            const tiposPermitidos = [
-                "image/jpeg",
-                "image/png"
-            ];
+            const correcto = validarArchivo(archivoDni, tiposPermitidos, extensionesPermitidas);
+
+            if (!correcto) {
+                archivoDni.value = "";
+            }
 
             return marcarCampo(
                 document.getElementById("grupoArchivo"),
-                validarArchivo(archivoDni, tiposPermitidos),
+                correcto,
                 document.getElementById("errorArchivo")
             );
         }
@@ -372,6 +370,7 @@
             aficiones.value = "";
 
             comprobarAficiones();
+            actualizarBoton();
         }
 
 
@@ -398,7 +397,6 @@
             }
 
             const prefijo = codigoPostal.value.substring(0, 2);
-
             const encontrada = provincias.find(p => p.prefijo === prefijo);
 
             if (encontrada) {
@@ -448,6 +446,91 @@
                 condiciones.checked,
                 document.getElementById("errorCondiciones")
             );
+        }
+
+
+        // ==============================
+        // FORMULARIO COMPLETO
+        // ==============================
+
+        function formularioValido() {
+
+            return validarLongitud(nombre.value.trim(), 2, 20) &&
+                validarLongitud(apellidos.value.trim(), 2, 30) &&
+                validarDni(dni.value) &&
+                validarFecha(fechaNacimiento.value) &&
+                validarRadioMarcado("sexo") &&
+                validarArchivo(archivoDni, tiposPermitidos, extensionesPermitidas) &&
+                listaAficiones.length > 0 &&
+                validarSoloNumeros(codigoPostal.value, 5) &&
+                provincia.value !== "" &&
+                validarSeleccion(situacionLaboral.value) &&
+                condiciones.checked;
+        }
+
+
+        function actualizarBoton() {
+            submit.disabled = !formularioValido();
+        }
+
+
+        // ==============================
+        // DATOS DEL FORMULARIO
+        // ==============================
+
+        function obtenerDatosFormulario() {
+
+            const sexoSeleccionado = document.querySelector('input[name="sexo"]:checked');
+
+            return "Nombre: " + nombre.value.trim() + "\n" +
+                "Apellidos: " + apellidos.value.trim() + "\n" +
+                "DNI: " + dni.value.trim().toUpperCase() + "\n" +
+                "Fecha de nacimiento: " + fechaNacimiento.value + "\n" +
+                "Sexo: " + sexoSeleccionado.value + "\n" +
+                "Archivo DNI: " + archivoDni.files[0].name + "\n" +
+                "Aficiones: " + listaAficiones.join(", ") + "\n" +
+                "Código postal: " + codigoPostal.value + "\n" +
+                "Provincia: " + provincia.value + "\n" +
+                "Situación laboral: " + situacionLaboral.value + "\n" +
+                "Condiciones aceptadas: Sí";
+        }
+
+
+        // ==============================
+        // BORRAR FORMULARIO
+        // ==============================
+
+        function borrarFormulario() {
+
+            formulario.reset();
+
+            listaAficiones.length = 0;
+            provincia.value = "";
+
+            for (let i = 0; i < aficiones.options.length; i++) {
+
+                const opcion = aficiones.options[i];
+
+                opcion.classList.remove("seleccionada");
+
+                if (opcion.value !== "") {
+                    opcion.textContent = opcion.value;
+                }
+            }
+
+            document.querySelectorAll(".grupoCampo").forEach(
+                grupo => {
+                    grupo.classList.remove("campo-error", "campo-valido");
+                }
+            );
+
+            document.querySelectorAll(".error").forEach(
+                error => {
+                    error.classList.remove("visible");
+                }
+            );
+
+            actualizarBoton();
         }
 
 
@@ -508,21 +591,51 @@
         // ==============================
 
         nombre.addEventListener("blur", comprobarNombre);
+        nombre.addEventListener("input", actualizarBoton);
+
         apellidos.addEventListener("blur", comprobarApellidos);
+        apellidos.addEventListener("input", actualizarBoton);
+
         dni.addEventListener("blur", comprobarDni);
+        dni.addEventListener("input", actualizarBoton);
+
         fechaNacimiento.addEventListener("blur", comprobarFecha);
-        archivoDni.addEventListener("change", comprobarArchivo);
+        fechaNacimiento.addEventListener("input", actualizarBoton);
+
+        archivoDni.addEventListener(
+            "change",
+            function () {
+                comprobarArchivo();
+                actualizarBoton();
+            }
+        );
+
         aficiones.addEventListener("change", seleccionarAficion);
-        codigoPostal.addEventListener("input", rellenarProvincia);
+
+        codigoPostal.addEventListener(
+            "input",
+            function () {
+                rellenarProvincia();
+                actualizarBoton();
+            }
+        );
+
         codigoPostal.addEventListener("blur", comprobarCodigoPostal);
+
         situacionLaboral.addEventListener("change", comprobarSituacion);
+        situacionLaboral.addEventListener("change", actualizarBoton);
+
         condiciones.addEventListener("change", comprobarCondiciones);
+        condiciones.addEventListener("change", actualizarBoton);
 
         document.querySelectorAll('input[name="sexo"]').forEach(
             opcion => {
                 opcion.addEventListener("change", comprobarSexo);
+                opcion.addEventListener("change", actualizarBoton);
             }
         );
+
+        borrar.addEventListener("click", borrarFormulario);
 
 
         // ==============================
@@ -538,14 +651,27 @@
                 const errores = obtenerErrores();
 
                 if (errores === "") {
-                    alert("¡Inscripción realizada correctamente!");
+
+                    const datos = obtenerDatosFormulario();
+
+                    alert(
+                        "¡Inscripción realizada correctamente!\n\n" +
+                        "Datos enviados:\n\n" +
+                        datos
+                    );
+
                 } else {
+
                     alert("Hay algunos campos que debes revisar:\n\n" + errores);
+
                 }
             }
         );
 
+        actualizarBoton();
+
     </script>
 
 </body>
+
 </html>

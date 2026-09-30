@@ -1,27 +1,10 @@
-// ========================================
-// FUNCIONES GENÉRICAS DE VALIDACIÓN
-// ========================================
-
-
-// Comprueba si un carácter es un número
-
 function esDigito(caracter) {
     return caracter >= "0" && caracter <= "9";
 }
 
-
-// ========================================
-// LONGITUD
-// ========================================
-
 function validarLongitud(texto, minimo, maximo) {
     return texto.length >= minimo && texto.length <= maximo;
 }
-
-
-// ========================================
-// SOLO NÚMEROS
-// ========================================
 
 function validarSoloNumeros(texto, longitud) {
 
@@ -38,11 +21,6 @@ function validarSoloNumeros(texto, longitud) {
 
     return true;
 }
-
-
-// ========================================
-// DNI
-// ========================================
 
 function validarDni(texto) {
 
@@ -64,11 +42,6 @@ function validarDni(texto) {
 
     return letra === letras.charAt(posicion);
 }
-
-
-// ========================================
-// FECHA
-// ========================================
 
 function validarFecha(texto) {
 
@@ -105,11 +78,6 @@ function validarFecha(texto) {
     );
 }
 
-
-// ========================================
-// RADIO
-// ========================================
-
 function validarRadioMarcado(nombreGrupo) {
 
     const opciones = document.getElementsByName(nombreGrupo);
@@ -124,26 +92,20 @@ function validarRadioMarcado(nombreGrupo) {
     return false;
 }
 
-
-// ========================================
-// ARCHIVO
-// ========================================
-
-function validarArchivo(campo, tiposPermitidos) {
+function validarArchivo(campo, tiposPermitidos, extensionesPermitidas) {
 
     if (campo.files.length === 0) {
         return false;
     }
 
     const archivo = campo.files[0];
+    const nombreArchivo = archivo.name.toLowerCase();
 
-    return tiposPermitidos.includes(archivo.type);
+    const tipoCorrecto = tiposPermitidos.includes(archivo.type);
+    const extensionCorrecta = extensionesPermitidas.some(extension => nombreArchivo.endsWith(extension));
+
+    return tipoCorrecto && extensionCorrecta;
 }
-
-
-// ========================================
-// SELECT
-// ========================================
 
 function validarSeleccion(valor) {
     return valor !== "";
