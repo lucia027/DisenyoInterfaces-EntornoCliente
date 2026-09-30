@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 
 <head>
@@ -14,353 +15,141 @@
 
     <!-- LOGO -->
     <div id="logo">
-
-        <img
-            id="logoImagen"
-            src="Logo.png"
-            alt="Logo De Jóvenes">
-
-        <span>
-            DE JÓVENES
-        </span>
-
+        <img id="logoImagen" src="Logo.png" alt="Logo De Jóvenes">
+        <span>DE JÓVENES</span>
     </div>
-
 
     <div id="body">
 
         <!-- TÍTULO -->
         <div id="encabezado">
-
-            <h1>Leganés</h1>
-
+            <h1>Leganes</h1>
             <h2>Únete al club</h2>
-
         </div>
-
 
         <!-- FORMULARIO -->
         <form id="formulario">
 
-
             <!-- NOMBRE -->
             <div class="grupoCampo" id="grupoNombre">
-
-                <label class="linea" for="nombre">
-                    Nombre
-                </label>
-
-                <input
-                    class="caja"
-                    id="nombre"
-                    type="text"
-                    maxlength="20"
-                    placeholder="Nombre">
-
-                <p class="error" id="errorNombre">
-                    El nombre debe tener entre 2 y 20 caracteres.
-                </p>
-
+                <label class="linea" for="nombre">Nombre</label>
+                <input class="caja" id="nombre" type="text" maxlength="20" placeholder="Nombre">
+                <p class="error" id="errorNombre">El nombre debe tener entre 2 y 20 caracteres.</p>
             </div>
-
 
             <!-- APELLIDOS -->
             <div class="grupoCampo" id="grupoApellidos">
-
-                <label class="linea" for="apellidos">
-                    Apellidos
-                </label>
-
-                <input
-                    class="caja"
-                    id="apellidos"
-                    type="text"
-                    maxlength="30"
-                    placeholder="Apellidos">
-
-                <p class="error" id="errorApellidos">
-                    Los apellidos deben tener entre 2 y 30 caracteres.
-                </p>
-
+                <label class="linea" for="apellidos">Apellidos</label>
+                <input class="caja" id="apellidos" type="text" maxlength="30" placeholder="Apellidos">
+                <p class="error" id="errorApellidos">Los apellidos deben tener entre 2 y 30 caracteres.</p>
             </div>
-
 
             <!-- DNI -->
             <div class="grupoCampo" id="grupoDni">
-
-                <label class="linea" for="dni">
-                    DNI
-                </label>
-
-                <input
-                    class="caja"
-                    id="dni"
-                    type="text"
-                    maxlength="9"
-                    placeholder="12345678Z">
-
-                <p class="error" id="errorDni">
-                    El DNI no es válido.
-                </p>
-
+                <label class="linea" for="dni">DNI</label>
+                <input class="caja" id="dni" type="text" maxlength="9" placeholder="12345678Z">
+                <p class="error" id="errorDni">El DNI no es válido.</p>
             </div>
-
 
             <!-- FECHA DE NACIMIENTO -->
             <div class="grupoCampo" id="grupoFecha">
-
-                <label class="linea" for="fechaNacimiento">
-                    Fecha de nacimiento
-                </label>
-
-                <input
-                    class="caja"
-                    id="fechaNacimiento"
-                    type="text"
-                    maxlength="10"
-                    placeholder="dd/mm/aaaa">
-
-                <p class="error" id="errorFecha">
-                    Introduce una fecha válida con formato dd/mm/aaaa.
-                </p>
-
+                <label class="linea" for="fechaNacimiento">Fecha de nacimiento</label>
+                <input class="caja" id="fechaNacimiento" type="text" maxlength="10" placeholder="dd/mm/aaaa">
+                <p class="error" id="errorFecha"> Introduce una fecha válida con formato dd/mm/aaaa.</p>
             </div>
-
 
             <!-- SEXO -->
             <div class="grupoCampo" id="grupoSexo">
-
-                <label class="linea">
-                    Sexo
-                </label>
+                <label class="linea">Sexo</label>
 
                 <div id="sexo">
+                    <input id="hombre" type="rad" name="sexo" value="hombre">
+                    <label for="hombre">Hombre</label>
 
-                    <input
-                        id="hombre"
-                        type="radio"
-                        name="sexo"
-                        value="hombre">
+                    <input id="mujer" type="radio" name="sexo" value="mujer">
+                    <label for="mujer">Mujer</label>
 
-                    <label for="hombre">
-                        Hombre
-                    </label>
-
-
-                    <input
-                        id="mujer"
-                        type="radio"
-                        name="sexo"
-                        value="mujer">
-
-                    <label for="mujer">
-                        Mujer
-                    </label>
-
-
-                    <input
-                        id="noBinario"
-                        type="radio"
-                        name="sexo"
-                        value="noBinario">
-
-                    <label for="noBinario">
-                        No binario
-                    </label>
-
+                    <input id="noBinario" type="radio" name="sexo" value="noBinario">
+                    <label for="noBinario">No binario</label>
                 </div>
 
-                <p class="error" id="errorSexo">
-                    Selecciona una opción.
-                </p>
-
+                <p class="error" id="errorSexo">Selecciona una opción.</p>
             </div>
-
 
             <!-- SUBIR DNI -->
             <div class="grupoCampo" id="grupoArchivo">
-
-                <label class="linea" for="archivoDni">
-                    Subir DNI
-                </label>
-
-                <input
-                    id="archivoDni"
-                    type="file"
-                    accept=".jpg,.jpeg,.png,image/jpeg,image/png">
-
-                <p class="error" id="errorArchivo">
-                    Selecciona una imagen JPG o PNG.
-                </p>
-
+                <label class="linea" for="archivoDni">Subir DNI</label>
+                <input id="archivoDni" type="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png">
+                <p class="error" id="errorArchivo">Selecciona una imagen JPG o PNG.</p>
             </div>
-
 
             <!-- AFICIONES -->
             <div class="grupoCampo" id="grupoAficiones">
+                <label class="linea" for="aficiones">Aficiones</label>
 
-                <label class="linea" for="aficiones">
-                    Aficiones
-                </label>
-
-                <select
-                    class="cajaSeleccion"
-                    id="aficiones">
-
-                    <option value="" selected>
-                        Selecciona una afición
-                    </option>
-
-                    <option value="Deporte">
-                        Deporte
-                    </option>
-
-                    <option value="Música">
-                        Música
-                    </option>
-
-                    <option value="Cine">
-                        Cine
-                    </option>
-
-                    <option value="Videojuegos">
-                        Videojuegos
-                    </option>
-
-                    <option value="Lectura">
-                        Lectura
-                    </option>
-
-                    <option value="Tecnología">
-                        Tecnología
-                    </option>
-
+                <select class="cajaSeleccion" id="aficiones">
+                    <option value="" selected>Selecciona una afición</option>
+                    <option value="Deporte">Deporte</option>
+                    <option value="Música">Música</option>
+                    <option value="Cine">Cine</option>
+                    <option value="Videojuegos">Videojuegos</option>
+                    <option value="Lectura">Lectura</option>
+                    <option value="Tecnología">Tecnología</option>
                 </select>
 
-                <p class="ayuda">
-                    Puedes seleccionar varias.
-                </p>
-
-                <p class="error" id="errorAficiones">
-                    Selecciona al menos una afición.
-                </p>
-
+                <p class="ayuda">Puedes seleccionar varias.</p>
+                <p class="error" id="errorAficiones">Selecciona al menos una afición.</p>
             </div>
-
 
             <!-- CP Y PROVINCIA -->
             <div id="direccion">
 
                 <!-- CÓDIGO POSTAL -->
                 <div class="grupoCampo" id="grupoCp">
-
-                    <label class="linea" for="codigoPostal">
-                        Código postal
-                    </label>
-
-                    <input
-                        class="caja"
-                        id="codigoPostal"
-                        type="text"
-                        maxlength="5"
-                        placeholder="28911">
-
-                    <p class="error" id="errorCp">
-                        Introduce un código postal válido.
-                    </p>
-
+                    <label class="linea" for="codigoPostal">Código postal</label>
+                    <input class="caja" id="codigoPostal" type="text" maxlength="5" placeholder="28911">
+                    <p class="error" id="errorCp">Introduce un código postal válido.</p>
                 </div>
-
 
                 <!-- PROVINCIA -->
                 <div class="grupoCampo">
-
-                    <label class="linea" for="provincia">
-                        Provincia
-                    </label>
-
-                    <input
-                        class="caja"
-                        id="provincia"
-                        type="text"
-                        readonly>
-
+                    <label class="linea" for="provincia">Provincia</label>
+                    <input class="caja" id="provincia" type="text" readonly>
                 </div>
 
             </div>
 
-
             <!-- SITUACIÓN LABORAL -->
             <div class="grupoCampo" id="grupoSituacion">
+                <label class="linea" for="situacionLaboral">Situación laboral</label>
 
-                <label class="linea" for="situacionLaboral">
-                    Situación laboral
-                </label>
-
-                <select
-                    class="cajaSeleccion"
-                    id="situacionLaboral">
-
-                    <option value="" selected>
-                        Selecciona una opción
-                    </option>
-
-                    <option value="estudiante">
-                        Estudiante
-                    </option>
-
-                    <option value="trabajando">
-                        Trabajando
-                    </option>
-
-                    <option value="desempleado">
-                        Buscando trabajo
-                    </option>
-
-                    <option value="complicado">
-                        Es complicado
-                    </option>
-
+                <select class="cajaSeleccion" id="situacionLaboral">
+                    <option value="" selected>Selecciona una opción</option>
+                    <option value="estudiante">Estudiante</option>
+                    <option value="trabajando">Trabajando</option>
+                    <option value="desempleado">Buscando trabajo</option>
+                    <option value="complicado">Es complicado</option>
                 </select>
 
-                <p class="error" id="errorSituacion">
-                    Selecciona una situación laboral.
-                </p>
-
+                <p class="error" id="errorSituacion">Selecciona una situación laboral.</p>
             </div>
-
 
             <!-- CONDICIONES -->
             <div class="grupoCampo" id="grupoCondiciones">
-
-                <input
-                    id="condiciones"
-                    type="checkbox">
-
-                <label for="condiciones">
-                    Acepto las condiciones
-                </label>
-
-                <p class="error" id="errorCondiciones">
-                    Debes aceptar las condiciones.
-                </p>
-
+                <input id="condiciones" type="checkbox">
+                <label for="condiciones">Acepto las condiciones</label>
+                <p class="error" id="errorCondiciones">Debes aceptar las condiciones.</p>
             </div>
 
-
             <!-- BOTÓN -->
-            <button id="submit" type="submit">
-                Inscribirme
-            </button>
+            <button id="submit" type="submit">Inscribirme</button>
 
         </form>
 
     </div>
 
-
     <!-- FUNCIONES GENÉRICAS -->
     <script src="validar.js"></script>
-
 
     <!-- JAVASCRIPT ESPECÍFICO -->
     <script>
@@ -369,38 +158,17 @@
         // REFERENCIAS
         // ==============================
 
-        const formulario =
-            document.getElementById("formulario");
-
-        const nombre =
-            document.getElementById("nombre");
-
-        const apellidos =
-            document.getElementById("apellidos");
-
-        const dni =
-            document.getElementById("dni");
-
-        const fechaNacimiento =
-            document.getElementById("fechaNacimiento");
-
-        const archivoDni =
-            document.getElementById("archivoDni");
-
-        const aficiones =
-            document.getElementById("aficiones");
-
-        const codigoPostal =
-            document.getElementById("codigoPostal");
-
-        const provincia =
-            document.getElementById("provincia");
-
-        const situacionLaboral =
-            document.getElementById("situacionLaboral");
-
-        const condiciones =
-            document.getElementById("condiciones");
+        const formulario = document.getElementById("formulario");
+        const nombre = document.getElementById("nombre");
+        const apellidos = document.getElementById("apellidos");
+        const dni = document.getElementById("dni");
+        const fechaNacimiento = document.getElementById("fechaNacimiento");
+        const archivoDni = document.getElementById("archivoDni");
+        const aficiones = document.getElementById("aficiones");
+        const codigoPostal = document.getElementById("codigoPostal");
+        const provincia = document.getElementById("provincia");
+        const situacionLaboral = document.getElementById("situacionLaboral");
+        const condiciones = document.getElementById("condiciones");
 
 
         // ==============================
@@ -415,7 +183,6 @@
         // ==============================
 
         const provincias = [
-
             { prefijo: "01", nombre: "Álava" },
             { prefijo: "02", nombre: "Albacete" },
             { prefijo: "03", nombre: "Alicante" },
@@ -468,7 +235,6 @@
             { prefijo: "50", nombre: "Zaragoza" },
             { prefijo: "51", nombre: "Ceuta" },
             { prefijo: "52", nombre: "Melilla" }
-
         ];
 
 
@@ -476,26 +242,11 @@
         // MARCAR CAMPO
         // ==============================
 
-        function marcarCampo(
-            grupo,
-            correcto,
-            mensajeError
-        ) {
+        function marcarCampo(grupo, correcto, mensajeError) {
 
-            grupo.classList.toggle(
-                "campo-error",
-                !correcto
-            );
-
-            grupo.classList.toggle(
-                "campo-valido",
-                correcto
-            );
-
-            mensajeError.classList.toggle(
-                "visible",
-                !correcto
-            );
+            grupo.classList.toggle("campo-error", !correcto);
+            grupo.classList.toggle("campo-valido", correcto);
+            mensajeError.classList.toggle("visible", !correcto);
 
             return correcto;
         }
@@ -508,15 +259,8 @@
         function comprobarNombre() {
 
             return marcarCampo(
-
                 document.getElementById("grupoNombre"),
-
-                validarLongitud(
-                    nombre.value.trim(),
-                    2,
-                    20
-                ),
-
+                validarLongitud(nombre.value.trim(), 2, 20),
                 document.getElementById("errorNombre")
             );
         }
@@ -529,15 +273,8 @@
         function comprobarApellidos() {
 
             return marcarCampo(
-
                 document.getElementById("grupoApellidos"),
-
-                validarLongitud(
-                    apellidos.value.trim(),
-                    2,
-                    30
-                ),
-
+                validarLongitud(apellidos.value.trim(), 2, 30),
                 document.getElementById("errorApellidos")
             );
         }
@@ -550,13 +287,8 @@
         function comprobarDni() {
 
             return marcarCampo(
-
                 document.getElementById("grupoDni"),
-
-                validarDni(
-                    dni.value
-                ),
-
+                validarDni(dni.value),
                 document.getElementById("errorDni")
             );
         }
@@ -569,13 +301,8 @@
         function comprobarFecha() {
 
             return marcarCampo(
-
                 document.getElementById("grupoFecha"),
-
-                validarFecha(
-                    fechaNacimiento.value
-                ),
-
+                validarFecha(fechaNacimiento.value),
                 document.getElementById("errorFecha")
             );
         }
@@ -588,11 +315,8 @@
         function comprobarSexo() {
 
             return marcarCampo(
-
                 document.getElementById("grupoSexo"),
-
                 validarRadioMarcado("sexo"),
-
                 document.getElementById("errorSexo")
             );
         }
@@ -609,16 +333,9 @@
                 "image/png"
             ];
 
-
             return marcarCampo(
-
                 document.getElementById("grupoArchivo"),
-
-                validarArchivo(
-                    archivoDni,
-                    tiposPermitidos
-                ),
-
+                validarArchivo(archivoDni, tiposPermitidos),
                 document.getElementById("errorArchivo")
             );
         }
@@ -630,65 +347,29 @@
 
         function seleccionarAficion() {
 
-            const valor =
-                aficiones.value;
-
+            const valor = aficiones.value;
 
             if (valor === "") {
-
                 return;
-
             }
 
+            const opcion = aficiones.options[aficiones.selectedIndex];
+            const posicion = listaAficiones.indexOf(valor);
 
-            const opcion =
-                aficiones.options[
-                    aficiones.selectedIndex
-                ];
-
-
-            const posicion =
-                listaAficiones.indexOf(valor);
-
-
-            // Si no estaba seleccionada
             if (posicion === -1) {
 
                 listaAficiones.push(valor);
+                opcion.textContent = "✓ " + valor;
+                opcion.classList.add("seleccionada");
 
+            } else {
 
-                opcion.textContent =
-                    "✓ " + valor;
-
-
-                opcion.classList.add(
-                    "seleccionada"
-                );
-
+                listaAficiones.splice(posicion, 1);
+                opcion.textContent = valor;
+                opcion.classList.remove("seleccionada");
             }
-
-            // Si ya estaba seleccionada
-            else {
-
-                listaAficiones.splice(
-                    posicion,
-                    1
-                );
-
-
-                opcion.textContent =
-                    valor;
-
-
-                opcion.classList.remove(
-                    "seleccionada"
-                );
-
-            }
-
 
             aficiones.value = "";
-
 
             comprobarAficiones();
         }
@@ -697,11 +378,8 @@
         function comprobarAficiones() {
 
             return marcarCampo(
-
                 document.getElementById("grupoAficiones"),
-
                 listaAficiones.length > 0,
-
                 document.getElementById("errorAficiones")
             );
         }
@@ -715,36 +393,17 @@
 
             provincia.value = "";
 
-
-            if (
-                codigoPostal.value.length < 2
-            ) {
-
+            if (codigoPostal.value.length < 2) {
                 return;
-
             }
 
+            const prefijo = codigoPostal.value.substring(0, 2);
 
-            const prefijo =
-                codigoPostal.value.substring(
-                    0,
-                    2
-                );
-
-
-            const encontrada =
-                provincias.find(
-                    p => p.prefijo === prefijo
-                );
-
+            const encontrada = provincias.find(p => p.prefijo === prefijo);
 
             if (encontrada) {
-
-                provincia.value =
-                    encontrada.nombre;
-
+                provincia.value = encontrada.nombre;
             }
-
         }
 
 
@@ -754,20 +413,11 @@
 
         function comprobarCodigoPostal() {
 
-            const correcto =
-                validarSoloNumeros(
-                    codigoPostal.value,
-                    5
-                ) &&
-                provincia.value !== "";
-
+            const correcto = validarSoloNumeros(codigoPostal.value, 5) && provincia.value !== "";
 
             return marcarCampo(
-
                 document.getElementById("grupoCp"),
-
                 correcto,
-
                 document.getElementById("errorCp")
             );
         }
@@ -780,13 +430,8 @@
         function comprobarSituacion() {
 
             return marcarCampo(
-
                 document.getElementById("grupoSituacion"),
-
-                validarSeleccion(
-                    situacionLaboral.value
-                ),
-
+                validarSeleccion(situacionLaboral.value),
                 document.getElementById("errorSituacion")
             );
         }
@@ -799,11 +444,8 @@
         function comprobarCondiciones() {
 
             return marcarCampo(
-
                 document.getElementById("grupoCondiciones"),
-
                 condiciones.checked,
-
                 document.getElementById("errorCondiciones")
             );
         }
@@ -817,76 +459,45 @@
 
             let errores = "";
 
-
             if (!comprobarNombre()) {
-
-                errores +=
-                    "- El nombre debe tener entre 2 y 20 caracteres.\n";
+                errores += "- El nombre debe tener entre 2 y 20 caracteres.\n";
             }
-
 
             if (!comprobarApellidos()) {
-
-                errores +=
-                    "- Los apellidos deben tener entre 2 y 30 caracteres.\n";
+                errores += "- Los apellidos deben tener entre 2 y 30 caracteres.\n";
             }
-
 
             if (!comprobarDni()) {
-
-                errores +=
-                    "- El DNI no es válido.\n";
+                errores += "- El DNI no es válido.\n";
             }
-
 
             if (!comprobarFecha()) {
-
-                errores +=
-                    "- La fecha de nacimiento no es válida.\n";
+                errores += "- La fecha de nacimiento no es válida.\n";
             }
-
 
             if (!comprobarSexo()) {
-
-                errores +=
-                    "- Debes seleccionar un sexo.\n";
+                errores += "- Debes seleccionar un sexo.\n";
             }
-
 
             if (!comprobarArchivo()) {
-
-                errores +=
-                    "- Debes subir el DNI en formato JPG o PNG.\n";
+                errores += "- Debes subir el DNI en formato JPG o PNG.\n";
             }
-
 
             if (!comprobarAficiones()) {
-
-                errores +=
-                    "- Debes seleccionar al menos una afición.\n";
+                errores += "- Debes seleccionar al menos una afición.\n";
             }
-
 
             if (!comprobarCodigoPostal()) {
-
-                errores +=
-                    "- El código postal no es válido.\n";
+                errores += "- El código postal no es válido.\n";
             }
-
 
             if (!comprobarSituacion()) {
-
-                errores +=
-                    "- Debes seleccionar una situación laboral.\n";
+                errores += "- Debes seleccionar una situación laboral.\n";
             }
-
 
             if (!comprobarCondiciones()) {
-
-                errores +=
-                    "- Debes aceptar las condiciones.\n";
+                errores += "- Debes aceptar las condiciones.\n";
             }
-
 
             return errores;
         }
@@ -896,80 +507,22 @@
         // EVENTOS
         // ==============================
 
-        nombre.addEventListener(
-            "blur",
-            comprobarNombre
+        nombre.addEventListener("blur", comprobarNombre);
+        apellidos.addEventListener("blur", comprobarApellidos);
+        dni.addEventListener("blur", comprobarDni);
+        fechaNacimiento.addEventListener("blur", comprobarFecha);
+        archivoDni.addEventListener("change", comprobarArchivo);
+        aficiones.addEventListener("change", seleccionarAficion);
+        codigoPostal.addEventListener("input", rellenarProvincia);
+        codigoPostal.addEventListener("blur", comprobarCodigoPostal);
+        situacionLaboral.addEventListener("change", comprobarSituacion);
+        condiciones.addEventListener("change", comprobarCondiciones);
+
+        document.querySelectorAll('input[name="sexo"]').forEach(
+            opcion => {
+                opcion.addEventListener("change", comprobarSexo);
+            }
         );
-
-
-        apellidos.addEventListener(
-            "blur",
-            comprobarApellidos
-        );
-
-
-        dni.addEventListener(
-            "blur",
-            comprobarDni
-        );
-
-
-        fechaNacimiento.addEventListener(
-            "blur",
-            comprobarFecha
-        );
-
-
-        archivoDni.addEventListener(
-            "change",
-            comprobarArchivo
-        );
-
-
-        aficiones.addEventListener(
-            "change",
-            seleccionarAficion
-        );
-
-
-        codigoPostal.addEventListener(
-            "input",
-            rellenarProvincia
-        );
-
-
-        codigoPostal.addEventListener(
-            "blur",
-            comprobarCodigoPostal
-        );
-
-
-        situacionLaboral.addEventListener(
-            "change",
-            comprobarSituacion
-        );
-
-
-        condiciones.addEventListener(
-            "change",
-            comprobarCondiciones
-        );
-
-
-        document
-            .querySelectorAll(
-                'input[name="sexo"]'
-            )
-            .forEach(
-                opcion => {
-
-                    opcion.addEventListener(
-                        "change",
-                        comprobarSexo
-                    );
-
-                }
-            );
 
 
         // ==============================
@@ -982,33 +535,17 @@
 
                 event.preventDefault();
 
-
-                const errores =
-                    obtenerErrores();
-
+                const errores = obtenerErrores();
 
                 if (errores === "") {
-
-                    alert(
-                        "¡Inscripción realizada correctamente!"
-                    );
-
+                    alert("¡Inscripción realizada correctamente!");
+                } else {
+                    alert("Hay algunos campos que debes revisar:\n\n" + errores);
                 }
-
-                else {
-
-                    alert(
-                        "Hay algunos campos que debes revisar:\n\n"
-                        + errores
-                    );
-
-                }
-
             }
         );
 
     </script>
 
 </body>
-
 </html>

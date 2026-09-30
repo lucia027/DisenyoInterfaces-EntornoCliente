@@ -6,9 +6,7 @@
 // Comprueba si un carácter es un número
 
 function esDigito(caracter) {
-
-    return caracter >= "0" &&
-           caracter <= "9";
+    return caracter >= "0" && caracter <= "9";
 }
 
 
@@ -16,14 +14,8 @@ function esDigito(caracter) {
 // LONGITUD
 // ========================================
 
-function validarLongitud(
-    texto,
-    minimo,
-    maximo
-) {
-
-    return texto.length >= minimo &&
-           texto.length <= maximo;
+function validarLongitud(texto, minimo, maximo) {
+    return texto.length >= minimo && texto.length <= maximo;
 }
 
 
@@ -31,32 +23,18 @@ function validarLongitud(
 // SOLO NÚMEROS
 // ========================================
 
-function validarSoloNumeros(
-    texto,
-    longitud
-) {
+function validarSoloNumeros(texto, longitud) {
 
     if (texto.length !== longitud) {
-
         return false;
-
     }
 
-
-    for (
-        let i = 0;
-        i < texto.length;
-        i++
-    ) {
+    for (let i = 0; i < texto.length; i++) {
 
         if (!esDigito(texto.charAt(i))) {
-
             return false;
-
         }
-
     }
-
 
     return true;
 }
@@ -68,49 +46,23 @@ function validarSoloNumeros(
 
 function validarDni(texto) {
 
-    texto =
-        texto
-            .trim()
-            .toUpperCase();
-
+    texto = texto.trim().toUpperCase();
 
     if (texto.length !== 9) {
-
         return false;
-
     }
 
+    const numeros = texto.substring(0, 8);
+    const letra = texto.charAt(8);
 
-    const numeros =
-        texto.substring(0, 8);
-
-
-    const letra =
-        texto.charAt(8);
-
-
-    if (
-        !validarSoloNumeros(
-            numeros,
-            8
-        )
-    ) {
-
+    if (!validarSoloNumeros(numeros, 8)) {
         return false;
-
     }
 
+    const letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+    const posicion = parseInt(numeros) % 23;
 
-    const letras =
-        "TRWAGMYFPDXBNJZSQVHLCKE";
-
-
-    const posicion =
-        parseInt(numeros) % 23;
-
-
-    return letra ===
-        letras.charAt(posicion);
+    return letra === letras.charAt(posicion);
 }
 
 
@@ -121,64 +73,30 @@ function validarDni(texto) {
 function validarFecha(texto) {
 
     if (texto.length !== 10) {
-
         return false;
-
     }
 
-
-    if (
-        texto.charAt(2) !== "/" ||
-        texto.charAt(5) !== "/"
-    ) {
-
+    if (texto.charAt(2) !== "/" || texto.charAt(5) !== "/") {
         return false;
-
     }
 
-
-    const diaTexto =
-        texto.substring(0, 2);
-
-
-    const mesTexto =
-        texto.substring(3, 5);
-
-
-    const anioTexto =
-        texto.substring(6, 10);
-
+    const diaTexto = texto.substring(0, 2);
+    const mesTexto = texto.substring(3, 5);
+    const anioTexto = texto.substring(6, 10);
 
     if (
         !validarSoloNumeros(diaTexto, 2) ||
         !validarSoloNumeros(mesTexto, 2) ||
         !validarSoloNumeros(anioTexto, 4)
     ) {
-
         return false;
-
     }
 
+    const dia = parseInt(diaTexto);
+    const mes = parseInt(mesTexto);
+    const anio = parseInt(anioTexto);
 
-    const dia =
-        parseInt(diaTexto);
-
-
-    const mes =
-        parseInt(mesTexto);
-
-
-    const anio =
-        parseInt(anioTexto);
-
-
-    const fecha =
-        new Date(
-            anio,
-            mes - 1,
-            dia
-        );
-
+    const fecha = new Date(anio, mes - 1, dia);
 
     return (
         fecha.getDate() === dia &&
@@ -192,30 +110,16 @@ function validarFecha(texto) {
 // RADIO
 // ========================================
 
-function validarRadioMarcado(
-    nombreGrupo
-) {
+function validarRadioMarcado(nombreGrupo) {
 
-    const opciones =
-        document.getElementsByName(
-            nombreGrupo
-        );
+    const opciones = document.getElementsByName(nombreGrupo);
 
-
-    for (
-        let i = 0;
-        i < opciones.length;
-        i++
-    ) {
+    for (let i = 0; i < opciones.length; i++) {
 
         if (opciones[i].checked) {
-
             return true;
-
         }
-
     }
-
 
     return false;
 }
@@ -225,27 +129,15 @@ function validarRadioMarcado(
 // ARCHIVO
 // ========================================
 
-function validarArchivo(
-    campo,
-    tiposPermitidos
-) {
+function validarArchivo(campo, tiposPermitidos) {
 
-    if (
-        campo.files.length === 0
-    ) {
-
+    if (campo.files.length === 0) {
         return false;
-
     }
 
+    const archivo = campo.files[0];
 
-    const archivo =
-        campo.files[0];
-
-
-    return tiposPermitidos.includes(
-        archivo.type
-    );
+    return tiposPermitidos.includes(archivo.type);
 }
 
 
@@ -254,6 +146,5 @@ function validarArchivo(
 // ========================================
 
 function validarSeleccion(valor) {
-
     return valor !== "";
 }
