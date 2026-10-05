@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rutas de senderismo</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #EEF2F1;
+    color: #1A2333;
+  }
+
+  .contenedor {
+    width: min(100% - 2rem, 1100px);
+    margin-inline: auto;
+    padding-block: 1.5rem;
+  }
+
+  h1 {
+    font-size: clamp(1.4rem, 1rem + 2vw, 2.2rem);
+    margin: 0 0 1rem;
+  }
+
+  .galeria {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .tarjeta {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tarjeta .foto {
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(160deg, var(--c1), var(--c2));
+  }
+
+  .tarjeta h2 { font-size: 1.05rem; margin: .8rem 1rem .3rem; }
+  .tarjeta p  { font-size: .9rem; margin: 0 1rem .8rem; color: #4B5768; }
+
+  .tarjeta .distancia {
+    margin: auto 1rem 1rem;
+    font-weight: 600;
+    font-size: .85rem;
+    color: #0E6E63;
+  }
+</style>
+</head>
+<body>
+  <div class="contenedor">
+    <h1>Rutas de senderismo</h1>
+    <ul class="galeria">
+      <li class="tarjeta">
+        <div class="foto" style="--c1:#7FB7A4; --c2:#2F5D50"></div>
+        <h2>Hayedo de Montejo</h2>
+        <p>Paseo sombreado junto al río Jarama.</p>
+        <span class="distancia">6 km</span>
+      </li>
+      <li class="tarjeta">
+        <div class="foto" style="--c1:#E7C27D; --c2:#9A6A2F"></div>
+        <h2>La Pedriza</h2>
+        <p>Granito, trepadas cortas y vistas al embalse de Santillana.</p>
+        <span class="distancia">11 km</span>
+      </li>
+      <li class="tarjeta">
+        <div class="foto" style="--c1:#9DB8E0; --c2:#3B5A8C"></div>
+        <h2>Lagunas de Peñalara</h2>
+        <p>Circuito de alta montaña.</p>
+        <span class="distancia">8 km</span>
+      </li>
+      <li class="tarjeta">
+        <div class="foto" style="--c1:#C9A3C9; --c2:#6B3F6B"></div>
+        <h2>Cascada del Purgatorio</h2>
+        <p>Desde el monasterio de El Paular, siguiendo el arroyo.</p>
+        <span class="distancia">14 km</span>
+      </li>
+      <li class="tarjeta">
+        <div class="foto" style="--c1:#B5CF8A; --c2:#55702C"></div>
+        <h2>Silla de Felipe II</h2>
+        <p>Ruta sencilla y familiar.</p>
+        <span class="distancia">4 km</span>
+      </li>
+      <li class="tarjeta">
+        <div class="foto" style="--c1:#E39A8B; --c2:#8C3B2E"></div>
+        <h2>Cañón del río Lobos</h2>
+        <p>Paredes calizas, buitres y la ermita de San Bartolomé.</p>
+        <span class="distancia">9 km</span>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>

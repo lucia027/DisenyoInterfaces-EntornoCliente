@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pedidos</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; padding: 1rem; font-family: system-ui, sans-serif; color: #1A2333; background: #EEF2F1; }
+  h1 { font-size: 1.3rem; margin: 0 0 1rem; }
+
+  /* ---------- Móvil: cada fila es una ficha ---------- */
+  .pedidos,
+  .pedidos tbody,
+  .pedidos tr,
+  .pedidos td { display: block; }
+
+  .pedidos thead {
+    position: absolute; width: 1px; height: 1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
+
+  .pedidos tr {
+    background: #fff;
+    border-radius: 10px;
+    padding: .25rem 1rem;
+    margin-bottom: .75rem;
+  }
+
+  .pedidos td {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .55rem 0;
+    border-bottom: 1px dashed #D6DDE3;
+  }
+  .pedidos td:last-child { border-bottom: 0; }
+
+  .pedidos td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #4B5768;
+  }
+
+  .estado { font-weight: 600; }
+  .enviado   { color: #0E6E63; }
+  .pendiente { color: #9A3412; }
+
+  /* ---------- Desde 640px: tabla normal ---------- */
+  @media (min-width: 640px) {
+    .pedidos { display: table; width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; }
+    .pedidos thead {
+      display: table-header-group;
+      position: static; width: auto; height: auto;
+      overflow: visible; clip: auto; white-space: normal;
+    }
+    .pedidos tbody { display: table-row-group; }
+    .pedidos tr { display: table-row; padding: 0; margin: 0; border-radius: 0; }
+    .pedidos th,
+    .pedidos td {
+      display: table-cell;
+      text-align: left;
+      padding: .7rem 1rem;
+      border-bottom: 1px solid #D6DDE3;
+    }
+    .pedidos th { background: #DCEFEB; }
+    .pedidos td::before { content: none; }
+  }
+</style>
+</head>
+<body>
+  <h1>Pedidos recientes</h1>
+  <table class="pedidos" role="table">
+    <thead role="rowgroup">
+      <tr role="row">
+        <th role="columnheader" scope="col">Pedido</th>
+        <th role="columnheader" scope="col">Cliente</th>
+        <th role="columnheader" scope="col">Fecha</th>
+        <th role="columnheader" scope="col">Total</th>
+        <th role="columnheader" scope="col">Estado</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup">
+      <tr role="row">
+        <td role="cell" data-label="Pedido">#1042</td>
+        <td role="cell" data-label="Cliente">Marta Gil</td>
+        <td role="cell" data-label="Fecha">28/09/2026</td>
+        <td role="cell" data-label="Total">42,90 €</td>
+        <td role="cell" data-label="Estado"><span class="estado enviado">Enviado</span></td>
+      </tr>
+      <tr role="row">
+        <td role="cell" data-label="Pedido">#1043</td>
+        <td role="cell" data-label="Cliente">Jorge Ruiz</td>
+        <td role="cell" data-label="Fecha">29/09/2026</td>
+        <td role="cell" data-label="Total">18,50 €</td>
+        <td role="cell" data-label="Estado"><span class="estado pendiente">Pendiente</span></td>
+      </tr>
+      <tr role="row">
+        <td role="cell" data-label="Pedido">#1044</td>
+        <td role="cell" data-label="Cliente">Ana Torres</td>
+        <td role="cell" data-label="Fecha">30/09/2026</td>
+        <td role="cell" data-label="Total">97,00 €</td>
+        <td role="cell" data-label="Estado"><span class="estado enviado">Enviado</span></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

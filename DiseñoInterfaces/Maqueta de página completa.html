@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maqueta de blog</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, sans-serif; color: #1A2333; background: #EEF2F1; }
+
+  .pagina {
+    min-height: 100vh;
+    display: grid;
+    gap: .75rem;
+    padding: .75rem;
+    grid-template-rows: auto auto 1fr auto auto;
+    grid-template-areas:
+      "cab"
+      "nav"
+      "principal"
+      "lateral"
+      "pie";
+  }
+
+  .cab       { grid-area: cab;       background: #1F3A5F; color: #fff; }
+  .nav       { grid-area: nav;       background: #CFE3DF; }
+  .principal { grid-area: principal; background: #fff; }
+  .lateral   { grid-area: lateral;   background: #F3E3B8; }
+  .pie       { grid-area: pie;       background: #2C3746; color: #fff; }
+
+  .pagina > * { padding: 1rem; border-radius: 8px; }
+  h1, h2 { margin: 0 0 .5rem; font-size: 1.1rem; }
+  p { margin: 0 0 .5rem; }
+
+  /* Indicador del diseño activo */
+  .cab::after { content: "Diseño actual: móvil, 1 columna"; display: block; font-size: .85rem; opacity: .8; }
+
+  /* ---------- Tableta: desde 600px ---------- */
+  @media (min-width: 600px) {
+    .pagina {
+      grid-template-columns: 180px 1fr;
+      grid-template-rows: auto 1fr auto auto;
+      grid-template-areas:
+        "cab cab"
+        "nav principal"
+        "nav lateral"
+        "pie pie";
+    }
+    .cab::after { content: "Diseño actual: tableta, 2 columnas"; }
+  }
+
+  /* ---------- Escritorio: desde 900px ---------- */
+  @media (min-width: 900px) {
+    .pagina {
+      grid-template-columns: 180px 1fr 220px;
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas:
+        "cab cab       cab"
+        "nav principal lateral"
+        "pie pie       pie";
+    }
+    .cab::after { content: "Diseño actual: escritorio, 3 columnas"; }
+  }
+</style>
+</head>
+<body>
+  <div class="pagina">
+    <header class="cab"><h1>Mi blog</h1></header>
+    <nav class="nav"><h2>Navegación</h2><p>Inicio · Artículos · Sobre mí</p></nav>
+    <main class="principal">
+      <h2>Artículo principal</h2>
+      <p>Este es el contenido más importante de la página. Observa cómo cambia su posición al cambiar el ancho del marco, sin que el HTML se mueva.</p>
+    </main>
+    <aside class="lateral"><h2>Lateral</h2><p>Enlaces relacionados.</p></aside>
+    <footer class="pie">Pie de página</footer>
+  </div>
+</body>
+</html>

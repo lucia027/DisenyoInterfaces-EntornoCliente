@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Container queries</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; padding: 1rem; font-family: system-ui, sans-serif; color: #1A2333; background: #EEF2F1; }
+
+  /* ---------- Maqueta de página (media query) ---------- */
+  .escena { display: grid; gap: 1rem; }
+  @media (min-width: 700px) {
+    .escena { grid-template-columns: 260px 1fr; }
+  }
+
+  /* Los dos huecos son contenedores medibles */
+  .hueco { container-type: inline-size; }
+  .hueco > h2 { font-size: .8rem; color: #4B5768; margin: 0 0 .4rem; font-weight: 600; }
+
+  /* ---------- Tarjeta: diseño base (estrecho) ---------- */
+  .perfil {
+    display: grid;
+    gap: .6rem;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+  }
+  .avatar {
+    width: 72px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7FB7A4, #1F3A5F);
+  }
+  .perfil h3 { margin: 0; font-size: clamp(1.1rem, 5cqi, 1.5rem); }
+  .cargo { margin: 0; color: #0E6E63; font-weight: 600; font-size: .9rem; }
+  .perfil p { margin: 0; font-size: .92rem; }
+  .perfil button {
+    justify-self: start;
+    font: inherit; font-weight: 600;
+    padding: .55rem 1rem; min-height: 44px;
+    border: 0; border-radius: 6px;
+    background: #1F3A5F; color: #fff; cursor: pointer;
+  }
+
+  /* ---------- Tarjeta: si su contenedor mide 400px o más ---------- */
+  @container (min-width: 400px) {
+    .perfil {
+      grid-template-columns: 96px 1fr;
+      column-gap: 1.25rem;
+      align-items: start;
+    }
+    .avatar { width: 96px; grid-row: span 2; }
+    .perfil p,
+    .perfil button { grid-column: 2; }
+  }
+</style>
+</head>
+<body>
+  <div class="escena">
+    <aside class="hueco">
+      <h2>Columna lateral</h2>
+      <article class="perfil">
+        <div class="avatar"></div>
+        <div>
+          <h3>Lucía Moreno</h3>
+          <p class="cargo">Diseñadora web</p>
+        </div>
+        <p>Especialista en interfaces accesibles y sistemas de diseño.</p>
+        <button type="button">Ver perfil</button>
+      </article>
+    </aside>
+
+    <main class="hueco">
+      <h2>Zona principal</h2>
+      <article class="perfil">
+        <div class="avatar"></div>
+        <div>
+          <h3>Lucía Moreno</h3>
+          <p class="cargo">Diseñadora web</p>
+        </div>
+        <p>Especialista en interfaces accesibles y sistemas de diseño.</p>
+        <button type="button">Ver perfil</button>
+      </article>
+    </main>
+  </div>
+</body>
+</html>
