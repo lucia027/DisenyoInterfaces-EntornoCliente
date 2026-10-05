@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipos de comida</title>
+</head>
+<body>
+    <form>
+        <label for="tipoComida">Tipo de comida:</label>
+        <select id="tipoComida"></select>
+
+        <label for="comida">Comida:</label>
+        <select id="comida" disabled></select>
+
+        <label for="ingrediente">Ingrediente:</label>
+        <select id="ingrediente" disabled></select>
+    </form>
+
+    <p id="resultado"></p>
+
+    <script>
+        const comidas = {
+            "Salado": {
+                "Patatas": ["Sal", "Aceite", "Patata"],
+                "Bocadillo": ["Pan", "Jamón", "Queso"],
+                "Pizza": ["Tomate", "Queso", "Pepperoni"],
+                "Hamburguesa": ["Pan", "Carne", "Lechuga"]
+            },
+            "Dulce": {
+                "Chocolate": ["Cacao", "Azúcar", "Leche"],
+                "Helado": ["Leche", "Azúcar", "Nata"],
+                "Galletas": ["Harina", "Azúcar", "Mantequilla"],
+                "Pastel": ["Harina", "Huevos", "Azúcar"]
+            },
+            "Ácido": {
+                "Limón": ["Limón", "Agua", "Azúcar"],
+                "Vinagre": ["Vino", "Agua", "Ácido acético"],
+                "Pepinillos": ["Pepino", "Vinagre", "Sal"],
+                "Yogur Griego": ["Leche", "Fermentos", "Nata"]
+            }
+        };
+
+        const selectTipoComida = document.getElementById("tipoComida");
+        const selectComida = document.getElementById("comida");
+        const selectIngrediente = document.getElementById("ingrediente");
+        const resultado = document.getElementById("resultado");
+
+        function rellenarSelect(select, lista, textoInicial) {
+            select.innerHTML = "";
+
+            const opcionInicial = document.createElement("option");
+            opcionInicial.value = "";
+            opcionInicial.textContent = textoInicial;
+            select.appendChild(opcionInicial);
+
+            for (let i = 0; i < lista.length; i++) {
+                const opcion = document.createElement("option");
+                opcion.value = lista[i];
+                opcion.textContent = lista[i];
+                select.appendChild(opcion);
+            }
+        }
+
+        function cargarTiposComida() {
+            const tipos = Object.keys(comidas);
+
+            rellenarSelect(selectTipoComida, tipos, "- Seleccione un tipo -");
+            rellenarSelect(selectComida, [], "- Seleccione una comida -");
+            rellenarSelect(selectIngrediente, [], "- Seleccione un ingrediente -");
+        }
+
+        function alCambiarTipoComida() {
+            const tipoSeleccionado = selectTipoComida.value;
+
+            if (tipoSeleccionado === "") {
+                rellenarSelect(selectComida, [], "- Seleccione una comida -");
+                selectComida.disabled = true;
+            } else {
+                const listaComidas = Object.keys(comidas[tipoSeleccionado]);
+                rellenarSelect(selectComida, listaComidas, "- Seleccione una comida -");
+                selectComida.disabled = false;
+            }
+
+            rellenarSelect(selectIngrediente, [], "- Seleccione un ingrediente -");
+            selectIngrediente.disabled = true;
+
+            mostrarResultado();
+        }
+
+        function alCambiarComida() {
+            const tipoSeleccionado = selectTipoComida.value;
+            const comidaSeleccionada = selectComida.value;
+
+            if (comidaSeleccionada === "") {
+                rellenarSelect(selectIngrediente, [], "- Seleccione un ingrediente -");
+                selectIngrediente.disabled = true;
+            } else {
+                const ingredientes = comidas[tipoSeleccionado][comidaSeleccionada];
+                rellenarSelect(selectIngrediente, ingredientes, "- Seleccione un ingrediente -");
+                selectIngrediente.disabled = false;
+            }
+
+            mostrarResultado();
+        }
+
+        function mostrarResultado() {
+            if (selectTipoComida.value !== "" && selectComida.value !== "" && selectIngrediente.value !== "") {
+                resultado.textContent = "Has seleccionado: " + selectTipoComida.value + " - " + selectComida.value + " - " + selectIngrediente.value;
+            } else {
+                resultado.textContent = "";
+            }
+        }
+
+        selectTipoComida.addEventListener("change", alCambiarTipoComida);
+        selectComida.addEventListener("change", alCambiarComida);
+        selectIngrediente.addEventListener("change", mostrarResultado);
+
+        cargarTiposComida();
+    </script>
+</body>
+</html>
