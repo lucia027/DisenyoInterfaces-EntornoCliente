@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listas dinámicas</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #fff0f6;
+        }
+
+        h1 {
+            text-align: center;
+            color: #c94f7c;
+        }
+
+        .contenedor {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .lista {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .agregar {
+            display: flex;
+            gap: 5px;
+        }
+
+        input {
+            padding: 7px;
+            border: 1px solid #e7a3bb;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        button {
+            padding: 7px 13px;
+            cursor: pointer;
+            border: 1px solid #d66a91;
+            border-radius: 5px;
+            background-color: #f5b6cc;
+            color: #7a2848;
+        }
+
+        button:hover {
+            background-color: #ed9fba;
+        }
+
+        select {
+            width: 220px;
+            height: 250px;
+            border: 2px solid #e7a3bb;
+            border-radius: 6px;
+            background-color: #fffafd;
+            padding: 5px;
+        }
+
+        option {
+            padding: 5px;
+        }
+
+        .botonesMover {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .botonesMover button {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .borrar {
+            width: 50px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Listas</h1>
+
+    <div class="contenedor">
+
+        <div class="lista">
+            <div class="agregar">
+                <input type="text" id="inputIzquierda" placeholder="Nuevo elemento">
+                <button id="agregarIzquierda">+</button>
+            </div>
+
+            <select id="listaIzquierda" multiple></select>
+
+            <button id="borrarIzquierda" class="borrar"><strong>-</strong></button>
+        </div>
+
+        <div class="botonesMover">
+            <button id="moverDerecha">&gt;</button>
+            <button id="moverIzquierda">&lt;</button>
+        </div>
+
+        <div class="lista">
+            <div class="agregar">
+                <input type="text" id="inputDerecha" placeholder="Nuevo elemento">
+                <button id="agregarDerecha">+</button>
+            </div>
+
+            <select id="listaDerecha" multiple></select>
+
+            <button id="borrarDerecha" class="borrar"><strong>-</strong></button>
+        </div>
+
+    </div>
+
+    <script>
+        const inputIzquierda = document.getElementById("inputIzquierda");
+        const inputDerecha = document.getElementById("inputDerecha");
+
+        const listaIzquierda = document.getElementById("listaIzquierda");
+        const listaDerecha = document.getElementById("listaDerecha");
+
+        const agregarIzquierda = document.getElementById("agregarIzquierda");
+        const agregarDerecha = document.getElementById("agregarDerecha");
+
+        const borrarIzquierda = document.getElementById("borrarIzquierda");
+        const borrarDerecha = document.getElementById("borrarDerecha");
+
+        const moverDerecha = document.getElementById("moverDerecha");
+        const moverIzquierda = document.getElementById("moverIzquierda");
+
+        function agregarElemento(input, select) {
+            const texto = input.value.trim();
+
+            if (texto === "") {
+                return;
+            }
+
+            const opcion = document.createElement("option");
+
+            opcion.textContent = texto;
+            opcion.value = texto;
+
+            select.appendChild(opcion);
+
+            input.value = "";
+            input.focus();
+        }
+
+        function borrarSeleccionados(select) {
+            const seleccionados = Array.from(select.selectedOptions);
+
+            for (const opcion of seleccionados) {
+                opcion.remove();
+            }
+        }
+
+        function moverSeleccionados(origen, destino) {
+            const seleccionados = Array.from(origen.selectedOptions);
+
+            for (const opcion of seleccionados) {
+                destino.appendChild(opcion);
+                opcion.selected = false;
+            }
+        }
+
+        agregarIzquierda.addEventListener("click", function() {
+            agregarElemento(inputIzquierda, listaIzquierda);
+        });
+
+        agregarDerecha.addEventListener("click", function() {
+            agregarElemento(inputDerecha, listaDerecha);
+        });
+
+        borrarIzquierda.addEventListener("click", function() {
+            borrarSeleccionados(listaIzquierda);
+        });
+
+        borrarDerecha.addEventListener("click", function() {
+            borrarSeleccionados(listaDerecha);
+        });
+
+        moverDerecha.addEventListener("click", function() {
+            moverSeleccionados(listaIzquierda, listaDerecha);
+        });
+
+        moverIzquierda.addEventListener("click", function() {
+            moverSeleccionados(listaDerecha, listaIzquierda);
+        });
+    </script>
+
+</body>
+</html>
