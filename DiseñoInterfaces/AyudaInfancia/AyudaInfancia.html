@@ -1,121 +1,356 @@
-<style>
-body {
-    margin: 0;
-}
-.Fijo {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-
-    background-color: white;
-    z-index: 1000;
-}
-.Encabezado {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-     padding-top: 180px;
-
-    padding: 10px 30px;
-    box-sizing: border-box;
-
-    background-color: rgb(198, 11, 30);
-}
-.Titulo {
-    font-size: xxx-large;
-    color: white;
-    margin-left: auto;
-}
-.Menu {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-
-    padding: 20px 0;
-
-    border-bottom: 5px solid rgb(198, 11, 30);
-}
-.Menu a {
-    flex: 1;
-
-    text-align: center;
-    text-decoration: none;
-
-    color: rgb(58, 58, 58);
-
-    font-size: 18px;
-    font-weight: bold;
-
-    transition: 0.2s;
-}
-.Menu a:hover {
-    color: rgb(198, 11, 30);
-    transform: scale(1.1);
-}
-.Menu::before {
-    content: "";
-
-    position: absolute;
-
-    left: 33.33%;
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    width: 2px;
-    height: 30px;
-
-    background-color: rgb(198, 11, 30);
-}
-.Menu::after {
-    content: "";
-
-    position: absolute;
-
-    left: 66.66%;
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    width: 2px;
-    height: 30px;
-
-    background-color: rgb(198, 11, 30);
-}
-.Contenedor1{
-    margin-top: 30px;
-}
-</style>
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="Ayuda a la infancia.">
-    <title>Ayuda a la infancia.</title>
-</head>
-<body>
+    <meta name="description" content="Ayuda a la infancia">
+    <title>Ayuda a la infancia</title>
 
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .Fijo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+
+            background-color: white;
+            z-index: 1000;
+        }
+
+        .Encabezado {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+
+            padding: 10px 30px;
+            box-sizing: border-box;
+
+            background-color: rgb(198, 11, 30);
+        }
+
+        .Titulo {
+            font-size: 35px;
+            color: white;
+        }
+
+        #Titulo {
+            margin-left: auto;
+        }
+
+        #Telefono {
+            margin-left: auto;
+        }
+
+
+        .Menu {
+            position: relative;
+
+            display: flex;
+            align-items: center;
+
+            padding: 20px 0;
+
+            border-bottom: 5px solid rgb(198, 11, 30);
+            background-color: white;
+        }
+
+        .Menu a {
+            flex: 1;
+
+            text-align: center;
+            text-decoration: none;
+
+            color: rgb(58, 58, 58);
+
+            font-size: 18px;
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .Menu a:hover {
+            color: rgb(198, 11, 30);
+            transform: scale(1.1);
+        }
+
+        .Menu::before {
+            content: "";
+
+            position: absolute;
+
+            left: 33.33%;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 2px;
+            height: 30px;
+
+            background-color: rgb(198, 11, 30);
+        }
+
+        .Menu::after {
+            content: "";
+
+            position: absolute;
+
+            left: 66.66%;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 2px;
+            height: 30px;
+
+            background-color: rgb(198, 11, 30);
+        }
+
+
+        .Contenido {
+            margin-top: 160px;
+        }
+
+
+        .Contenedor1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 40px;
+
+            padding: 40px;
+        }
+
+        .Contenedor1 img {
+            width: 45%;
+            height: 350px;
+
+            object-fit: cover;
+
+            border-radius: 5px;
+        }
+
+        .TextoInicio {
+            width: 40%;
+            text-align: center;
+        }
+
+        .TextoInicio h2 {
+            color: rgb(198, 11, 30);
+            font-size: 30px;
+        }
+
+        .TextoInicio p {
+            font-size: 19px;
+        }
+
+
+        .Contenedor2 {
+            padding: 40px 70px;
+            background-color: rgb(245, 245, 245);
+        }
+
+        .Contenedor2 h1 {
+            color: rgb(198, 11, 30);
+        }
+
+        .Contenedor2 h2 {
+            color: rgb(198, 11, 30);
+        }
+
+        .InformacionLinea {
+            display: flex;
+            align-items: center;
+
+            gap: 40px;
+
+            margin-bottom: 30px;
+        }
+
+        .InformacionLinea img {
+            width: 300px;
+            height: 220px;
+
+            object-fit: cover;
+
+            border-radius: 5px;
+        }
+
+        .TextoLinea {
+            flex: 1;
+        }
+
+
+        .Contacto {
+            padding: 40px 70px;
+        }
+
+        .Contacto h1 {
+            color: rgb(198, 11, 30);
+        }
+
+        .InformacionContacto {
+            display: flex;
+            align-items: center;
+
+            gap: 50px;
+
+            margin-top: 30px;
+        }
+
+        .InformacionContacto img {
+            width: 180px;
+        }
+
+        .DatosContacto {
+            font-size: 18px;
+        }
+
+        .DatosContacto a {
+            color: rgb(198, 11, 30);
+        }
+
+
+        footer {
+            margin-top: 30px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            background-color: rgb(198, 11, 30);
+            color: white;
+        }
+    </style>
+</head>
+
+
+<body>
     <header class="Fijo">
         <div class="Encabezado">
-            <img src="Bandera comunidad de madrid.png" width="120" height="80">
-            <div id="Titulo" class="Titulo">Linea de ayuda a la infancia</div>
+            <img src="Bandera comunidad de madrid.png" width="120" height="80" alt="Comunidad de Madrid">
+            <div id="Titulo" class="Titulo">Línea de ayuda a la infancia</div>
             <div id="Telefono" class="Titulo">116 112</div>
         </div>
+
         <div class="Menu">
-            <a>INICIO</a>
-            <a>LINEA TLF.</a>
-            <a>CONTACTO</a>
+            <a href="#Inicio">INICIO</a>
+            <a href="#Linea">LÍNEA TLF.</a>
+            <a href="#Contacto">CONTACTO</a>
         </div>
     </header>
-    <div class="Contenedor1">
-        <img src="ChicaSola.jpeg" width="1000" height="700">
-        <div class=""></div>
 
+    <div class="Contenido">
+        <div id="Inicio" class="Contenedor1">
+            <img src="ChicaSola.jpeg"alt="Chica utilizando su teléfono">
+            <div class="TextoInicio">
+                <h2>Queremos escucharte</h2>
+                <p>
+                    La Línea de Ayuda a la Infancia ofrece atención
+                    a niños, niñas y adolescentes que necesiten
+                    hablar sobre sus problemas o preocupaciones.
+                </p>
+                <h2>116 112</h2>
+            </div>
+        </div>
+
+        <div id="Linea" class="Contenedor2">
+            <h1>LÍNEA TELEFÓNICA DE AYUDA A LA INFANCIA</h1>
+            <div class="InformacionLinea">
+                <img src="ChicoSofa.jpeg" alt="Joven sentado">
+                <div class="TextoLinea">
+                    <p>
+                        Con el fin de dar respuesta a la necesidad que tienen
+                        muchos niños, niñas y adolescentes de que se les escuche
+                        en sus problemas y dificultades diarias, disponemos de
+                        la <strong>Línea de Ayuda a la Infancia</strong>.
+                    </p>
+                    <p>
+                        Ofrece una respuesta de fácil acceso,
+                        profesional e individual a sus problemas y
+                        preocupaciones todos los días del año,
+                        las 24 horas del día.
+                    </p>
+                </div>
+            </div>
+            <h2>¿Qué es la Línea de Ayuda a la Infancia?</h2>
+            <p>
+                Es un servicio especializado de atención telefónica,
+                al que podrán dirigirse niños, adolescentes y adultos
+                para consultar cualquier tipo de problemática relacionada
+                con menores.
+            </p>
+            <h2>¿Cuáles son sus objetivos?</h2>
+            <ul>
+                <li>
+                    Proporcionar una respuesta profesional e individual
+                    de fácil acceso.
+                </li>
+                <li>
+                    Prestar orientación personal, social, psicológica
+                    y jurídica.
+                </li>
+                <li>
+                    Derivar los casos, cuando sea necesario,
+                    a los recursos de atención correspondientes.
+                </li>
+            </ul>
+            <h2>¿A quién se dirige?</h2>
+            <p>
+                A niños, adolescentes y adultos que necesiten consultar
+                cualquier problemática relacionada con menores.
+            </p>
+            <h2>Características</h2>
+            <ul>
+                <li>
+                    Funciona todos los días del año,
+                    las 24 horas del día.
+                </li>
+                <li>
+                    Cuenta con un equipo especializado
+                    en atención a menores.
+                </li>
+                <li>
+                    Atiende las llamadas realizadas
+                    en la Comunidad de Madrid.
+                </li>
+            </ul>
+            <h2>Acceso al programa</h2>
+            <p><strong>Número de teléfono gratuito: 116 112</strong></p>
+        </div>
+        <div id="Contacto" class="Contacto">
+            <h1>CONTACTO</h1>
+            <p>
+                En la Comunidad de Madrid, el órgano responsable
+                del programa es la Dirección General de la Familia
+                y el Menor.
+            </p>
+            <div class="InformacionContacto">
+                <img src="QR.png"alt="Código QR">
+                <div>
+                    <p>
+                        Mediante este código QR podrá descargarse
+                        información de contacto en su teléfono móvil.
+                    </p>
+                </div>
+                <div class="DatosContacto">
+                    <h3>Dirección General de la Familia y el Menor</h3>
+                    <p>
+                       915 803 464 / 116 112
+                    </p>
+                    <p>dgfm@madrid.org
+                    </p>
+                    <p><a href="https://www.madrid.org">www.madrid.org</a>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-    
+    <footer>Comunidad de Madrid · Línea de Ayuda a la Infancia</footer>
 </body>
 </html>
