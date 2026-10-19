@@ -1,91 +1,423 @@
-/* Estilos de Siempre Activos: sencillos y responsive */
-:root { --morado: #7836af; --oscuro: #512475; --fondo: #f5effa; }
-
-body { font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #332b3a; background: #faf8fc; line-height: 1.6; }
-.contenedor { width: 90%; max-width: 1100px; margin: auto; }
-section { scroll-margin-top: 90px; }
-h1, h2 { color: var(--oscuro); line-height: 1.25; }
-h1 { font-size: 3em; }
-h2 { font-size: 1.9em; margin-bottom: .7em; }
-p { font-size: 1em; margin-bottom: 1em; }
-
-/* Cabecera y menú de navegación */
-.cabecera { position: sticky; top: 0; z-index: 10; background: white; border-bottom: 1px solid #e6dcef; }
-.cabecera-interna { min-height: 72px; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
-.marca { display: flex; align-items: center; gap: 10px; color: var(--oscuro); text-decoration: none; font-size: 1.1em; font-weight: bold; }
-.marca-icono { width: 42px; height: 42px; padding: 8px; background: var(--morado); border-radius: 12px; }
-.menu { display: flex; align-items: center; gap: 8px; }
-.menu a { color: var(--oscuro); text-decoration: none; padding: 9px 12px; border-radius: 18px; font-weight: bold; font-size: .95em; }
-.menu a:hover { background: var(--fondo); }
-.boton-menu { display: none; border: 0; border-radius: 8px; color: var(--oscuro); background: var(--fondo); padding: 7px 13px; font-size: 1.5em; cursor: pointer; }
-
-/* Título y carrusel: imágenes sin texto encima */
-.inicio { padding: 38px 0 50px; text-align: center; background: #f4ecfa; }
-.inicio h1 { margin-bottom: 22px; }
-.inicio h1 span { color: var(--morado); }
-.carrusel { width: 94%; max-width: 900px; height: 420px; margin: auto; position: relative; overflow: hidden; border-radius: 15px; background: #eee1f5; }
-.diapositiva { display: none; width: 100%; height: 100%; }
-.diapositiva.activa { display: block; }
-.diapositiva img { width: 100%; height: 100%; object-fit: cover; }
-.flecha { position: absolute; top: 45%; width: 42px; height: 42px; border: 0; border-radius: 50%; background: #ffffffdf; color: var(--oscuro); font-size: 1.5em; cursor: pointer; }
-.anterior { left: 12px; }
-.siguiente { right: 12px; }
-.puntos { display: flex; justify-content: center; gap: 9px; margin-top: 14px; }
-.punto { width: 11px; height: 11px; border: 0; border-radius: 50%; background: #c8b4da; cursor: pointer; }
-.punto.activo { background: var(--morado); }
-
-/* Texto del alcalde con foto integrada */
-.bloque { padding: 45px 0; }
-.tarjeta { padding: 28px; background: white; border: 1px solid #e9e1ee; border-radius: 12px; }
-.tarjeta::after { content: ""; display: block; clear: both; }
-.foto-alcalde { float: left; width: 180px; max-width: 35%; height: auto; margin: 4px 20px 10px 0; border-radius: 7px; }
-
-/* Tablas del folleto */
-.fondo-claro { background: var(--fondo); }
-.texto-centro { text-align: center; }
-.tablas { display: flex; gap: 2%; margin-top: 24px; }
-.tabla-caja { width: 49%; min-width: 0; background: white; padding: 14px; border-radius: 10px; }
-.desliza-tabla { overflow-x: auto; }
-table { width: 100%; min-width: 470px; font-size: .78em; text-align: left; }
-th, td { border: 1px solid #e2d7e8; padding: 8px 6px; }
-th { color: white; background: var(--morado); }
-tbody tr:nth-child(even) { background: #f3ebf8; }
-.horas { text-align: center; }
-
-/* Formulario basado en el ejemplo de clase, pero sin validación ni envío */
-.inscripciones { padding: 48px 0 60px; background: #faf8fc; }
-.inscripciones h2 { text-align: center; }
-.inscripciones h2 span { color: var(--morado); }
-#formulario { width: 100%; max-width: 480px; margin: 22px auto 0; padding: 30px; background: white; border: 1px solid #dcd5e4; border-radius: 8px; box-shadow: 0 2px 6px #0000000d; }
-#formulario > div { margin-bottom: 16px; }
-.linea { display: block; color: #444; font-size: .9em; font-weight: bold; margin-bottom: 6px; }
-.caja { width: 100%; padding: 10px 12px; font-size: .95em; border: 1px solid #ccc; border-radius: 4px; background: white; }
-.caja:focus { outline: 1px solid var(--morado); border-color: var(--morado); }
-#submit { width: 100%; padding: 12px; margin-top: 8px; border: 0; border-radius: 4px; color: white; background: var(--morado); font-size: .95em; font-weight: bold; cursor: pointer; }
-#submit:hover { background: var(--oscuro); }
-.pie { padding: 18px; background: var(--oscuro); color: white; text-align: center; font-size: .85em; }
-.pie p { margin: 0; }
-
-/* Menú hamburguesa y dos tablas apiladas en pantallas pequeñas */
-@media (max-width: 800px) {
-    .cabecera-interna { position: relative; }
-    .boton-menu { display: block; }
-    .menu { display: none; position: absolute; top: 100%; left: 0; width: 100%; flex-direction: column; align-items: stretch; gap: 0; background: white; padding: 10px; border: 1px solid #e6dcef; }
-    .menu.abierto { display: flex; }
-    .menu a { display: block; }
-    .tablas { flex-direction: column; gap: 18px; }
-    .tabla-caja { width: 100%; }
-    .carrusel { height: 320px; }
+:root {
+    --morado: #7836af;
+    --oscuro: #512475;
+    --fondo: #f5effa;
 }
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #332b3a;
+    background: #faf8fc;
+    line-height: 1.6;
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+section {
+    scroll-margin-top: 90px;
+}
+
+h1, h2 {
+    color: var(--oscuro);
+    line-height: 1.25;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+h2 {
+    font-size: 1.9em;
+    margin-bottom: .7em;
+}
+
+p {
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+
+.cabecera {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: white;
+    border-bottom: 1px solid #e6dcef;
+}
+
+.cabecera-interna {
+    min-height: 72px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--oscuro);
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.marca-icono {
+    width: 42px;
+    height: 42px;
+    padding: 8px;
+    background: var(--morado);
+    border-radius: 12px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.menu a {
+    color: var(--oscuro);
+    text-decoration: none;
+    padding: 9px 12px;
+    border-radius: 18px;
+    font-weight: bold;
+    font-size: .95em;
+}
+
+.menu a:hover {
+    background: var(--fondo);
+}
+
+.boton-menu {
+    display: none;
+    border: 0;
+    border-radius: 8px;
+    color: var(--oscuro);
+    background: var(--fondo);
+    padding: 7px 13px;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.inicio {
+    padding: 38px 0 50px;
+    text-align: center;
+    background: #f4ecfa;
+}
+
+.inicio h1 {
+    margin-bottom: 22px;
+}
+
+.inicio h1 span {
+    color: var(--morado);
+}
+
+.carrusel {
+    width: 94%;
+    max-width: 900px;
+    height: 420px;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    background: #eee1f5;
+}
+
+.diapositiva {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.diapositiva.activa {
+    display: block;
+}
+
+.diapositiva img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.flecha {
+    position: absolute;
+    top: 45%;
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 50%;
+    background: #ffffffdf;
+    color: var(--oscuro);
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.anterior {
+    left: 12px;
+}
+
+.siguiente {
+    right: 12px;
+}
+
+.puntos {
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 14px;
+}
+
+.punto {
+    width: 11px;
+    height: 11px;
+    border: 0;
+    border-radius: 50%;
+    background: #c8b4da;
+    cursor: pointer;
+}
+
+.punto.activo {
+    background: var(--morado);
+}
+
+.bloque {
+    padding: 45px 0;
+}
+
+.tarjeta {
+    padding: 28px;
+    background: white;
+    border: 1px solid #e9e1ee;
+    border-radius: 12px;
+}
+
+.tarjeta::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.foto-alcalde {
+    float: left;
+    width: 180px;
+    max-width: 35%;
+    height: auto;
+    margin: 4px 20px 10px 0;
+    border-radius: 7px;
+}
+
+.fondo-claro {
+    background: var(--fondo);
+}
+
+.texto-centro {
+    text-align: center;
+}
+
+.tablas {
+    display: flex;
+    gap: 2%;
+    margin-top: 24px;
+}
+
+.tabla-caja {
+    width: 49%;
+    min-width: 0;
+    background: white;
+    padding: 14px;
+    border-radius: 10px;
+}
+
+.desliza-tabla {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 470px;
+    font-size: .78em;
+    text-align: left;
+}
+
+th, td {
+    border: 1px solid #e2d7e8;
+    padding: 8px 6px;
+}
+
+th {
+    color: white;
+    background: var(--morado);
+}
+
+tbody tr:nth-child(even) {
+    background: #f3ebf8;
+}
+
+.horas {
+    text-align: center;
+}
+
+.inscripciones {
+    padding: 48px 0 60px;
+    background: #faf8fc;
+}
+
+.inscripciones h2 {
+    text-align: center;
+}
+
+.inscripciones h2 span {
+    color: var(--morado);
+}
+
+#formulario {
+    width: 100%;
+    max-width: 480px;
+    margin: 22px auto 0;
+    padding: 30px;
+    background: white;
+    border: 1px solid #dcd5e4;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px #0000000d;
+}
+
+#formulario > div {
+    margin-bottom: 16px;
+}
+
+.linea {
+    display: block;
+    color: #444;
+    font-size: .9em;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.caja {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: .95em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white;
+}
+
+.caja:focus {
+    outline: 1px solid var(--morado);
+    border-color: var(--morado);
+}
+
+#submit {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 0;
+    border-radius: 4px;
+    color: white;
+    background: var(--morado);
+    font-size: .95em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#submit:hover {
+    background: var(--oscuro);
+}
+
+@media (max-width: 800px) {
+    .cabecera-interna {
+        position: relative;
+    }
+
+    .boton-menu {
+        display: block;
+    }
+
+    .menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: white;
+        padding: 10px;
+        border: 1px solid #e6dcef;
+    }
+
+    .menu.abierto {
+        display: flex;
+    }
+
+    .menu a {
+        display: block;
+    }
+
+    .tablas {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .tabla-caja {
+        width: 100%;
+    }
+
+    .carrusel {
+        height: 320px;
+    }
+}
+
 @media (max-width: 520px) {
-    h1 { font-size: 2.15em; }
-    h2 { font-size: 1.55em; }
-    .inicio { padding: 28px 0 36px; }
-    .carrusel { width: 100%; height: 230px; }
-    .flecha { width: 34px; height: 34px; }
-    .bloque { padding: 30px 0; }
-    .tarjeta { padding: 17px; }
-    .foto-alcalde { width: 115px; max-width: 42%; margin-right: 13px; }
-    .tabla-caja { padding: 10px; }
-    #formulario { padding: 22px; }
+    h1 {
+        font-size: 2.15em;
+    }
+
+    h2 {
+        font-size: 1.55em;
+    }
+
+    .inicio {
+        padding: 28px 0 36px;
+    }
+
+    .carrusel {
+        width: 100%;
+        height: 230px;
+    }
+
+    .flecha {
+        width: 34px;
+        height: 34px;
+    }
+
+    .bloque {
+        padding: 30px 0;
+    }
+
+    .tarjeta {
+        padding: 17px;
+    }
+
+    .foto-alcalde {
+        width: 115px;
+        max-width: 42%;
+        margin-right: 13px;
+    }
+
+    .tabla-caja {
+        padding: 10px;
+    }
+
+    #formulario {
+        padding: 22px;
+    }
 }

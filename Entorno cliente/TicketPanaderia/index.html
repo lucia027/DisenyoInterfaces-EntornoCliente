@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panadería</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <main class="contenedor">
+        <header class="cabecera-principal">
+            <h1>Panadería ♡</h1>
+        </header>
+
+        <section class="tienda">
+            <div class="icono-tienda">
+                <img src="logo_panaderia.png" alt="Logo kawaii de la panadería">
+            </div>
+            <div class="datos-tienda">
+                <p>Calle de la Canela, 12 · Madrid</p>
+                <p>Teléfono: 91 123 45 67</p>
+                <p>¡Un poquito de felicidad en cada bocado! ♡</p>
+            </div>
+        </section>
+
+        <section class="pedidos">
+            <form id="formulario">
+                <div class="campo producto-campo">
+                    <label for="producto">Producto</label>
+                    <select id="producto" required>
+                        <option value="">- Selecciona un producto -</option>
+                    </select>
+                </div>
+
+                <div class="campo precio-campo">
+                    <label for="precio">Precio</label>
+                    <select id="precio" disabled>
+                        <option value="">-</option>
+                    </select>
+                </div>
+
+                <div class="campo cantidad-campo">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" id="cantidad" min="1" step="1" value="1" required>
+                </div>
+
+                <div class="campo subtotal-campo">
+                    <label>Subtotal</label>
+                    <strong id="subtotalLinea">—</strong>
+                </div>
+
+                <button type="submit" id="botonAnadir" disabled>Añadir ♡</button>
+            </form>
+        </section>
+
+        <section class="cesta">
+            <div class="tabla-contenedor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio u.</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                            <th>Borrar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lineasPedido">
+                        <tr>
+                            <td colspan="5" class="vacio">Tu cestita está vacía. ¡Añade algo rico! ♡</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="resumen">
+                <p>Total del pedido: <strong id="totalPedido">0,00 €</strong></p>
+
+                <div class="botones">
+                    <button type="button" id="botonBorrar" disabled>Borrar seleccionados</button>
+                    <button type="button" id="botonTicket" disabled>Imprimir ticket ♡</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        Gracias por elegir nuestra panadería ♡ ¡Que tengas un día muy dulce!
+    </footer>
+
+    <script src="validar.js"></script>
+    <script>
+        const productos = [
+            { nombre: "Barra de pan", precio: 0.90 },
+            { nombre: "Chapata", precio: 1.20 },
+            { nombre: "Croissant", precio: 1.50 },
+            { nombre: "Napolitana de chocolate", precio: 1.80 },
+            { nombre: "Palmera de chocolate", precio: 1.75 }
+        ];
+
+        let pedido = [];
+
+        const selectProducto = document.getElementById("producto");
+        const selectPrecio = document.getElementById("precio");
+        const inputCantidad = document.getElementById("cantidad");
+        const subtotalLinea = document.getElementById("subtotalLinea");
+        const botonAnadir = document.getElementById("botonAnadir");
+        const botonBorrar = document.getElementById("botonBorrar");
+        const botonTicket = document.getElementById("botonTicket");
+        const lineasPedido = document.getElementById("lineasPedido");
+        const totalPedido = document.getElementById("totalPedido");
+
+        productos.forEach((producto, posicion) => {
+            selectProducto.innerHTML += `<option value="${posicion}">${producto.nombre}</option>`;
+            selectPrecio.innerHTML += `<option value="${posicion}">${formatearPrecio(producto.precio)}</option>`;
+        });
+
+        function actualizarLinea() {
+            const posicion = selectProducto.value;
+            const cantidad = Number(inputCantidad.value);
+
+            selectPrecio.value = posicion;
+
+            if (posicion === "" || !cantidadValida(inputCantidad.value)) {
+                subtotalLinea.textContent = "—";
+                botonAnadir.disabled = true;
+                return;
+            }
+
+            const producto = productos[Number(posicion)];
+            subtotalLinea.textContent = formatearPrecio(producto.precio * cantidad);
+            botonAnadir.disabled = false;
+        }
+
+        function mostrarPedido() {
+            lineasPedido.innerHTML = "";
+            let total = 0;
+
+            if (pedido.length === 0) {
+                lineasPedido.innerHTML = '<tr><td colspan="5" class="vacio">Tu cestita está vacía. ¡Añade algo rico! ♡</td></tr>';
+            }
+
+            pedido.forEach((linea, posicion) => {
+                const subtotal = linea.precio * linea.cantidad;
+                total += subtotal;
+
+                lineasPedido.innerHTML += `
+                    <tr>
+                        <td>${linea.nombre}</td>
+                        <td>${formatearPrecio(linea.precio)}</td>
+                        <td>${linea.cantidad}</td>
+                        <td>${formatearPrecio(subtotal)}</td>
+                        <td><input type="checkbox" class="marcarBorrar" value="${posicion}" aria-label="Borrar ${linea.nombre}"></td>
+                    </tr>
+                `;
+            });
+
+            totalPedido.textContent = formatearPrecio(total);
+            botonBorrar.disabled = pedido.length === 0;
+            botonTicket.disabled = pedido.length === 0;
+        }
+
+        selectProducto.addEventListener("change", actualizarLinea);
+        inputCantidad.addEventListener("input", actualizarLinea);
+
+        document.getElementById("formulario").addEventListener("submit", function(evento) {
+            evento.preventDefault();
+
+            if (selectProducto.value === "" || !cantidadValida(inputCantidad.value)) {
+                return;
+            }
+
+            const producto = productos[Number(selectProducto.value)];
+            const cantidad = Number(inputCantidad.value);
+            const existente = pedido.find(linea => linea.nombre === producto.nombre);
+
+            if (existente) {
+                existente.cantidad += cantidad;
+            } else {
+                pedido.push({ nombre: producto.nombre, precio: producto.precio, cantidad: cantidad });
+            }
+
+            mostrarPedido();
+
+            selectProducto.value = "";
+            inputCantidad.value = 1;
+            actualizarLinea();
+        });
+
+        botonBorrar.addEventListener("click", function() {
+            const marcados = document.querySelectorAll(".marcarBorrar:checked");
+
+            if (marcados.length === 0) {
+                alert("Selecciona al menos un producto para borrar.");
+                return;
+            }
+
+            if (confirm("¿Quieres borrar los productos seleccionados?")) {
+                const posiciones = Array.from(marcados).map(check => Number(check.value));
+                pedido = pedido.filter((linea, posicion) => !posiciones.includes(posicion));
+                mostrarPedido();
+            }
+        });
+
+        botonTicket.addEventListener("click", function() {
+            let ticket = "PANADERÍA\n";
+            ticket += "Calle de la Canela, 12 · Madrid\n";
+            ticket += "Teléfono: 91 123 45 67\n";
+            ticket += "-----------------------------\n";
+
+            pedido.forEach(linea => {
+                ticket += `${linea.nombre}\n`;
+                ticket += `${linea.cantidad} x ${formatearPrecio(linea.precio)} = ${formatearPrecio(linea.precio * linea.cantidad)}\n`;
+            });
+
+            ticket += "-----------------------------\n";
+            ticket += `TOTAL: ${totalPedido.textContent}\n`;
+            ticket += "¡Gracias por tu compra! ♡";
+
+            alert(ticket);
+        });
+    </script>
+</body>
+</html>

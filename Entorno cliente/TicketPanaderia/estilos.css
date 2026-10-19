@@ -1,0 +1,285 @@
+:root {
+    --rosa: #f5c6d5;
+    --rosa-oscuro: #ad5775;
+    --rosa-suave: #fff1f5;
+    --fondo: #fff7fa;
+    --crema: #fff6e5;
+    --crema-oscuro: #f7ecd4;
+    --marron: #654c45;
+    --lila-suave: #efe6f6;
+    --rosa-boton: #e95696;
+    --lila-boton: #9869d2;
+    --coral-boton: #ec7080;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: var(--marron);
+    background: #fdf3f7;
+    line-height: 1.5;
+}
+
+.contenedor {
+    width: 92%;
+    max-width: 1220px;
+    margin: 26px auto;
+    padding: 28px 34px;
+    background: #fcfbfc;
+    border: 1px solid #edd3dc;
+    border-radius: 20px;
+    box-shadow: 0 3px 12px #00000008;
+}
+
+h1, p {
+    margin-top: 0;
+}
+
+.cabecera-principal {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.cabecera-principal h1 {
+    margin: 0;
+    font-size: 2.7em;
+    color: var(--rosa-oscuro);
+    letter-spacing: .5px;
+}
+
+.tienda {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    padding: 16px 0 22px;
+    border-bottom: 2px dashed #efb5c7;
+}
+
+.icono-tienda {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background: var(--crema);
+    border-radius: 18px;
+}
+
+.icono-tienda img {
+    width: 92px;
+    height: 92px;
+    object-fit: contain;
+    display: block;
+}
+
+.datos-tienda p {
+    margin: 6px 0;
+    font-size: 1.12em;
+}
+
+.pedidos, .cesta {
+    margin-top: 28px;
+}
+
+#formulario {
+    display: flex;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 6px;
+    padding: 20px 22px;
+    background: var(--crema);
+    border-radius: 16px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+    font-size: 1.02em;
+    color: #684a3f;
+}
+
+.campo select,
+.campo input {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #d8c3c9;
+    border-radius: 9px;
+    background: white;
+    font-size: .98em;
+}
+
+.producto-campo {
+    flex: 2.2;
+    min-width: 240px;
+}
+
+.precio-campo,
+.cantidad-campo,
+.subtotal-campo {
+    flex: 1;
+    min-width: 120px;
+}
+
+#subtotalLinea {
+    display: block;
+    padding: 10px 0;
+    white-space: nowrap;
+    font-size: 1.08em;
+}
+
+button {
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 12px;
+    color: white;
+    font-size: .98em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 3px 0 #00000015;
+}
+
+#botonAnadir {
+    background: var(--rosa-boton);
+}
+
+#botonTicket {
+    background: var(--lila-boton);
+}
+
+#botonBorrar {
+    background: var(--coral-boton);
+}
+
+button:hover:not(:disabled) {
+    filter: brightness(.92);
+}
+
+button:disabled {
+    background: #c9bdc4 !important;
+    color: #ffffff;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.tabla-contenedor {
+    overflow-x: auto;
+    margin-top: 6px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th {
+    padding: 15px 12px;
+    background: #e3b6c7;
+    color: #6b4253;
+    font-size: 1em;
+}
+
+td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #efd8df;
+    font-size: .99em;
+}
+
+th:last-child,
+td:last-child {
+    text-align: center;
+}
+
+.vacio {
+    padding: 28px;
+    text-align: center;
+    color: #a27f89;
+    font-size: 1em;
+}
+
+.resumen {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.resumen p {
+    margin: 0;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+footer {
+    padding: 10px 15px 30px;
+    text-align: center;
+    color: #a2687a;
+    font-size: .95em;
+}
+
+@media (max-width: 760px) {
+    .contenedor {
+        padding: 20px;
+    }
+
+    .cabecera-principal h1 {
+        font-size: 2.2em;
+    }
+
+    .tienda {
+        gap: 16px;
+        align-items: flex-start;
+    }
+
+    .icono-tienda {
+        width: 90px;
+        height: 90px;
+        padding: 8px;
+    }
+
+    .icono-tienda img {
+        width: 68px;
+        height: 68px;
+    }
+
+    #formulario {
+        gap: 15px;
+        padding: 16px;
+    }
+
+    .producto-campo,
+    .precio-campo,
+    .cantidad-campo,
+    .subtotal-campo {
+        flex-basis: 100%;
+        min-width: 100%;
+    }
+
+    .botones {
+        width: 100%;
+    }
+
+    .botones button {
+        width: 100%;
+    }
+
+    table {
+        min-width: 520px;
+    }
+}
