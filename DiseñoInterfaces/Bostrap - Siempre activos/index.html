@@ -337,6 +337,199 @@
                <div class="col-md-6 d-flex align-items-center gap-2"><label for="f16color" class="form-label mb-0">Color:</label><input type="color" class="form-control form-control-color" id="f16color" value="#7952b3"></div>
             </div>
         </form>
+
+        <form id="formRegistro" class="iconos-x" novalidate>
+
+  <!-- Capa 1: resumen de errores (oculto hasta que se envía con errores) -->
+  <div id="resumenErrores" class="alert alert-danger d-none" role="alert" tabindex="-1">
+    <h6 class="alert-heading"><i class="bi bi-x-octagon-fill"></i> <span id="resumenTitulo">Revisa los campos marcados</span></h6>
+    <ul id="listaErrores" class="mb-0 small"></ul>
+  </div>
+
+  <!-- ===== 1. Datos personales ===== -->
+  <fieldset class="mb-4">
+    <legend class="fs-6 fw-bold text-primary border-bottom pb-1 mb-3"><i class="bi bi-person"></i> 1. Datos personales</legend>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required minlength="2" maxlength="40" pattern="[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' \-]+" data-patron="Solo letras, espacios, apóstrofo y guion" data-nombre="Nombre" autocomplete="given-name">
+          <label for="nombre">Nombre *</label>
+          <div class="invalid-feedback" id="nombre-error"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos" required minlength="2" maxlength="60" pattern="[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' \-]+" data-patron="Solo letras, espacios, apóstrofo y guion" data-nombre="Apellidos" autocomplete="family-name">
+          <label for="apellidos">Apellidos *</label>
+          <div class="invalid-feedback" id="apellidos-error"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="text" class="form-control text-uppercase" id="dni" name="dni" placeholder="DNI" required maxlength="9" data-nombre="DNI/NIE">
+          <label for="dni">DNI / NIE *</label>
+          <div class="invalid-feedback" id="dni-error"></div>
+          <div class="valid-feedback" id="dni-ok"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="date" class="form-control" id="fnac" name="fnac" placeholder="Fecha" required data-nombre="Fecha de nacimiento">
+          <label for="fnac">Fecha de nacimiento *</label>
+          <div class="invalid-feedback" id="fnac-error"></div>
+          <div class="valid-feedback" id="fnac-ok"></div>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <!-- ===== 2. Contacto ===== -->
+  <fieldset class="mb-4">
+    <legend class="fs-6 fw-bold text-primary border-bottom pb-1 mb-3"><i class="bi bi-envelope"></i> 2. Contacto</legend>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label for="email" class="form-label">Email *</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text"><i class="bi bi-at"></i></span>
+          <input type="email" class="form-control" id="email" name="email" required pattern="[^@\s]+@[^@\s]+\.[A-Za-z]{2,}" data-patron="Falta el dominio (ej. nombre@dominio.es)" data-nombre="Email" autocomplete="email" placeholder="nombre@dominio.es">
+          <div class="invalid-feedback" id="email-error"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="telefono" class="form-label">Teléfono móvil</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text">+34</span>
+          <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[67][0-9]{8}" inputmode="numeric" maxlength="9" data-nombre="Teléfono" data-patron="Debe tener 9 cifras y empezar por 6 o 7" placeholder="600123456" autocomplete="tel-national">
+          <div class="invalid-feedback" id="telefono-error"></div>
+        </div>
+        <div class="form-text">Opcional.</div>
+      </div>
+      <div class="col-md-4">
+        <label for="cp" class="form-label">Código postal *</label>
+        <input type="text" class="form-control" id="cp" name="cp" required pattern="[0-9]{5}" inputmode="numeric" maxlength="5" data-nombre="Código postal" data-patron="Debe tener 5 cifras" placeholder="28911" autocomplete="postal-code">
+        <div class="invalid-feedback" id="cp-error"></div>
+        <div class="valid-feedback" id="cp-ok"></div>
+      </div>
+    </div>
+  </fieldset>
+
+  <!-- ===== 3. Cuenta ===== -->
+  <fieldset class="mb-4">
+    <legend class="fs-6 fw-bold text-primary border-bottom pb-1 mb-3"><i class="bi bi-key"></i> 3. Cuenta de acceso</legend>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label for="usuario" class="form-label">Nombre de usuario *</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text" id="usuario-estado" style="width:2.6rem"><i class="bi bi-person"></i></span>
+          <input type="text" class="form-control" id="usuario" name="usuario" required minlength="4" maxlength="20" pattern="[a-z0-9_]+" data-nombre="Usuario" data-patron="Solo minúsculas, números y guion bajo" autocomplete="username">
+          <div class="invalid-feedback" id="usuario-error"></div>
+          <div class="valid-feedback" id="usuario-ok"></div>
+        </div>
+      </div>
+      <div class="col-md-6 d-none d-md-block"></div>
+      <div class="col-md-6">
+        <label for="password" class="form-label">Contraseña *</label>
+        <div class="input-group has-validation">
+          <input type="password" class="form-control" id="password" name="password" required data-nombre="Contraseña" autocomplete="new-password">
+          <button class="btn btn-outline-secondary" type="button" id="verPassword" aria-label="Mostrar contraseña"><i class="bi bi-eye"></i></button>
+          <div class="invalid-feedback" id="password-error"></div>
+        </div>
+        <!-- Medidor de fortaleza -->
+        <div class="progress mt-2" style="height: 6px;" role="progressbar" aria-label="Fortaleza de la contraseña">
+          <div class="progress-bar" id="fuerzaBarra" style="width: 0%"></div>
+        </div>
+        <div class="form-text" id="fuerzaTexto">Fortaleza: —</div>
+      </div>
+      <div class="col-md-6">
+        <label for="password2" class="form-label">Repetir contraseña *</label>
+        <input type="password" class="form-control" id="password2" name="password2" required data-nombre="Repetir contraseña" autocomplete="new-password">
+        <div class="invalid-feedback" id="password2-error"></div>
+        <div class="valid-feedback">Las contraseñas coinciden.</div>
+      </div>
+      <div class="col-12">
+        <!-- Lista de requisitos con iconos que cambian en vivo -->
+        <ul class="list-unstyled small row row-cols-2 row-cols-md-5 g-1 mb-0" id="reglasPassword">
+          <li class="col" data-regla="longitud"><i class="bi bi-x-circle-fill text-danger"></i> 8+ caracteres</li>
+          <li class="col" data-regla="mayuscula"><i class="bi bi-x-circle-fill text-danger"></i> Una mayúscula</li>
+          <li class="col" data-regla="minuscula"><i class="bi bi-x-circle-fill text-danger"></i> Una minúscula</li>
+          <li class="col" data-regla="numero"><i class="bi bi-x-circle-fill text-danger"></i> Un número</li>
+          <li class="col" data-regla="simbolo"><i class="bi bi-dash-circle text-body-secondary"></i> Un símbolo (extra)</li>
+        </ul>
+      </div>
+    </div>
+  </fieldset>
+
+  <!-- ===== 4. Datos bancarios ===== -->
+  <fieldset class="mb-4">
+    <legend class="fs-6 fw-bold text-primary border-bottom pb-1 mb-3"><i class="bi bi-bank"></i> 4. Domiciliación</legend>
+    <div class="row g-3">
+      <div class="col-md-8">
+        <label for="iban" class="form-label">IBAN *</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text"><i class="bi bi-credit-card-2-front"></i></span>
+          <input type="text" class="form-control text-uppercase font-monospace" id="iban" name="iban" required maxlength="34" data-nombre="IBAN" placeholder="ES00 0000 0000 0000 0000 0000">
+          <div class="invalid-feedback" id="iban-error"></div>
+          <div class="valid-feedback" id="iban-ok"></div>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <!-- ===== 5. Preferencias ===== -->
+  <fieldset class="mb-4">
+    <legend class="fs-6 fw-bold text-primary border-bottom pb-1 mb-3"><i class="bi bi-sliders"></i> 5. Preferencias</legend>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <p class="form-label mb-1">Intereses * <small class="text-body-secondary">(de 1 a 3)</small></p>
+        <div id="grupoIntereses">
+          <div class="form-check"><input class="form-check-input" type="checkbox" name="intereses" value="Diseño web" id="int1" data-nombre="Intereses"><label class="form-check-label" for="int1">Diseño web</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox" name="intereses" value="Back-end" id="int2"><label class="form-check-label" for="int2">Back-end</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox" name="intereses" value="Bases de datos" id="int3"><label class="form-check-label" for="int3">Bases de datos</label></div>
+          <div class="form-check"><input class="form-check-input" type="checkbox" name="intereses" value="Ciberseguridad" id="int4"><label class="form-check-label" for="int4">Ciberseguridad</label></div>
+        </div>
+        <div class="invalid-feedback" id="int1-error"></div>
+      </div>
+      <div class="col-md-6">
+        <p class="form-label mb-1">Plan *</p>
+        <div class="form-check"><input class="form-check-input" type="radio" name="plan" value="Gratuito" id="plan1" required data-nombre="Plan"><label class="form-check-label" for="plan1">Gratuito</label></div>
+        <div class="form-check"><input class="form-check-input" type="radio" name="plan" value="Estudiante" id="plan2" required><label class="form-check-label" for="plan2">Estudiante</label></div>
+        <div class="form-check"><input class="form-check-input" type="radio" name="plan" value="Profesional" id="plan3" required><label class="form-check-label" for="plan3">Profesional</label></div>
+        <div class="invalid-feedback" id="plan1-error"></div>
+        <div class="form-check form-switch mt-3">
+          <input class="form-check-input" type="checkbox" role="switch" id="boletin" name="boletin" checked>
+          <label class="form-check-label" for="boletin">Recibir el boletín</label>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="terminos" name="terminos" required data-nombre="Condiciones">
+          <label class="form-check-label" for="terminos">He leído y acepto las <a href="#">condiciones de uso</a> *</label>
+          <div class="invalid-feedback" id="terminos-error"></div>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="d-grid gap-2 d-sm-flex">
+    <button type="submit" class="btn btn-primary btn-lg" id="btnRegistro"><i class="bi bi-person-plus"></i> Crear cuenta</button>
+    <button type="reset" class="btn btn-outline-secondary btn-lg">Limpiar</button>
+  </div>
+  <p class="form-text mt-2 mb-0">* Campos obligatorios</p>
+</form>
+
+<!-- Modal de éxito -->
+<div class="modal fade" id="modalRegistro" tabindex="-1" aria-labelledby="modalRegistroTitulo" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header text-bg-success">
+        <h1 class="modal-title fs-5" id="modalRegistroTitulo"><i class="bi bi-check-circle-fill"></i> ¡Registro correcto!</h1>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body"><p>Estos son los datos que se enviarían al servidor:</p><table class="table table-sm table-striped mb-0"><tbody id="tablaResumen"></tbody></table></div>
+      <div class="modal-footer"><button type="button" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button></div>
+    </div>
+  </div>
+</div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
         <script>
             document.getElementById('btnConfirmarBorrado').addEventListener('click', () => {
@@ -348,6 +541,301 @@
                 document.querySelectorAll('[data-bs-toggle="popover"]').forEach(el => new bootstrap.Popover(el));
             });
             document.getElementById('botonHover').addEventListener('mouseenter', () => { new bootstrap.Modal('#modalHover').show(); });
+            /* =====================================================================
+   1) FUNCIONES DE VALIDACIÓN "EXTERNAS" (puras, reutilizables, sin DOM)
+   ===================================================================== */
+
+// DNI (8 cifras + letra) o NIE (X/Y/Z + 7 cifras + letra). Letra = número mod 23
+function validarDNI(valor) {
+  const v = valor.toUpperCase().replace(/[\s-]/g, '');
+  if (!/^(\d{8}|[XYZ]\d{7})[A-Z]$/.test(v)) return false;
+  const numero = v.slice(0, -1).replace('X', '0').replace('Y', '1').replace('Z', '2');
+  const letra = 'TRWAGMYFPDXBNJZSQVHLCKE'[parseInt(numero, 10) % 23];
+  return letra === v.slice(-1);
+}
+
+// Edad en años cumplidos a partir de una fecha 'AAAA-MM-DD'
+function calcularEdad(fechaISO) {
+  const nac = new Date(fechaISO + 'T00:00:00');
+  const hoy = new Date();
+  let edad = hoy.getFullYear() - nac.getFullYear();
+  const m = hoy.getMonth() - nac.getMonth();
+  if (m < 0 || (m === 0 && hoy.getDate() < nac.getDate())) edad--;
+  return edad;
+}
+
+// Las 2 primeras cifras del CP son el código de provincia (01-52)
+const PROVINCIAS = ['Álava','Albacete','Alicante','Almería','Ávila','Badajoz','Illes Balears','Barcelona',
+  'Burgos','Cáceres','Cádiz','Castellón','Ciudad Real','Córdoba','A Coruña','Cuenca','Girona','Granada',
+  'Guadalajara','Gipuzkoa','Huelva','Huesca','Jaén','León','Lleida','La Rioja','Lugo','Madrid','Málaga',
+  'Murcia','Navarra','Ourense','Asturias','Palencia','Las Palmas','Pontevedra','Salamanca',
+  'Santa Cruz de Tenerife','Cantabria','Segovia','Sevilla','Soria','Tarragona','Teruel','Toledo',
+  'Valencia','Valladolid','Bizkaia','Zamora','Zaragoza','Ceuta','Melilla'];
+function provinciaDeCP(cp) {
+  const n = parseInt(cp.slice(0, 2), 10);
+  return (n >= 1 && n <= 52) ? PROVINCIAS[n - 1] : null;
+}
+
+// IBAN: se mueven 4 caracteres al final, letras → números (A=10...) y el resto mod 97 debe ser 1
+function validarIBAN(valor) {
+  const s = valor.replace(/\s+/g, '').toUpperCase();
+  if (!/^[A-Z]{2}\d{2}[A-Z0-9]{10,30}$/.test(s)) return false;
+  if (s.startsWith('ES') && s.length !== 24) return false;
+  const reordenado = s.slice(4) + s.slice(0, 4);
+  const numerico = reordenado.replace(/[A-Z]/g, c => (c.charCodeAt(0) - 55).toString());
+  let resto = 0;
+  for (const cifra of numerico) resto = (resto * 10 + Number(cifra)) % 97;  // evita números gigantes
+  return resto === 1;
+}
+
+// Fortaleza de la contraseña: qué reglas cumple y una puntuación de 0 a 5
+function analizarPassword(pw) {
+  const reglas = {
+    longitud:  pw.length >= 8,
+    mayuscula: /[A-ZÁÉÍÓÚÑ]/.test(pw),
+    minuscula: /[a-záéíóúñ]/.test(pw),
+    numero:    /\d/.test(pw),
+    simbolo:   /[^A-Za-z0-9ÁÉÍÓÚÑáéíóúñ]/.test(pw)
+  };
+  const puntos = Object.values(reglas).filter(Boolean).length + (pw.length >= 12 ? 1 : 0);
+  return { reglas, puntos: Math.min(puntos, 5) };
+}
+
+// Simula una petición al servidor (en la vida real: fetch('/api/usuarios/existe?u=...'))
+function comprobarUsuarioServidor(usuario) {
+  const ocupados = ['admin', 'root', 'usuario', 'test', 'profesor'];
+  return new Promise(resolve => setTimeout(() => resolve(!ocupados.includes(usuario)), 900));
+}
+
+/* =====================================================================
+   2) INTEGRACIÓN CON BOOTSTRAP
+   ===================================================================== */
+const form = document.getElementById('formRegistro');
+const $ = id => document.getElementById(id);
+
+// Pinta el estado de un campo: setCustomValidity + clases + mensajes
+function marcar(campo, error, mensajeOk = '') {
+  campo.setCustomValidity(error);
+  campo.classList.toggle('is-invalid', !!error);
+  campo.classList.toggle('is-valid', !error);
+  if ($(campo.id + '-error')) $(campo.id + '-error').textContent = error;
+  if ($(campo.id + '-ok')) $(campo.id + '-ok').textContent = mensajeOk;
+}
+
+// Traduce los errores nativos de HTML5 a mensajes claros en español
+function errorNativo(c) {
+  const v = c.validity;
+  if (v.valueMissing)    return 'Este campo es obligatorio';
+  if (v.typeMismatch)    return c.type === 'email' ? 'Escribe un email válido (nombre@dominio.es)' : 'Formato no válido';
+  if (v.tooShort)        return `Mínimo ${c.minLength} caracteres (llevas ${c.value.length})`;
+  if (v.patternMismatch) return c.dataset.patron || 'Hay caracteres no permitidos';
+  return '';
+}
+
+// Reglas de cada campo: devuelven el mensaje de error ('' si es correcto)
+const reglas = {
+  nombre:    c => errorNativo(c),
+  apellidos: c => errorNativo(c),
+  dni:       c => errorNativo(c) || (validarDNI(c.value) ? '' :
+               (/^(\d{8}|[XYZ]\d{7})[A-Z]$/.test(c.value) ? 'La letra no corresponde al número' : 'Formato: 8 cifras + letra, o X/Y/Z + 7 cifras + letra')),
+  fnac:      c => {
+               const e = errorNativo(c); if (e) return e;
+               const edad = calcularEdad(c.value);
+               if (edad < 0)   return 'La fecha no puede ser futura';
+               if (edad < 18)  return `Debes ser mayor de edad (tendrías ${edad} años)`;
+               if (edad > 110) return 'Revisa el año de nacimiento';
+               return '';
+             },
+  email:     c => errorNativo(c),
+  telefono:  c => errorNativo(c),
+  cp:        c => errorNativo(c) || (provinciaDeCP(c.value) ? '' : 'No existe ninguna provincia con ese código'),
+  password:  c => {
+               if (c.validity.valueMissing) return 'Este campo es obligatorio';
+               const { reglas } = analizarPassword(c.value);
+               return (reglas.longitud && reglas.mayuscula && reglas.minuscula && reglas.numero)
+                 ? '' : 'No cumple los requisitos indicados abajo';
+             },
+  password2: c => errorNativo(c) || (c.value === $('password').value ? '' : 'Las contraseñas no coinciden'),
+  iban:      c => errorNativo(c) || (validarIBAN(c.value) ? '' : 'IBAN incorrecto: revisa los dígitos de control'),
+  terminos:  c => c.checked ? '' : 'Debes aceptar las condiciones'
+};
+
+// Mensajes de acierto con información útil
+const mensajesOk = {
+  dni:  c => /^[XYZ]/.test(c.value) ? 'NIE correcto' : 'DNI correcto',
+  fnac: c => `Edad: ${calcularEdad(c.value)} años`,
+  cp:   c => `Provincia: ${provinciaDeCP(c.value)}`,
+  iban: () => 'IBAN válido'
+};
+
+function validarCampo(c) {
+  c.setCustomValidity('');                        // limpiar error propio antes de evaluar
+  if (c.id === 'telefono' && c.value === '') {    // opcional y vacío: neutro
+    c.classList.remove('is-valid', 'is-invalid'); return;
+  }
+  const error = reglas[c.id](c);
+  marcar(c, error, !error && mensajesOk[c.id] ? mensajesOk[c.id](c) : '');
+}
+
+// Grupos (checkbox con mínimo/máximo y radios): se marcan todos sus elementos
+function validarGrupo(nombre, comprobar) {
+  const opciones = [...form.querySelectorAll(`[name="${nombre}"]`)];
+  opciones.forEach(o => o.setCustomValidity(''));
+  const error = comprobar(opciones);
+  opciones.forEach(o => { o.classList.toggle('is-invalid', !!error); o.classList.toggle('is-valid', !error); });
+  opciones[0].setCustomValidity(error);
+  const fb = $(opciones[0].id + '-error');
+  fb.textContent = error;
+  fb.classList.toggle('d-block', !!error);       // el feedback no es hermano del input: lo mostramos a mano
+}
+const validarIntereses = () => validarGrupo('intereses', ops => {
+  const n = ops.filter(o => o.checked).length;
+  return n === 0 ? 'Elige al menos un interés' : n > 3 ? `Máximo 3 intereses (has marcado ${n})` : '';
+});
+const validarPlan = () => validarGrupo('plan', ops => ops.some(o => o.checked) ? '' : 'Elige un plan');
+
+/* ---------- Usuario: validación asíncrona con debounce ---------- */
+let temporizador, peticionActual = 0;
+function estadoUsuario(estado) {
+  const iconos = {
+    neutro:   '<i class="bi bi-person"></i>',
+    cargando: '<span class="spinner-border spinner-border-sm text-primary" role="status"></span>',
+    ok:       '<i class="bi bi-check-circle-fill text-success"></i>',
+    error:    '<i class="bi bi-x-circle-fill text-danger"></i>'
+  };
+  $('usuario-estado').innerHTML = iconos[estado];
+}
+async function validarUsuario() {
+  const c = $('usuario');
+  c.setCustomValidity('');
+  const e = errorNativo(c);
+  if (e) { marcar(c, e); estadoUsuario('error'); return; }
+  const id = ++peticionActual;
+  c.classList.remove('is-valid', 'is-invalid');
+  c.setCustomValidity('Comprobando…');           // mientras tanto no se puede enviar
+  estadoUsuario('cargando');
+  const libre = await comprobarUsuarioServidor(c.value);
+  if (id !== peticionActual) return;             // llegó una respuesta antigua: se ignora
+  marcar(c, libre ? '' : `"${c.value}" ya está en uso. Prueba con "${c.value}_${new Date().getFullYear()}"`,
+         libre ? '¡Nombre de usuario disponible!' : '');
+  estadoUsuario(libre ? 'ok' : 'error');
+}
+
+/* ---------- Contraseña: medidor y lista de requisitos ---------- */
+function actualizarFuerza() {
+  const { reglas: r, puntos } = analizarPassword($('password').value);
+  document.querySelectorAll('#reglasPassword li').forEach(li => {
+    const ok = r[li.dataset.regla];
+    const opcional = li.dataset.regla === 'simbolo';
+    li.querySelector('i').className = ok ? 'bi bi-check-circle-fill text-success'
+      : opcional ? 'bi bi-dash-circle text-body-secondary' : 'bi bi-x-circle-fill text-danger';
+  });
+  const niveles = [['—', ''], ['Muy débil', 'bg-danger'], ['Débil', 'bg-danger'], ['Media', 'bg-warning'], ['Fuerte', 'bg-info'], ['Muy fuerte', 'bg-success']];
+  const [texto, color] = niveles[$('password').value ? puntos : 0];
+  $('fuerzaBarra').className = 'progress-bar ' + color;
+  $('fuerzaBarra').style.width = ($('password').value ? puntos * 20 : 0) + '%';
+  $('fuerzaTexto').textContent = 'Fortaleza: ' + texto;
+}
+
+/* =====================================================================
+   3) EVENTOS: cuándo se valida
+   ===================================================================== */
+Object.keys(reglas).forEach(id => {
+  const c = $(id);
+  // Primera validación al salir del campo; después, en cada cambio
+  c.addEventListener('blur', () => { c.dataset.tocado = '1'; validarCampo(c); });
+  c.addEventListener(c.type === 'checkbox' || c.type === 'date' ? 'change' : 'input', () => {
+    if (c.id === 'dni') c.value = c.value.toUpperCase();
+    if (c.id === 'password') {
+      actualizarFuerza();
+      if ($('password2').dataset.tocado) validarCampo($('password2'));  // validación cruzada
+    }
+    if (c.dataset.tocado || c.type === 'checkbox') validarCampo(c);
+  });
+});
+// IBAN: formato en bloques de 4 al salir del campo
+$('iban').addEventListener('blur', e => {
+  e.target.value = e.target.value.replace(/\s+/g, '').toUpperCase().replace(/(.{4})/g, '$1 ').trim();
+  validarCampo(e.target);
+});
+$('usuario').addEventListener('input', () => {
+  clearTimeout(temporizador);
+  temporizador = setTimeout(validarUsuario, 500);   // debounce: espera a que deje de escribir
+});
+form.querySelectorAll('[name="intereses"]').forEach(o => o.addEventListener('change', validarIntereses));
+form.querySelectorAll('[name="plan"]').forEach(o => o.addEventListener('change', validarPlan));
+$('verPassword').addEventListener('click', function () {
+  const p = $('password'), visible = p.type === 'text';
+  p.type = visible ? 'password' : 'text';
+  this.innerHTML = visible ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
+});
+
+/* ---------- Envío ---------- */
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = $('btnRegistro'), textoBtn = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Validando…';
+
+  Object.keys(reglas).forEach(id => { $(id).dataset.tocado = '1'; validarCampo($(id)); });
+  validarIntereses(); validarPlan();
+  clearTimeout(temporizador);
+  await validarUsuario();                          // esperamos al "servidor"
+
+  btn.disabled = false; btn.innerHTML = textoBtn;
+
+  // Campos inválidos (un solo elemento por grupo de radios/checks)
+  const vistos = new Set();
+  const invalidos = [...form.querySelectorAll('input:invalid, select:invalid, textarea:invalid')]
+    .filter(c => !vistos.has(c.name) && vistos.add(c.name));
+
+  const resumen = $('resumenErrores');
+  if (invalidos.length) {
+    $('resumenTitulo').textContent = invalidos.length === 1 ? 'Hay 1 error en el formulario' : `Hay ${invalidos.length} errores en el formulario`;
+    $('listaErrores').innerHTML = '';
+    invalidos.forEach(c => {
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="#${c.id}" class="alert-link"></a>: <span></span>`;
+      li.querySelector('a').textContent = c.dataset.nombre || c.name;
+      li.querySelector('span').textContent = c.validationMessage;
+      li.querySelector('a').addEventListener('click', ev => { ev.preventDefault(); c.focus(); });
+      $('listaErrores').appendChild(li);
+    });
+    invalidos.forEach(c => { c.classList.remove('sacudir'); void c.offsetWidth; c.classList.add('sacudir'); });  // animación de aviso
+    resumen.classList.remove('d-none');
+    resumen.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    resumen.focus({ preventScroll: true });        // los lectores de pantalla lo anuncian
+    return;
+  }
+
+  // Todo correcto: mostramos los datos (aquí se haría el fetch al servidor)
+  resumen.classList.add('d-none');
+  const datos = new FormData(form);
+  const filas = [['Nombre', datos.get('nombre') + ' ' + datos.get('apellidos')], ['DNI/NIE', datos.get('dni')],
+    ['Email', datos.get('email')], ['Provincia', provinciaDeCP(datos.get('cp'))], ['Usuario', datos.get('usuario')],
+    ['IBAN', datos.get('iban')], ['Intereses', datos.getAll('intereses').join(', ')], ['Plan', datos.get('plan')],
+    ['Boletín', datos.get('boletin') ? 'Sí' : 'No']];
+  $('tablaResumen').innerHTML = '';
+  filas.forEach(([k, v]) => {
+    const tr = $('tablaResumen').insertRow();
+    tr.insertCell().textContent = k; tr.cells[0].className = 'fw-semibold';
+    tr.insertCell().textContent = v;
+  });
+  bootstrap.Modal.getOrCreateInstance('#modalRegistro').show();
+});
+
+/* ---------- Limpiar ---------- */
+form.addEventListener('reset', () => {
+  setTimeout(() => {   // esperamos a que el navegador vacíe los campos
+    form.querySelectorAll('.is-valid, .is-invalid').forEach(c => c.classList.remove('is-valid', 'is-invalid'));
+    form.querySelectorAll('input').forEach(c => { c.setCustomValidity(''); delete c.dataset.tocado; });
+    form.querySelectorAll('.invalid-feedback.d-block').forEach(f => f.classList.remove('d-block'));
+    $('resumenErrores').classList.add('d-none');
+    estadoUsuario('neutro'); actualizarFuerza();
+  });
+});
+ 
         </script>
+
     </body>
 </html>
