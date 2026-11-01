@@ -4,65 +4,429 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
     <title>Optica</title>
 </head>
 <body>
-    
-    <!-- Menu -->    
+
+    <!-- Menu -->
     <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body rounded" data-bs-theme="dark">
         <a class="navbar-brand mx-auto fs-2" href="#" ><i class="bi bi-shop"></i>Optica Boops</a>
     </nav>
 
-    <p class="fs-3 fw-bold">Solicita información de nuestros servicios: </p>    
+    <main class="container py-4">
+        <p class="fs-3 fw-bold">Solicita información de nuestros servicios: </p>
 
+        <form id="formulario" novalidate>
+            <div class="row g-3">
+                <!-- Nombre (obligatorio, entre 2 y 100 caracteres) -->
+                <div class="col-12">
+                    <div class="input-group">
+                        <span class="input-group-text">Nombre</span>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="nombre" placeholder="nombre" maxlength="100" required>
+                            <label for="nombre">Tu nombre</label>
+                        </div>
+                    </div>
+                    <div class="invalid-feedback" id="errorNombre">El nombre debe tener entre 2 y 100 caracteres.</div>
+                </div>
 
-    <div  class="row g-3">
-        <div class="input-group ">
-            <span class="input-group-text">Nombre</span>
-            <div class="form-floating">
-                <input type="text" class="form-control" id="nombre" placeholder="nombre">
-                <label for="nombre">Tu nombre</label>
+                <!-- Email (obligatorio, máximo 100 caracteres) -->
+                <div class="col-12">
+                    <div class="input-group">
+                        <span class="input-group-text">Email</span>
+                        <div class="form-floating">
+                            <input type="email" class="form-control" id="email" placeholder="email" maxlength="100" required>
+                            <label for="email">Tu email</label>
+                        </div>
+                    </div>
+                    <div class="invalid-feedback" id="errorEmail">Introduce un email válido de 100 caracteres como máximo.</div>
+                </div>
+
+                <!-- Teléfono (opcional; si se rellena, debe ser correcto) -->
+                <div class="col-12">
+                    <div class="input-group">
+                        <span class="input-group-text">Teléfono</span>
+                        <div class="form-floating">
+                            <input type="tel" class="form-control" id="telefono" placeholder="teléfono" maxlength="9">
+                            <label for="telefono">Tu teléfono, empezado en 6, 7 o 9</label>
+                        </div>
+                    </div>
+                    <div class="invalid-feedback" id="errorTelefono">Debe tener 9 dígitos y empezar por 6, 7 o 9, o dejarse vacío.</div>
+                </div>
+
+                <!-- Código postal y provincia -->
+                <div class="col-12">
+                    <div class="input-group">
+                        <span class="input-group-text">Codigo postal</span>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="codigoPostal" placeholder="codigo postal" maxlength="5" inputmode="numeric" required>
+                            <label for="codigoPostal">Tu código postal</label>
+                        </div>
+                    </div>
+                    <div class="invalid-feedback" id="errorCodigoPostal">Introduce 5 dígitos y un prefijo provincial válido (01-52).</div>
+                </div>
+
+                <div class="col-12">
+                    <div class="input-group">
+                        <span class="input-group-text">Provincia</span>
+                        <input type="text" class="form-control" id="provincia" aria-label="Provincia" readonly>
+                    </div>
+                </div>
+
+                <!-- Tipo de producto (obligatorio) -->
+                <div class="col-12">
+                    <p class="fw-semibold mb-2">Producto sobre el que quieres información:</p>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="isGafas" id="r1" value="gafas">
+                        <label class="form-check-label" for="r1">Gafas</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="isGafas" id="r2" value="lentes">
+                        <label class="form-check-label" for="r2">Lentes de contacto</label>
+                    </div>
+                    <div class="invalid-feedback" id="errorTipo">Selecciona una de las dos opciones.</div>
+                </div>
+
+                <!-- Dolencias: selección múltiple, sin obligación de elegir -->
+                <div class="col-12">
+                    <label class="form-label" for="dolencias">Dolencias</label>
+                    <select class="form-select" id="dolencias" multiple size="4">
+                        <option value="Miopía">Miopía</option>
+                        <option value="Astigmatismo">Astigmatismo</option>
+                        <option value="Ojos cansados">Ojos cansados</option>
+                        <option value="Hipermetropía">Hipermetropía</option>
+                    </select>
+                </div>
+
+                <!-- Fecha desde mañana, con tooltip -->
+                <div class="col-12">
+                    <label class="form-label" for="fechaDeseada">Fecha deseada *</label>
+                    <input type="text" class="form-control" id="fechaDeseada" placeholder="dd/mm/aaaa" maxlength="10" required data-bs-toggle="tooltip" data-bs-placement="top" title="Elige una fecha a partir de mañana.">
+                    <div class="invalid-feedback" id="errorFecha">Introduce una fecha válida (dd/mm/aaaa) a partir de mañana.</div>
+                </div>
+
+                <!-- Comentarios: máximo 250 caracteres -->
+                <div class="col-12">
+                    <label class="form-label" for="comentarios">Comentarios</label>
+                    <textarea class="form-control" id="comentarios" rows="3" maxlength="250"></textarea>
+                </div>
+
+                <!-- Aceptación de condiciones -->
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="condiciones" required>
+                        <label class="form-check-label" for="condiciones">
+                            Acepto las <a href="#modalCondiciones" data-bs-toggle="modal" data-bs-target="#modalCondiciones">condiciones</a>.
+                        </label>
+                        <div class="invalid-feedback" id="errorCondiciones">Debes aceptar las condiciones.</div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <button class="btn btn-dark" type="submit">ENVIAR</button>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <!-- Modal con las condiciones -->
+    <div class="modal fade" id="modalCondiciones" tabindex="-1" aria-labelledby="tituloCondiciones" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="tituloCondiciones">Condiciones</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    Los datos facilitados se utilizarán para atender la solicitud de información sobre los productos de la óptica.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="input-group ">
-            <span class="input-group-text">Email</span>
-            <div class="form-floating">
-                <input type="email" class="form-control" id="email" placeholder="email">
-                <label for="email">Tu email</label>
-            </div>
-        </div>  
-
-        <div class="input-group ">
-            <span class="input-group-text">Teléfono</span>
-            <div class="form-floating">
-                <input type="tel" class="form-control" id="telefono" placeholder="teléfono">
-                <label for="telefono">Tu teléfono, empezado en 6, 7 o 9</label>
-            </div>
-        </div>
-
-        <div class="input-group ">
-            <span class="input-group-text">Codigo postal</span>
-            <div class="form-floating">
-                <input type="text" class="form-control" id="codigoPostal" placeholder="codigo postal">
-                <label for="codigoPostal">Tu código postal</label>
+    <!-- Modal final: muestra los datos introducidos -->
+    <div class="modal fade" id="modalEnviado" tabindex="-1" aria-labelledby="tituloEnviado" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="tituloEnviado">Datos enviados</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0" id="datosEnviados" style="white-space: pre-line;"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
-
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="isGafas" id="r1" value="gafas">
-            <label class="form-check-label" for="r1">Gafas</label>
-        </div>
-
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="isGafas" id="r2" value="lentes">
-            <label class="form-check-label" for="r2">Lentes de contacto</label>
-        </div>
-
-        
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Reutiliza las funciones del ejercicio anterior. -->
+    <script src="validar.js"></script>
+    <script>
+        // Validaciones especificas de la practica de la optica.
+        function validarFechaDeseada(texto) {
+            if (!validarFecha(texto)) {
+                return false;
+            }
+
+            const dia = parseInt(texto.substring(0, 2));
+            const mes = parseInt(texto.substring(3, 5));
+            const anio = parseInt(texto.substring(6, 10));
+            const fecha = new Date(anio, mes - 1, dia);
+
+            const manana = new Date();
+            manana.setHours(0, 0, 0, 0);
+            manana.setDate(manana.getDate() + 1);
+
+            return fecha >= manana;
+        }
+
+        function validarTelefono(texto) {
+            if (texto === "") {
+                return true;
+            }
+            return validarSoloNumeros(texto, 9) &&
+                   (texto.charAt(0) === "6" || texto.charAt(0) === "7" || texto.charAt(0) === "9");
+        }
+
+        // Provincias según los dos primeros dígitos del código postal.
+        const provincias = [
+            { prefijo: "01", nombre: "Álava" },
+            { prefijo: "02", nombre: "Albacete" },
+            { prefijo: "03", nombre: "Alicante" },
+            { prefijo: "04", nombre: "Almería" },
+            { prefijo: "05", nombre: "Ávila" },
+            { prefijo: "06", nombre: "Badajoz" },
+            { prefijo: "07", nombre: "Illes Balears" },
+            { prefijo: "08", nombre: "Barcelona" },
+            { prefijo: "09", nombre: "Burgos" },
+            { prefijo: "10", nombre: "Cáceres" },
+            { prefijo: "11", nombre: "Cádiz" },
+            { prefijo: "12", nombre: "Castellón" },
+            { prefijo: "13", nombre: "Ciudad Real" },
+            { prefijo: "14", nombre: "Córdoba" },
+            { prefijo: "15", nombre: "A Coruña" },
+            { prefijo: "16", nombre: "Cuenca" },
+            { prefijo: "17", nombre: "Girona" },
+            { prefijo: "18", nombre: "Granada" },
+            { prefijo: "19", nombre: "Guadalajara" },
+            { prefijo: "20", nombre: "Guipúzcoa" },
+            { prefijo: "21", nombre: "Huelva" },
+            { prefijo: "22", nombre: "Huesca" },
+            { prefijo: "23", nombre: "Jaén" },
+            { prefijo: "24", nombre: "León" },
+            { prefijo: "25", nombre: "Lleida" },
+            { prefijo: "26", nombre: "La Rioja" },
+            { prefijo: "27", nombre: "Lugo" },
+            { prefijo: "28", nombre: "Madrid" },
+            { prefijo: "29", nombre: "Málaga" },
+            { prefijo: "30", nombre: "Murcia" },
+            { prefijo: "31", nombre: "Navarra" },
+            { prefijo: "32", nombre: "Ourense" },
+            { prefijo: "33", nombre: "Asturias" },
+            { prefijo: "34", nombre: "Palencia" },
+            { prefijo: "35", nombre: "Las Palmas" },
+            { prefijo: "36", nombre: "Pontevedra" },
+            { prefijo: "37", nombre: "Salamanca" },
+            { prefijo: "38", nombre: "Santa Cruz de Tenerife" },
+            { prefijo: "39", nombre: "Cantabria" },
+            { prefijo: "40", nombre: "Segovia" },
+            { prefijo: "41", nombre: "Sevilla" },
+            { prefijo: "42", nombre: "Soria" },
+            { prefijo: "43", nombre: "Tarragona" },
+            { prefijo: "44", nombre: "Teruel" },
+            { prefijo: "45", nombre: "Toledo" },
+            { prefijo: "46", nombre: "Valencia" },
+            { prefijo: "47", nombre: "Valladolid" },
+            { prefijo: "48", nombre: "Vizcaya" },
+            { prefijo: "49", nombre: "Zamora" },
+            { prefijo: "50", nombre: "Zaragoza" },
+            { prefijo: "51", nombre: "Ceuta" },
+            { prefijo: "52", nombre: "Melilla" }
+        ];
+
+        const formulario = document.getElementById("formulario");
+        const nombre = document.getElementById("nombre");
+        const email = document.getElementById("email");
+        const telefono = document.getElementById("telefono");
+        const codigoPostal = document.getElementById("codigoPostal");
+        const provincia = document.getElementById("provincia");
+        const fechaDeseada = document.getElementById("fechaDeseada");
+        const condiciones = document.getElementById("condiciones");
+        const dolencias = document.getElementById("dolencias");
+        const comentarios = document.getElementById("comentarios");
+
+        function marcarCampo(campo, correcto, mensajeError) {
+            campo.classList.toggle("is-invalid", !correcto);
+            campo.classList.toggle("is-valid", correcto);
+            mensajeError.classList.toggle("d-block", !correcto);
+            return correcto;
+        }
+
+        function comprobarNombre() {
+            return marcarCampo(
+                nombre,
+                validarLongitud(nombre.value.trim(), 2, 100),
+                document.getElementById("errorNombre")
+            );
+        }
+
+        function comprobarEmail() {
+            return marcarCampo(
+                email,
+                validarLongitud(email.value.trim(), 1, 100) && email.validity.valid,
+                document.getElementById("errorEmail")
+            );
+        }
+
+        function comprobarTelefono() {
+            return marcarCampo(
+                telefono,
+                validarTelefono(telefono.value.trim()),
+                document.getElementById("errorTelefono")
+            );
+        }
+
+        function rellenarProvincia() {
+            provincia.value = "";
+            if (codigoPostal.value.length < 2) {
+                return;
+            }
+
+            const prefijo = codigoPostal.value.substring(0, 2);
+            const encontrada = provincias.find(p => p.prefijo === prefijo);
+            if (encontrada) {
+                provincia.value = encontrada.nombre;
+            }
+        }
+
+        function comprobarCodigoPostal() {
+            rellenarProvincia();
+            return marcarCampo(
+                codigoPostal,
+                validarSoloNumeros(codigoPostal.value, 5) && provincia.value !== "",
+                document.getElementById("errorCodigoPostal")
+            );
+        }
+
+        function comprobarTipo() {
+            const correcto = validarRadioMarcado("isGafas");
+            const opciones = document.getElementsByName("isGafas");
+            for (let i = 0; i < opciones.length; i++) {
+                opciones[i].classList.toggle("is-invalid", !correcto);
+                opciones[i].classList.toggle("is-valid", correcto);
+            }
+            document.getElementById("errorTipo").classList.toggle("d-block", !correcto);
+            return correcto;
+        }
+
+        function comprobarFechaDeseada() {
+            return marcarCampo(
+                fechaDeseada,
+                validarFechaDeseada(fechaDeseada.value.trim()),
+                document.getElementById("errorFecha")
+            );
+        }
+
+        function comprobarCondiciones() {
+            return marcarCampo(
+                condiciones,
+                condiciones.checked,
+                document.getElementById("errorCondiciones")
+            );
+        }
+
+        function revisarSiValidado(campo, funcionComprobar) {
+            if (campo.classList.contains("is-valid") || campo.classList.contains("is-invalid")) {
+                funcionComprobar();
+            }
+        }
+
+        // Validar al salir de un campo y después, si ya se ha validado, al escribir.
+        nombre.addEventListener("blur", comprobarNombre);
+        nombre.addEventListener("input", function () {
+            revisarSiValidado(nombre, comprobarNombre);
+        });
+
+        email.addEventListener("blur", comprobarEmail);
+        email.addEventListener("input", function () {
+            revisarSiValidado(email, comprobarEmail);
+        });
+
+        telefono.addEventListener("blur", comprobarTelefono);
+        telefono.addEventListener("input", function () {
+            revisarSiValidado(telefono, comprobarTelefono);
+        });
+
+        codigoPostal.addEventListener("blur", comprobarCodigoPostal);
+        codigoPostal.addEventListener("input", function () {
+            rellenarProvincia();
+            revisarSiValidado(codigoPostal, comprobarCodigoPostal);
+        });
+
+        fechaDeseada.addEventListener("blur", comprobarFechaDeseada);
+        fechaDeseada.addEventListener("input", function () {
+            revisarSiValidado(fechaDeseada, comprobarFechaDeseada);
+        });
+
+        document.getElementsByName("isGafas").forEach(function (opcion) {
+            opcion.addEventListener("change", comprobarTipo);
+        });
+        condiciones.addEventListener("change", comprobarCondiciones);
+
+        // Tooltip de la fecha, mediante Bootstrap.
+        new bootstrap.Tooltip(fechaDeseada);
+
+        function obtenerDatosFormulario() {
+            const tipoElegido = document.querySelector('input[name="isGafas"]:checked');
+            const seleccionadas = [];
+            for (let i = 0; i < dolencias.options.length; i++) {
+                if (dolencias.options[i].selected) {
+                    seleccionadas.push(dolencias.options[i].value);
+                }
+            }
+
+            return "Nombre: " + nombre.value.trim() + "\n" +
+                   "Email: " + email.value.trim() + "\n" +
+                   "Teléfono: " + (telefono.value.trim() || "No indicado") + "\n" +
+                   "Código postal: " + codigoPostal.value + "\n" +
+                   "Provincia: " + provincia.value + "\n" +
+                   "Producto: " + (tipoElegido.value === "gafas" ? "Gafas" : "Lentes de contacto") + "\n" +
+                   "Dolencias: " + (seleccionadas.join(", ") || "Ninguna") + "\n" +
+                   "Fecha deseada: " + fechaDeseada.value.trim() + "\n" +
+                   "Comentarios: " + (comentarios.value.trim() || "Sin comentarios") + "\n" +
+                   "Condiciones aceptadas: Sí";
+        }
+
+        // Validación final: mostrar los errores bajo sus campos.
+        // No añadimos el modal de errores porque el enunciado lo deja como opcional.
+        formulario.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const resultados = [
+                comprobarNombre(),
+                comprobarEmail(),
+                comprobarTelefono(),
+                comprobarCodigoPostal(),
+                comprobarTipo(),
+                comprobarFechaDeseada(),
+                comprobarCondiciones()
+            ];
+
+            if (resultados.every(resultado => resultado)) {
+                document.getElementById("datosEnviados").textContent = obtenerDatosFormulario();
+                const modal = new bootstrap.Modal(document.getElementById("modalEnviado"));
+                modal.show();
+            }
+        });
+    </script>
 </body>
 </html>
