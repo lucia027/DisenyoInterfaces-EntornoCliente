@@ -10,13 +10,11 @@
     <form id="Formulario", name="form1", method="post", action="">
         <select name="dia" id="dia"></select>
         <select name="mes" id="mes"></select>
-
         <select name="anyo" id="anyo"></select>
 
     </form>
 
     <script>
-
         function crearOption(select, desde, hasta, selected){
             for(let i = desde; i <= hasta; i++){
                 const option = document.createElement("option");
