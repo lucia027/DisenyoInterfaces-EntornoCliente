@@ -12,530 +12,368 @@
     </style>
 </head>
 <body class="bg-body-tertiary">
+    <!-- Contenido sin tarjeta, bordes exteriores ni sombras -->
     <main class="container py-4">
-        <!-- Encabezado de la página -->
-        <div class="bg-white border rounded-3 p-3 p-md-4 shadow-sm">
-            <!-- Formulario completo: mantiene los IDs originales para no romper el JS existente. -->
-            <form id="formulario" novalidate>
+        <h1 class="h3 mb-4">Datos del envío</h1>
+        <form id="formulario" novalidate>
+            <section class="mb-4">
+                <header class="border-start border-warning border-4 ps-3 mb-3">
+                    <h2 class="h5 mb-1">Datos del destinatario</h2>
+                </header>
+                <div class="row g-3">
+                    <!-- Campo: Nombre -->
+                    <div class="col-12 col-md-6 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Nombre</span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                                <label for="nombre">Nombre</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <!-- Campo: Empresa -->
+                    <div class="col-12 col-md-6 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Empresa</span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="empresa" placeholder="Empresa">
+                                <label for="empresa">Empresa</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <!-- Campo: Tipo de documento -->
+                    <div class="col-12 col-md-6 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Tipo de documento</span>
+                            <div class="form-floating">
+                                <select class="form-select" id="tipoDocumento">
+                                    <option value="">Sin documento</option>
+                                    <option value="NIF">NIF</option>
+                                    <option value="NIE">NIE</option>
+                                    <option value="CIF">CIF</option>
+                                </select>
+                                <label for="tipoDocumento">Tipo de documento</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <!-- Campo: Número de documento -->
+                    <div class="col-12 col-md-6 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Número de documento</span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="documento" placeholder="Número de documento" maxlength="9">
+                                <label for="documento">Número de documento</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                </div>
+            </section>
 
-        <!-- ============================================================
-             SECCIÓN: DATOS DEL DESTINATARIO
-             ============================================================ -->
-        <section class="mb-4">
-            <header class="border-start border-warning border-4 ps-3 mb-3">
-                <h2 class="h5 mb-1">Datos del destinatario</h2>
-                <p class="text-secondary mb-0">Introduce los datos del destinatario.</p>
-            </header>
-            <div class="row g-3">
-                <!-- Campo: Nombre. Nombre de la persona destinataria. -->
-                <div class="col-12 col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-text">Nombre</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" maxlength="100" minlength="2" required>
-                            <label for="nombre">Tu nombre</label>
+            <section class="mb-4 pt-3 border-top">
+                <header class="border-start border-warning border-4 ps-3 mb-3">
+                    <h2 class="h5 mb-1">Dirección</h2>
+                </header>
+                <div class="row g-3">
+                    <!-- Campo: Tipo de vía -->
+                    <div class="col-12 col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-text">Tipo de vía</span>
+                            <div class="form-floating">
+                                <select class="form-select" id="tipoVia">
+                                    <option value="">Sin especificar</option>
+                                    <option value="Calle">Calle</option>
+                                    <option value="Avenida">Avenida</option>
+                                    <option value="Plaza">Plaza</option>
+                                    <option value="Camino">Camino</option>
+                                    <option value="Carretera">Carretera</option>
+                                </select>
+                                <label for="tipoVia">Tipo de vía</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorNombre" data-error-for="nombre">El nombre debe tener entre 2 y 100 caracteres.</div>
-                </div>
-
-                <!-- Campo: Primer apellido. Primer apellido del destinatario. -->
-                <div class="col-12 col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-text">Primer apellido</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="primerApellido" placeholder="Primer apellido" maxlength="100" minlength="2" required>
-                            <label for="primerApellido">Tu primer apellido</label>
+                    <!-- Campo: Nombre de la vía * -->
+                    <div class="col-12 col-md-8 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Nombre de la vía *</span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="nombreVia" placeholder="Nombre de la vía *">
+                                <label for="nombreVia">Nombre de la vía *</label>
+                            </div>
                         </div>
+                        <div class="invalid-feedback"></div>
                     </div>
-                    <div class="invalid-feedback" id="errorPrimerApellido" data-error-for="primerApellido">El primer apellido debe tener entre 2 y 100 caracteres.</div>
-                </div>
-
-                <!-- Campo: Segundo apellido. Segundo apellido del destinatario. -->
-                <div class="col-12 col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-text">Segundo apellido</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="segundoApellido" placeholder="Segundo apellido" maxlength="100" minlength="2" required>
-                            <label for="segundoApellido">Tu segundo apellido</label>
+                    <!-- Campo: Número -->
+                    <div class="col-12 col-sm-6 col-lg-4 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Número</span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="numeroVia" placeholder="Número" maxlength="5">
+                                <label for="numeroVia">Número</label>
+                            </div>
                         </div>
+                        <div class="invalid-feedback"></div>
                     </div>
-                    <div class="invalid-feedback" id="errorSegundoApellido" data-error-for="segundoApellido">El segundo apellido debe tener entre 2 y 100 caracteres.</div>
-                </div>
-
-                <!-- Campo: Empresa. Empresa destinataria; se mantiene como obligatorio igual que en la base original. -->
-                <div class="col-12 col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-text">Empresa</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="empresa" placeholder="Empresa" maxlength="100" minlength="2" required>
-                            <label for="empresa">Nombre de la empresa</label>
+                    <!-- Campo: Bloque -->
+                    <div class="col-12 col-sm-6 col-lg-4 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Bloque</span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="bloqueVia" placeholder="Bloque" maxlength="5">
+                                <label for="bloqueVia">Bloque</label>
+                            </div>
                         </div>
+                        <div class="invalid-feedback"></div>
                     </div>
-                    <div class="invalid-feedback" id="errorEmpresa" data-error-for="empresa">El nombre de la empresa debe tener entre 2 y 100 caracteres.</div>
-                </div>
-
-                <!-- Campo: Tipo de documento. Selección del tipo de documento; se corrige el valor interno de CIF. -->
-                <div class="col-12 col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-text">Tipo de documento</span>
-                        <div class="form-floating">
-                            <select class="form-select" id="tipoDocumento" required>
-                                <option value="" selected disabled>Selecciona una opción</option>
-                                <option value="NIF">NIF</option>
-                                <option value="DNI">DNI</option>
-                                <option value="CIF">CIF</option>
-                            </select>
-                            <label for="tipoDocumento">Tipo de documento</label>
+                    <!-- Campo: Escalera -->
+                    <div class="col-12 col-sm-6 col-lg-4 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Escalera</span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="escaleraVia" placeholder="Escalera" maxlength="5">
+                                <label for="escaleraVia">Escalera</label>
+                            </div>
                         </div>
+                        <div class="invalid-feedback"></div>
                     </div>
-                    <div class="invalid-feedback" id="errorTipoDocumento" data-error-for="tipoDocumento">Debes seleccionar un tipo de documento.</div>
-                </div>
-
-                <!-- Campo: Número de documento. Número de documento de la persona o empresa. -->
-                <div class="col-12 col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-text">Número de documento</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="documento" placeholder="Número de documento" maxlength="100" minlength="2" required>
-                            <label for="documento">Tu número de documento</label>
+                    <!-- Campo: Código postal * -->
+                    <div class="col-12 col-md-6 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Código postal *</span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="codigoPostal" placeholder="Código postal *" maxlength="5" inputmode="numeric">
+                                <label for="codigoPostal">Código postal *</label>
+                            </div>
                         </div>
+                        <div class="invalid-feedback"></div>
                     </div>
-                    <div class="invalid-feedback" id="errorDocumento" data-error-for="documento">El número de documento debe tener entre 2 y 100 caracteres.</div>
-                </div>
-
-                <!-- Campo: Tipo de vía. Se corrige el valor interno de Carretera. -->
-                <div class="col-12 col-md-4">
-                    <div class="input-group">
-                        <span class="input-group-text">Tipo de vía</span>
-                        <div class="form-floating">
-                            <select class="form-select" id="tipoVia" required>
-                                <option value="" selected disabled>Selecciona una opción</option>
-                                <option value="Calle">Calle</option>
-                                <option value="Avenida">Avenida</option>
-                                <option value="Plaza">Plaza</option>
-                                <option value="Carretera">Carretera</option>
-                            </select>
-                            <label for="tipoVia">Tipo de vía</label>
-                        </div>
-                    </div>
-                    <div class="invalid-feedback" id="errorTipoVia" data-error-for="tipoVia">Debes seleccionar un tipo de vía.</div>
-                </div>
-
-                <!-- Campo: Nombre de la vía. Nombre de la calle, avenida o carretera. -->
-                <div class="col-12 col-md-8">
-                    <div class="input-group">
-                        <span class="input-group-text">Nombre de la vía</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="nombreVia" placeholder="Nombre de la vía" maxlength="100" minlength="2" required>
-                            <label for="nombreVia">Nombre de la vía</label>
-                        </div>
-                    </div>
-                    <div class="invalid-feedback" id="errorNombreVia" data-error-for="nombreVia">El nombre de la vía debe tener entre 2 y 100 caracteres.</div>
-                </div>
-
-                <!-- Campo: Número. Dato de dirección; se conserva su obligatoriedad del HTML original. -->
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-text">Número</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="numeroVia" placeholder="Número" maxlength="10" required>
-                            <label for="numeroVia">Número de la vía</label>
-                        </div>
-                    </div>
-                    <div class="invalid-feedback" id="errorNumeroVia" data-error-for="numeroVia">El número de la vía debe tener entre 1 y 10 caracteres.</div>
-                </div>
-
-                <!-- Campo: Bloque. Dato de dirección; se conserva su obligatoriedad del HTML original. -->
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-text">Bloque</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="bloqueVia" placeholder="Bloque" maxlength="10" required>
-                            <label for="bloqueVia">Bloque de la vía</label>
-                        </div>
-                    </div>
-                    <div class="invalid-feedback" id="errorBloqueVia" data-error-for="bloqueVia">El bloque de la vía debe tener entre 1 y 10 caracteres.</div>
-                </div>
-
-                <!-- Campo: Portal. Dato de dirección; se conserva su obligatoriedad del HTML original. -->
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-text">Portal</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="portalVia" placeholder="Portal" maxlength="10" required>
-                            <label for="portalVia">Portal de la vía</label>
-                        </div>
-                    </div>
-                    <div class="invalid-feedback" id="errorPortalVia" data-error-for="portalVia">El portal de la vía debe tener entre 1 y 10 caracteres.</div>
-                </div>
-
-                <!-- Campo: Piso. Dato de dirección; se conserva su obligatoriedad del HTML original. -->
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-text">Piso</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="pisoVia" placeholder="Piso" maxlength="10" required>
-                            <label for="pisoVia">Piso de la vía</label>
-                        </div>
-                    </div>
-                    <div class="invalid-feedback" id="errorPisoVia" data-error-for="pisoVia">El piso de la vía debe tener entre 1 y 10 caracteres.</div>
-                </div>
-
-                <!-- Campo: Escalera. Dato de dirección; se conserva su obligatoriedad del HTML original. -->
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-text">Escalera</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="escaleraVia" placeholder="Escalera" maxlength="10" required>
-                            <label for="escaleraVia">Escalera de la vía</label>
-                        </div>
-                    </div>
-                    <div class="invalid-feedback" id="errorEscaleraVia" data-error-for="escaleraVia">La escalera de la vía debe tener entre 1 y 10 caracteres.</div>
-                </div>
-
-                <!-- Campo: Puerta. Dato de dirección; se conserva su obligatoriedad del HTML original. -->
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-text">Puerta</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="puertaVia" placeholder="Puerta" maxlength="10" required>
-                            <label for="puertaVia">Puerta de la vía</label>
-                        </div>
-                    </div>
-                    <div class="invalid-feedback" id="errorPuertaVia" data-error-for="puertaVia">La puerta de la vía debe tener entre 1 y 10 caracteres.</div>
-                </div>
-
-                <!-- Campo: Dirección complemento. Texto adicional de la dirección; ID original conservado. -->
-                <div class="col-12">
-                    <div class="input-group">
-                        <span class="input-group-text">Dirección complemento</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="direccionCompleta" placeholder="Dirección complemento" maxlength="100" minlength="2" required>
-                            <label for="direccionCompleta">Información adicional de la dirección</label>
-                        </div>
-                    </div>
-                    <div class="invalid-feedback" id="errorDireccionCompleta" data-error-for="direccionCompleta">La dirección completa debe tener entre 2 y 100 caracteres.</div>
-                </div>
-
-                <!-- Campo: Código postal. Cinco dígitos; se asigna la provincia automáticamente a partir de los dos primeros. -->
-                <div class="col-12 col-md-4">
-                    <div class="input-group">
-                        <span class="input-group-text">Código postal</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="codigoPostal" placeholder="Código postal" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" required>
-                            <label for="codigoPostal">Tu código postal</label>
-                        </div>
-                    </div>
-                    <div class="invalid-feedback" id="errorCodigoPostal" data-error-for="codigoPostal">Introduce 5 dígitos y un prefijo provincial válido (01-52).</div>
-                </div>
-
-                <!-- Campo: Localidad. Ciudad o municipio del destinatario. -->
-                <div class="col-12 col-md-4">
-                    <div class="input-group">
-                        <span class="input-group-text">Localidad</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="localidad" placeholder="Localidad" maxlength="100" required>
-                            <label for="localidad">Tu localidad</label>
-                        </div>
-                    </div>
-                    <div class="invalid-feedback" id="errorLocalidad" data-error-for="localidad">La localidad es obligatoria.</div>
-                </div>
-
-                <!-- Campo: Provincia. Se rellena automáticamente con el prefijo del código postal. -->
-                <div class="col-12 col-md-4">
-                    <div class="input-group">
-                        <span class="input-group-text">Provincia</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="provincia" placeholder="Provincia" readonly>
-                            <label for="provincia">Provincia</label>
+                    <!-- Campo: Provincia -->
+                    <div class="col-12 col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-text">Provincia</span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="provincia" placeholder="Provincia" readonly>
+                                <label for="provincia">Provincia</label>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <!-- Campo: Móvil envío SMS. Teléfono móvil opcional para avisos; comienza por 6 o 7. -->
-                <div class="col-12">
-                    <div class="input-group">
-                        <span class="input-group-text">Móvil envío SMS</span>
-                        <div class="form-floating">
-                            <input type="tel" class="form-control" id="movilSms" placeholder="Móvil envío SMS" maxlength="9" inputmode="tel" pattern="[67][0-9]{8}">
-                            <label for="movilSms">Móvil para avisos SMS</label>
+            <section class="mb-4 pt-3 border-top">
+                <header class="border-start border-warning border-4 ps-3 mb-3">
+                    <h2 class="h5 mb-1">Contacto</h2>
+                </header>
+                <div class="row g-3">
+                    <!-- Campo: Móvil SMS -->
+                    <div class="col-12 col-md-4 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Móvil SMS</span>
+                            <div class="form-floating">
+                                <input type="tel" class="form-control" id="movilSms" placeholder="Móvil SMS" maxlength="9">
+                                <label for="movilSms">Móvil SMS</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <!-- Campo: Teléfono de contacto -->
+                    <div class="col-12 col-md-4 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Teléfono de contacto</span>
+                            <div class="form-floating">
+                                <input type="tel" class="form-control" id="telefono" placeholder="Teléfono de contacto" maxlength="9">
+                                <label for="telefono">Teléfono de contacto</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <!-- Campo: Email -->
+                    <div class="col-12 col-md-4 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Email</span>
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="email" placeholder="Email">
+                                <label for="email">Email</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-4 pt-3 border-top">
+                <header class="border-start border-warning border-4 ps-3 mb-3">
+                    <h2 class="h5 mb-1">Peso y tamaño</h2>
+                </header>
+                <div class="row g-3">
+                    <!-- Campo: Peso (kg) * -->
+                    <div class="col-12 col-md-6 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Peso (kg) *</span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="peso" placeholder="Peso (kg) *" inputmode="decimal">
+                                <label for="peso">Peso (kg) *</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <!-- Campo: Peso volumétrico (kg) -->
+                    <div class="col-12 col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-text">Peso volumétrico (kg)</span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="pesoVolumetrico" placeholder="Peso volumétrico (kg)" readonly>
+                                <label for="pesoVolumetrico">Peso volumétrico (kg)</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorMovilSms" data-error-for="movilSms">Debe tener 9 dígitos y comenzar por 6 o 7.</div>
+                    <!-- Campo: Alto (cm) * -->
+                    <div class="col-12 col-md-4 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Alto (cm) *</span>
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="alto" placeholder="Alto (cm) *" min="0" step="any">
+                                <label for="alto">Alto (cm) *</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <!-- Campo: Ancho (cm) * -->
+                    <div class="col-12 col-md-4 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Ancho (cm) *</span>
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="ancho" placeholder="Ancho (cm) *" min="0" step="any">
+                                <label for="ancho">Ancho (cm) *</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <!-- Campo: Largo (cm) * -->
+                    <div class="col-12 col-md-4 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Largo (cm) *</span>
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="largo" placeholder="Largo (cm) *" min="0" step="any">
+                                <label for="largo">Largo (cm) *</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-12"><p class="form-text mb-0">Peso volumétrico = alto × ancho × largo / 6000.</p></div>
                 </div>
+            </section>
 
-                <!-- Campo: Email. Correo electrónico del destinatario; campo opcional. -->
-                <div class="col-12">
-                    <div class="input-group">
-                        <span class="input-group-text">Email</span>
-                        <div class="form-floating">
-                            <input type="email" class="form-control" id="email" placeholder="Email" maxlength="100">
-                            <label for="email">Tu email</label>
+            <section class="mb-4 pt-3 border-top">
+                <header class="border-start border-warning border-4 ps-3 mb-3">
+                    <h2 class="h5 mb-1">Servicios adicionales</h2>
+                </header>
+                <div class="row g-3">
+                    <!-- Casilla: Preparar envío de vuelta -->
+                    <div class="col-12 col-md-4 d-flex align-items-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="prepararVuelta">
+                            <label class="form-check-label fw-semibold" for="prepararVuelta">Preparar envío de vuelta</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorEmail" data-error-for="email">Introduce una dirección de correo electrónico válida.</div>
-                </div>
-
-                <!-- Campo: Teléfono de contacto. Teléfono opcional; nueve dígitos y comienza por 6, 7 o 9. -->
-                <div class="col-12">
-                    <div class="input-group">
-                        <span class="input-group-text">Teléfono de contacto</span>
-                        <div class="form-floating">
-                            <input type="tel" class="form-control" id="telefono" placeholder="Teléfono de contacto" maxlength="9" inputmode="tel" pattern="[679][0-9]{8}">
-                            <label for="telefono">Teléfono de contacto</label>
+                    <!-- Campo: Fecha límite de vuelta -->
+                    <div class="col-12 col-md-8 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Fecha límite de vuelta</span>
+                            <div class="form-floating">
+                                <input type="date" class="form-control" id="fechaVuelta" placeholder="Fecha límite de vuelta" disabled>
+                                <label for="fechaVuelta">Fecha límite de vuelta</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <!-- Casilla: Seguro a todo riesgo -->
+                    <div class="col-12 col-md-4 d-flex align-items-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="seguroTodoRiesgo">
+                            <label class="form-check-label fw-semibold" for="seguroTodoRiesgo">Seguro a todo riesgo</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorTelefono" data-error-for="telefono">Debe tener 9 dígitos y empezar por 6, 7 o 9, o dejarse vacío.</div>
+                    <!-- Campo: Importe asegurado (€) -->
+                    <div class="col-12 col-md-8 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Importe asegurado (€)</span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="importeSeguro" placeholder="Importe asegurado (€)" inputmode="decimal" disabled>
+                                <label for="importeSeguro">Importe asegurado (€)</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <!-- Casilla: Reembolso a cuenta -->
+                    <div class="col-12 d-flex align-items-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="reembolsoCuenta">
+                            <label class="form-check-label fw-semibold" for="reembolsoCuenta">Reembolso a cuenta</label>
+                        </div>
+                    </div>
+                    <!-- Campo: Importe de reembolso (€) -->
+                    <div class="col-12 col-md-6 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Importe de reembolso (€)</span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="importeReembolso" placeholder="Importe de reembolso (€)" inputmode="decimal" disabled>
+                                <label for="importeReembolso">Importe de reembolso (€)</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <!-- Campo: IBAN -->
+                    <div class="col-12 col-md-6 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">IBAN</span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="iban" placeholder="IBAN" maxlength="42" disabled>
+                                <label for="iban">IBAN</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
                 </div>
+            </section>
 
+            <section class="mb-4 pt-3 border-top">
+                <header class="border-start border-warning border-4 ps-3 mb-3">
+                    <h2 class="h5 mb-1">Observaciones</h2>
+                </header>
+                <div class="row g-3">
+                    <!-- Campo: Observaciones (máximo 150 caracteres) -->
+                    <div class="col-12 campo-con-error">
+                        <div class="input-group">
+                            <span class="input-group-text">Observaciones (máximo 150 caracteres)</span>
+                            <div class="form-floating">
+                                <textarea class="form-control" id="observaciones" placeholder="Observaciones (máximo 150 caracteres)" rows="3" maxlength="150"></textarea>
+                                <label for="observaciones">Observaciones (máximo 150 caracteres)</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary px-4">Aceptar</button>
             </div>
-        </section>
-
-        <!-- ============================================================
-             SECCIÓN: PESO Y TAMAÑO
-             ============================================================ -->
-        <section class="mb-4 pt-3 border-top">
-            <header class="border-start border-warning border-4 ps-3 mb-3">
-                <h2 class="h5 mb-1">Peso y tamaño</h2>
-                <p class="text-secondary mb-0">Introduce el peso y las dimensiones del paquete.</p>
-            </header>
-            <div class="row g-3">
-                <!-- Campo: Peso (kg) (*). Peso real en kilogramos. -->
-                <div class="col-12 col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-text">Peso (kg) (*)</span>
-                        <div class="form-floating">
-                            <input type="number" class="form-control" id="peso" placeholder="Peso (kg) (*)" min="0.01" step="0.01" required>
-                            <label for="peso">Peso del envío en kg</label>
-                        </div>
-                    </div>
-                    <div class="invalid-feedback" id="errorPeso" data-error-for="peso">Introduce un peso mayor que cero.</div>
-                </div>
-
-                <!-- Campo: Peso volumétrico. Resultado automático del cálculo, solo lectura. -->
-                <div class="col-12 col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-text">Peso volumétrico</span>
-                        <div class="form-floating">
-                            <input type="number" class="form-control" id="pesoVolumetrico" placeholder="Peso volumétrico" readonly>
-                            <label for="pesoVolumetrico">Peso volumétrico (kg)</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Campo: Alto (cm) (*). Medida en centímetros; es obligatoria para calcular el volumen. -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="input-group">
-                        <span class="input-group-text">Alto (cm) (*)</span>
-                        <div class="form-floating">
-                            <input type="number" class="form-control" id="alto" placeholder="Alto (cm) (*)" min="0.1" step="0.1" required>
-                            <label for="alto">Alto (cm) (*)</label>
-                        </div>
-                    </div>
-                    <div class="invalid-feedback" id="errorAlto" data-error-for="alto">Introduce un valor válido para alto (cm) (*).</div>
-                </div>
-
-                <!-- Campo: Ancho (cm) (*). Medida en centímetros; es obligatoria para calcular el volumen. -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="input-group">
-                        <span class="input-group-text">Ancho (cm) (*)</span>
-                        <div class="form-floating">
-                            <input type="number" class="form-control" id="ancho" placeholder="Ancho (cm) (*)" min="0.1" step="0.1" required>
-                            <label for="ancho">Ancho (cm) (*)</label>
-                        </div>
-                    </div>
-                    <div class="invalid-feedback" id="errorAncho" data-error-for="ancho">Introduce un valor válido para ancho (cm) (*).</div>
-                </div>
-
-                <!-- Campo: Largo (cm) (*). Medida en centímetros; es obligatoria para calcular el volumen. -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="input-group">
-                        <span class="input-group-text">Largo (cm) (*)</span>
-                        <div class="form-floating">
-                            <input type="number" class="form-control" id="largo" placeholder="Largo (cm) (*)" min="0.1" step="0.1" required>
-                            <label for="largo">Largo (cm) (*)</label>
-                        </div>
-                    </div>
-                    <div class="invalid-feedback" id="errorLargo" data-error-for="largo">Introduce un valor válido para largo (cm) (*).</div>
-                </div>
-
-                <!-- Botón: calcular peso volumétrico a partir de las tres medidas. -->
-                <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-stretch">
-                    <button class="btn btn-outline-secondary w-100" type="button" id="calcularPeso">Calcular</button>
-                </div>
-                <!-- Nota informativa sobre el cálculo orientativo. -->
-                <div class="col-12">
-                    <p class="form-text mb-0">Cálculo orientativo: alto × ancho × largo / 6000. El factor aplicable depende del transportista.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============================================================
-             SECCIÓN: PREPARAR ENVÍO DE VUELTA ASOCIADO
-             ============================================================ -->
-        <section class="mb-4 pt-3 border-top">
-            <header class="border-start border-warning border-4 ps-3 mb-3">
-                <h2 class="h5 mb-1">Preparar envío de vuelta asociado</h2>
-                <p class="text-secondary mb-0">Indica si deseas preparar un envío de vuelta asociado.</p>
-            </header>
-            <div class="row g-3">
-                <!-- Campo: Preparar envío de vuelta asociado. Habilita la fecha de devolución. -->
-                <div class="col-12">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="prepararVuelta">
-                        <label class="form-check-label fw-semibold" for="prepararVuelta">Preparar envío de vuelta asociado</label>
-                    </div>
-                </div>
-
-                <!-- Campo: Fecha envío de vuelta. Selecciona una fecha solo al activar el checkbox anterior. -->
-                <div class="col-12 col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-text">Fecha envío de vuelta</span>
-                        <div class="form-floating">
-                            <input type="date" class="form-control" id="fechaVuelta" placeholder="Fecha envío de vuelta" disabled>
-                            <label for="fechaVuelta">Fecha de envío de vuelta</label>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ============================================================
-             SECCIÓN: SERVICIOS ADICIONALES DEL ENVÍO
-             ============================================================ -->
-        <section class="mb-4 pt-3 border-top">
-            <header class="border-start border-warning border-4 ps-3 mb-3">
-                <h2 class="h5 mb-1">Servicios adicionales del envío</h2>
-                <p class="text-secondary mb-0">Los servicios opcionales se activan al marcar su casilla.</p>
-            </header>
-            <div class="row g-3">
-                <!-- Campo: Seguro a Todo Riesgo. Habilita el importe del seguro. -->
-                <div class="col-12">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="seguroTodoRiesgo">
-                        <label class="form-check-label fw-semibold" for="seguroTodoRiesgo">Seguro a Todo Riesgo</label>
-                    </div>
-                </div>
-
-                <!-- Campo: Importe seguro (€) (*). Importe asegurado, obligatorio solo cuando se marca Seguro a Todo Riesgo. -->
-                <div class="col-12 col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-text">Importe seguro (€) (*)</span>
-                        <div class="form-floating">
-                            <input type="number" class="form-control" id="importeSeguro" placeholder="Importe seguro (€) (*)" min="0.01" step="0.01" disabled>
-                            <label for="importeSeguro">Importe asegurado</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12"><hr class="my-1"></div>
-                <!-- Campo: Reembolso en Cuenta. Habilita el importe y el IBAN. -->
-                <div class="col-12">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="reembolsoCuenta">
-                        <label class="form-check-label fw-semibold" for="reembolsoCuenta">Reembolso en Cuenta</label>
-                    </div>
-                </div>
-
-                <!-- Campo: Importe reembolso (€) (*). Importe del reembolso; obligatorio al marcar su servicio. -->
-                <div class="col-12 col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-text">Importe reembolso (€) (*)</span>
-                        <div class="form-floating">
-                            <input type="number" class="form-control" id="importeReembolso" placeholder="Importe reembolso (€) (*)" min="0.01" step="0.01" disabled>
-                            <label for="importeReembolso">Importe del reembolso</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Campo: IBAN (*). Cuenta para el reembolso; obligatoria solo cuando se activa. -->
-                <div class="col-12 col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-text">IBAN (*)</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="iban" placeholder="IBAN (*)" maxlength="34" autocomplete="off" disabled>
-                            <label for="iban">Cuenta bancaria (IBAN)</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12"><hr class="my-1"></div>
-                <!-- Campo: Entrega con recogida (consulte las condiciones del servicio). Habilita la descripción de mercancía. -->
-                <div class="col-12">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="entregaRecogida">
-                        <label class="form-check-label fw-semibold" for="entregaRecogida">Entrega con recogida (consulte las condiciones del servicio)</label>
-                    </div>
-                </div>
-
-                <!-- Campo: Mercancía (*). Descripción obligatoria cuando se activa Entrega con recogida. -->
-                <div class="col-12">
-                    <div class="input-group">
-                        <span class="input-group-text">Mercancía (*)</span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="mercancia" placeholder="Mercancía (*)" maxlength="150" disabled>
-                            <label for="mercancia">Descripción de la mercancía</label>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ============================================================
-             SECCIÓN: OBSERVACIONES
-             ============================================================ -->
-        <section class="mb-4 pt-3 border-top">
-            <header class="border-start border-warning border-4 ps-3 mb-3">
-                <h2 class="h5 mb-1">Observaciones</h2>
-                <p class="text-secondary mb-0">Si deseas mostrar alguna indicación en la etiqueta, escríbela aquí.</p>
-            </header>
-            <div class="row g-3">
-                <!-- Campo: Observaciones. Texto que se mostrará en la etiqueta del envío. -->
-                <div class="col-12">
-                    <label class="form-label" for="observaciones">Observaciones</label>
-                    <textarea class="form-control" id="observaciones" rows="3" maxlength="250" placeholder="Observaciones para la etiqueta"></textarea>
-                    <div class="form-text">Hasta 250 caracteres.</div>
-                </div>
-                <!-- Campo: Condiciones. Checkbox obligatorio de la base original. -->
-                <div class="col-12">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="condiciones" required>
-                        <label class="form-check-label" for="condiciones">
-                            Acepto las <a href="#modalCondiciones" data-bs-toggle="modal" data-bs-target="#modalCondiciones">condiciones</a>.
-                        </label>
-                    </div>
-                    <div class="invalid-feedback" id="errorCondiciones" data-error-for="condiciones">Debes aceptar las condiciones.</div>
-                </div>
-                <!-- Leyenda: obligatoriedad de los campos marcados con asterisco. -->
-                <div class="col-12"><p class="form-text mb-0">(*) Campo obligatorio cuando corresponda.</p></div>
-            </div>
-        </section>
-
-                <!-- Botones: Cancelar borra los datos y Aceptar comprueba el formulario. -->
-                <div class="d-flex flex-wrap justify-content-end gap-2">
-                    <button class="btn btn-outline-secondary px-4" type="reset" id="cancelar">Cancelar</button>
-                    <button class="btn btn-primary px-4" type="submit" id="aceptar">Aceptar</button>
-                </div>
-                <!-- Estado de envío: esta maqueta no dispone de conexión con un servidor. -->
-                <div class="alert alert-info mt-3 d-none" id="resultadoFormulario" role="status"></div>
-            </form>
-        </div>
+        </form>
     </main>
 
-    <!-- Modal Bootstrap: evita que el enlace de condiciones lleve a un destino inexistente. -->
-    <div class="modal fade" id="modalCondiciones" tabindex="-1" aria-labelledby="tituloCondiciones" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+    <!-- Modal Bootstrap: lista de errores o resumen del envío -->
+    <div class="modal fade" id="modalResultado" tabindex="-1" aria-hidden="true" aria-labelledby="tituloModal">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title fs-5" id="tituloCondiciones">Condiciones</h2>
+                    <h5 class="modal-title" id="tituloModal"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
-                <div class="modal-body">
-                    Formulario de práctica. Añade aquí las condiciones reales del servicio antes de utilizarlo con datos personales.
-                </div>
+                <div class="modal-body" id="contenidoModal"></div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
@@ -543,120 +381,267 @@
         </div>
     </div>
 
-    <!-- Necesario para que funcione el modal de Bootstrap. -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="validar.js"></script>
     <script>
-        // ============================================================
-        // JAVASCRIPT: comportamiento de los campos del formulario.
-        // ============================================================
-        const formulario = document.getElementById('formulario');
-        const resultadoFormulario = document.getElementById('resultadoFormulario');
+    // Eventos, comprobaciones de campos y modales: todo aquí, no en validar.js.
+    const formulario = document.getElementById("formulario");
+    const campo = id => document.getElementById(id);
+    let enviado = false;
+    const tocados = new Set();
 
-        // Campo: Código postal -> Provincia. Rellena la provincia de modo automático.
-        // El prefijo provincial solo identifica la provincia, no verifica el municipio.
-        const provincias = [
-            'Álava', 'Albacete', 'Alicante', 'Almería', 'Ávila', 'Badajoz', 'Baleares',
-            'Barcelona', 'Burgos', 'Cáceres', 'Cádiz', 'Castellón', 'Ciudad Real',
-            'Córdoba', 'A Coruña', 'Cuenca', 'Girona', 'Granada', 'Guadalajara',
-            'Gipuzkoa', 'Huelva', 'Huesca', 'Jaén', 'León', 'Lleida', 'La Rioja',
-            'Lugo', 'Madrid', 'Málaga', 'Murcia', 'Navarra', 'Ourense', 'Asturias',
-            'Palencia', 'Las Palmas', 'Pontevedra', 'Salamanca', 'Santa Cruz de Tenerife',
-            'Cantabria', 'Segovia', 'Sevilla', 'Soria', 'Tarragona', 'Teruel',
-            'Toledo', 'Valencia', 'Valladolid', 'Bizkaia', 'Zamora', 'Zaragoza',
-            'Ceuta', 'Melilla'
+    const etiquetas = {
+        nombre: "Nombre", empresa: "Empresa", tipoDocumento: "Tipo de documento",
+        documento: "Número de documento", nombreVia: "Nombre de la vía",
+        numeroVia: "Número", bloqueVia: "Bloque", escaleraVia: "Escalera",
+        codigoPostal: "Código postal", movilSms: "Móvil SMS", telefono: "Teléfono",
+        email: "Email", peso: "Peso", largo: "Largo", ancho: "Ancho", alto: "Alto",
+        fechaVuelta: "Fecha límite de vuelta", importeSeguro: "Importe asegurado",
+        importeReembolso: "Importe reembolso", iban: "IBAN", observaciones: "Observaciones"
+    };
+    const ids = Object.keys(etiquetas);
+
+    // Comprueba un campo y lo marca con las clases de Bootstrap.
+    function comprobar(id) {
+        const elemento = campo(id);
+        const valor = elemento.value.trim();
+        let correcto = true;
+        let mensaje = "";
+
+        switch (id) {
+            case "nombre":
+            case "empresa":
+                correcto = campo("nombre").value.trim() !== "" || campo("empresa").value.trim() !== "";
+                mensaje = "Debes introducir un nombre o una empresa.";
+                break;
+            case "tipoDocumento":
+                correcto = valor !== "" || campo("documento").value.trim() === "";
+                mensaje = "Selecciona el tipo de documento para ese número.";
+                break;
+            case "documento":
+                correcto = (valor === "" && campo("tipoDocumento").value === "")
+                    || (valor !== "" && validarDocumento(campo("tipoDocumento").value, valor));
+                mensaje = "El documento no corresponde al tipo elegido o está vacío.";
+                break;
+            case "nombreVia":
+                correcto = valor !== "";
+                mensaje = "El nombre de la vía es obligatorio.";
+                break;
+            case "numeroVia":
+            case "bloqueVia":
+            case "escaleraVia":
+                correcto = valor.length <= 5;
+                mensaje = "Máximo 5 caracteres.";
+                break;
+            case "codigoPostal":
+                correcto = validarCodigoPostal(valor);
+                mensaje = "Introduce un código postal español válido de 5 cifras.";
+                break;
+            case "movilSms":
+            case "telefono":
+                correcto = valor === "" || validarTelefono(valor);
+                mensaje = "Debe tener 9 cifras y empezar por 6, 7 o 9.";
+                break;
+            case "email":
+                correcto = valor === "" || validarEmail(valor);
+                mensaje = "Introduce un email válido.";
+                break;
+            case "peso":
+                correcto = validarPeso(valor);
+                mensaje = "Introduce un peso positivo con dos decimales (ej.: 1,25).";
+                break;
+            case "largo":
+            case "ancho":
+            case "alto":
+                correcto = validarNumeroPositivo(valor);
+                mensaje = "Introduce una medida mayor que cero.";
+                break;
+            case "fechaVuelta":
+                correcto = !campo("prepararVuelta").checked || validarFechaPosterior(valor, 7);
+                mensaje = "Elige una fecha posterior a 7 días desde hoy.";
+                break;
+            case "importeSeguro":
+                correcto = !campo("seguroTodoRiesgo").checked || validarNumeroPositivo(valor);
+                mensaje = "Introduce un importe asegurado positivo.";
+                break;
+            case "importeReembolso":
+                correcto = !campo("reembolsoCuenta").checked || validarNumeroPositivo(valor);
+                mensaje = "Introduce un importe de reembolso positivo.";
+                break;
+            case "iban":
+                correcto = !campo("reembolsoCuenta").checked || validarIban(valor);
+                mensaje = "Introduce un IBAN válido.";
+                break;
+            case "observaciones":
+                correcto = valor.length <= 150;
+                mensaje = "Máximo 150 caracteres.";
+                break;
+        }
+
+        const mostrar = enviado || tocados.has(id);
+        elemento.classList.toggle("is-invalid", mostrar && !correcto);
+        elemento.classList.toggle("is-valid", mostrar && correcto && valor !== "" && !elemento.disabled);
+        const error = elemento.closest(".campo-con-error")?.querySelector(".invalid-feedback");
+        if (error) {
+            error.textContent = mensaje;
+            error.classList.toggle("d-block", mostrar && !correcto);
+        }
+        return correcto;
+    }
+
+    function actualizarProvincia() {
+        campo("provincia").value = obtenerProvincia(campo("codigoPostal").value);
+    }
+
+    function actualizarPesoVolumetrico() {
+        const resultado = calcularPesoVolumetrico(campo("alto").value, campo("ancho").value, campo("largo").value);
+        campo("pesoVolumetrico").value = resultado === null ? "" : resultado.toFixed(2);
+    }
+
+    // Los campos se ven SIEMPRE; el check solo permite escribir en ellos.
+    // Son obligatorios únicamente al marcar la casilla correspondiente.
+    function actualizarOpciones() {
+        const opciones = [
+            ["prepararVuelta", ["fechaVuelta"]],
+            ["seguroTodoRiesgo", ["importeSeguro"]],
+            ["reembolsoCuenta", ["importeReembolso", "iban"]]
         ];
-        const codigoPostal = document.getElementById('codigoPostal');
-        const provincia = document.getElementById('provincia');
-
-        function actualizarProvincia() {
-            const valor = codigoPostal.value.trim();
-            const prefijo = Number(valor.slice(0, 2));
-            const prefijoValido = /^[0-9]{5}$/.test(valor) && prefijo >= 1 && prefijo <= 52;
-            provincia.value = prefijoValido ? provincias[prefijo - 1] : '';
-            codigoPostal.setCustomValidity(valor && /^[0-9]{5}$/.test(valor) && !prefijoValido
-                ? 'El prefijo del código postal no corresponde a una provincia española.'
-                : '');
-        }
-        codigoPostal.addEventListener('input', actualizarProvincia);
-
-        // Campos opcionales: fecha de vuelta, seguro, reembolso y mercancía.
-        // Cada checkbox habilita sus campos asociados y los hace obligatorios.
-        const dependencias = [
-            ['prepararVuelta', ['fechaVuelta']],
-            ['seguroTodoRiesgo', ['importeSeguro']],
-            ['reembolsoCuenta', ['importeReembolso', 'iban']],
-            ['entregaRecogida', ['mercancia']]
-        ];
-
-        function actualizarDependencias() {
-            dependencias.forEach(([casillaId, campos]) => {
-                const activo = document.getElementById(casillaId).checked;
-                campos.forEach(campoId => {
-                    const campo = document.getElementById(campoId);
-                    campo.disabled = !activo;
-                    campo.required = activo;
-                    if (!activo) campo.value = '';
-                });
+        opciones.forEach(([checkId, campos]) => {
+            const activo = campo(checkId).checked;
+            campos.forEach(id => {
+                campo(id).disabled = !activo;
+                campo(id).required = activo;
+                if (!activo) {
+                    campo(id).value = "";
+                    campo(id).classList.remove("is-valid", "is-invalid");
+                    const error = campo(id).closest(".campo-con-error")?.querySelector(".invalid-feedback");
+                    if (error) error.classList.remove("d-block");
+                    tocados.delete(id);
+                } else if (enviado) comprobar(id);
             });
-        }
-        dependencias.forEach(([casillaId]) => {
-            document.getElementById(casillaId).addEventListener('change', actualizarDependencias);
         });
-        actualizarDependencias();
+    }
 
-        // Campos: Alto, Ancho y Largo -> Peso volumétrico (valor orientativo).
-        document.getElementById('calcularPeso').addEventListener('click', () => {
-            const alto = Number(document.getElementById('alto').value);
-            const ancho = Number(document.getElementById('ancho').value);
-            const largo = Number(document.getElementById('largo').value);
-            const resultado = document.getElementById('pesoVolumetrico');
-            resultado.value = alto > 0 && ancho > 0 && largo > 0
-                ? ((alto * ancho * largo) / 6000).toFixed(2)
-                : '';
-        });
+    // La fecha de vuelta debe ser, como pronto, dentro de 8 días.
+    function actualizarFechaMinima() {
+        const fecha = new Date();
+        fecha.setDate(fecha.getDate() + 8);
+        const yyyy = fecha.getFullYear();
+        const mm = String(fecha.getMonth() + 1).padStart(2, "0");
+        const dd = String(fecha.getDate()).padStart(2, "0");
+        campo("fechaVuelta").min = `${yyyy}-${mm}-${dd}`;
+    }
 
-        // Validación: muestra los mensajes de los campos incorrectos al intentar Aceptar.
-        function mostrarErrores() {
-            document.querySelectorAll('[data-error-for]').forEach(mensaje => {
-                const campo = document.getElementById(mensaje.dataset.errorFor);
-                mensaje.classList.toggle('d-block', !campo.checkValidity());
-            });
-        }
-        formulario.addEventListener('input', () => {
-            if (formulario.classList.contains('was-validated')) mostrarErrores();
-        });
-        formulario.addEventListener('change', () => {
-            if (formulario.classList.contains('was-validated')) mostrarErrores();
-        });
-
-        // Botón: Aceptar. Valida en el navegador sin enviar información al servidor.
-        formulario.addEventListener('submit', event => {
-            event.preventDefault();
-            actualizarProvincia();
-            formulario.classList.add('was-validated');
-            mostrarErrores();
-            resultadoFormulario.classList.add('d-none');
-            if (!formulario.checkValidity()) {
-                formulario.querySelector(':invalid')?.focus();
-                return;
+    // Al escribir y al salir de un campo, muestra la validación inline.
+    ids.forEach(id => {
+        const elemento = campo(id);
+        elemento.addEventListener("blur", () => {
+            tocados.add(id);
+            comprobar(id);
+            if (id === "nombre" || id === "empresa") {
+                comprobar("nombre"); comprobar("empresa");
             }
-            resultadoFormulario.textContent = 'Formulario validado correctamente. Esta maqueta no envía datos a ningún servidor.';
-            resultadoFormulario.classList.remove('d-none');
+            if (id === "tipoDocumento" || id === "documento") {
+                comprobar("tipoDocumento"); comprobar("documento");
+            }
         });
-
-        // Botón: Cancelar. Restablece la provincia, el cálculo y los campos opcionales.
-        formulario.addEventListener('reset', () => {
-            setTimeout(() => {
-                actualizarDependencias();
-                actualizarProvincia();
-                document.getElementById('pesoVolumetrico').value = '';
-                formulario.classList.remove('was-validated');
-                document.querySelectorAll('[data-error-for]').forEach(mensaje => {
-                    mensaje.classList.remove('d-block');
+        elemento.addEventListener("input", () => {
+            if (id === "codigoPostal") actualizarProvincia();
+            if (["largo", "ancho", "alto"].includes(id)) actualizarPesoVolumetrico();
+            if (enviado || tocados.has(id)) comprobar(id);
+            if (["nombre", "empresa", "tipoDocumento", "documento"].includes(id)) {
+                ["nombre", "empresa", "tipoDocumento", "documento"].forEach(otro => {
+                    if (enviado || tocados.has(otro)) comprobar(otro);
                 });
-                resultadoFormulario.classList.add('d-none');
-            }, 0);
+            }
         });
+        elemento.addEventListener("change", () => {
+            if (enviado || tocados.has(id)) comprobar(id);
+            if (id === "tipoDocumento" && (enviado || tocados.has("documento"))) comprobar("documento");
+        });
+    });
+
+    ["prepararVuelta", "seguroTodoRiesgo", "reembolsoCuenta"].forEach(id => {
+        campo(id).addEventListener("change", actualizarOpciones);
+    });
+
+    // Modal de errores o de confirmación.
+    function mostrarModal(titulo, valores) {
+        campo("tituloModal").textContent = titulo;
+        const cuerpo = campo("contenidoModal");
+        cuerpo.replaceChildren();
+        const lista = document.createElement("ul");
+        valores.forEach(valor => {
+            const li = document.createElement("li");
+            li.textContent = valor;
+            lista.appendChild(li);
+        });
+        cuerpo.appendChild(lista);
+        bootstrap.Modal.getOrCreateInstance(campo("modalResultado")).show();
+    }
+
+    // Aceptar: siempre abre modal, tanto si hay errores como si está bien.
+    formulario.addEventListener("submit", event => {
+        event.preventDefault();
+        enviado = true;
+        actualizarProvincia();
+        actualizarPesoVolumetrico();
+        const errores = [];
+        ids.forEach(id => {
+            if (!comprobar(id)) {
+                if (id === "nombre" || id === "empresa") {
+                    if (campo("nombre").value.trim() === "" && campo("empresa").value.trim() === "") {
+                        if (!errores.includes("Debes introducir un nombre o una empresa.")) {
+                            errores.push("Debes introducir un nombre o una empresa.");
+                        }
+                    } else if (campo(id).value.trim() !== "") {
+                        errores.push(etiquetas[id] + ": debe estar informado.");
+                    }
+                } else {
+                    errores.push(etiquetas[id] + ": " + campo(id).closest(".campo-con-error").querySelector(".invalid-feedback").textContent);
+                }
+            }
+        });
+        if (errores.length > 0) {
+            mostrarModal("Errores del formulario", errores);
+            return;
+        }
+
+        // Datos del formulario para el modal correcto (también los opcionales).
+        const datos = [
+            "Nombre: " + (campo("nombre").value || "-"),
+            "Empresa: " + (campo("empresa").value || "-"),
+            "Tipo documento: " + (campo("tipoDocumento").value || "-"),
+            "Número de documento: " + (campo("documento").value || "-"),
+            "Tipo de vía: " + (campo("tipoVia").value || "-"),
+            "Nombre de la vía: " + campo("nombreVia").value,
+            "Número: " + (campo("numeroVia").value || "-"),
+            "Bloque: " + (campo("bloqueVia").value || "-"),
+            "Escalera: " + (campo("escaleraVia").value || "-"),
+            "Código postal: " + campo("codigoPostal").value,
+            "Provincia: " + campo("provincia").value,
+            "Móvil SMS: " + (campo("movilSms").value || "-"),
+            "Teléfono: " + (campo("telefono").value || "-"),
+            "Email: " + (campo("email").value || "-"),
+            "Peso: " + campo("peso").value + " kg",
+            "Largo: " + campo("largo").value + " cm",
+            "Ancho: " + campo("ancho").value + " cm",
+            "Alto: " + campo("alto").value + " cm",
+            "Peso volumétrico: " + campo("pesoVolumetrico").value + " kg",
+            "Envío de vuelta: " + (campo("prepararVuelta").checked ? "Sí" : "No"),
+            "Fecha límite: " + (campo("fechaVuelta").value || "-"),
+            "Seguro: " + (campo("seguroTodoRiesgo").checked ? "Sí" : "No"),
+            "Importe asegurado: " + (campo("importeSeguro").value || "-") ,
+            "Reembolso: " + (campo("reembolsoCuenta").checked ? "Sí" : "No"),
+            "Importe reembolso: " + (campo("importeReembolso").value || "-"),
+            "IBAN: " + (campo("iban").value || "-"),
+            "Observaciones: " + (campo("observaciones").value || "-")
+        ];
+        mostrarModal("Formulario enviado", datos);
+    });
+
+    actualizarFechaMinima();
+    actualizarOpciones();
     </script>
 </body>
 </html>
