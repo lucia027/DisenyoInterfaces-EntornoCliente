@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talleres Vives</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+   <main class="py-4 row g-3">
+
+    <div class="col-3">
+        <img src="Logo1.png" alt="Logo Talleres Vives" class="img-fluid">
+    </div>  
+
+    <div class="col-9  d-flex flex-column gap-3">
+
+        <p class="h2">Datos del cliente</p>
+
+        <div class="card">
+            <div class="col-12">
+                <div class="input-group">
+                    <span class="input-group-text">Nombre cliente</span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="nombre" placeholder="nombre" maxlength="100" required>
+                        <label for="nombre">Tu nombre</label>
+                    </div>
+                </div>
+                <div class="invalid-feedback" id="errorNombre">El nombre debe tener entre 2 y 100 caracteres.</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="col-12">
+                <div class="input-group">
+                    <span class="input-group-text">Dirección</span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="direccion" placeholder="dirección" maxlength="100" required>
+                        <label for="direccion">Tu dirección</label>
+                    </div>
+                </div>
+                <div class="invalid-feedback" id="errorDireccion">La dirección debe tener entre 2 y 100 caracteres.</div>
+            </div>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-6">
+                <div class="input-group">
+                    <span class="input-group-text">Codigo postal</span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="codigoPostal" placeholder="codigo postal" maxlength="5" inputmode="numeric" required>
+                        <label for="codigoPostal">Tu código postal</label>
+                    </div>
+                </div>
+                <div class="invalid-feedback" id="errorCodigoPostal">Introduce 5 dígitos y un prefijo provincial válido (01-52).</div>
+            </div>
+
+            <div class="col-6">
+                <div class="input-group">
+                    <span class="input-group-text">Provincia</span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="provincia" placeholder="provincia" maxlength="100" readonly>
+                        <label for="provincia"></label>
+                    </div>
+                </div>
+                <div class="invalid-feedback" id="errorCodigoPostal">Introduce 5 dígitos y un prefijo provincial válido (01-52).</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="col-12">
+                <div class="input-group">
+                    <span class="input-group-text">Ciudad</span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="ciudad" placeholder="ciudad" maxlength="100" required>
+                        <label for="ciudad">Tu ciudad</label>
+                    </div>
+                </div>
+                <div class="invalid-feedback" id="errorCiudad">La ciudad debe tener entre 2 y 100 caracteres.</div>
+            </div>
+        </div>     
+        
+        
+        <div class="card">
+            <div class="col-12">
+                <div class="input-group">
+                    <span class="input-group-text">CIF / NIF / NIE </span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="documento" placeholder="documento" maxlength="100" required>
+                        <label for="documento">Tu documento</label>
+                    </div>
+                </div>
+                <div class="invalid-feedback" id="errorDocumento">El telefono debe tener empezar por 9, 6 o 7 y tener 9 dígitos.</div>
+            </div>
+        </div>    
+
+        
+        <div class="card">
+            <div class="col-12">
+                <div class="input-group">
+                    <span class="input-group-text">Email</span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="email" placeholder="email" maxlength="100" required>
+                        <label for="email">Tu email</label>
+                    </div>
+                </div>
+                <div class="invalid-feedback" id="errorEmail"   >El email debe tener un formato de correo electrónico válido.</div>
+            </div>
+        </div>  
+
+        <div class="card">
+            <div class="col-12">
+                <div class="input-group">
+                    <span class="input-group-text">Captcha <span id="captcha-aleatorio">: 3+5 </span></span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="captcha" placeholder="captcha" maxlength="100" required>
+                        <label for="captcha">Tu captcha</label>
+                    </div>
+                </div>
+                <div class="invalid-feedback" id="errorCaptcha">El captcha debe ser correcto, sino eres un robot.</div>
+            </div>
+        </div>  
+
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-danger">Enviar     </button>
+        </div>
+
+    </div>
+
+   </main>
+    <script src="validar.js"></script>
+    <script>
+        // --- Funciones generales que vienen del archivo validar.js ---
+        const { crearElemento, validarTexto, validarDecimal, aNumero,
+            redondear, formatearMoneda, mostrarValidacion } = Validar;
+
+        // --- Referencias a los elementos del HTML ---
+        const columnaFormulario = document.querySelector('main > .col-9');
+        const contenedorEnviar = columnaFormulario.querySelector('.d-flex.justify-content-end');
+
+        // --- Crear la sección de factura dentro de la misma columna del formulario ---
+        const seccionFactura = crearElemento('section', 'container-fluid py-4');
+        const tituloFactura = crearElemento('h2', 'h4 mb-3', 'Líneas de factura');
+        const botonAnadir = crearElemento('button', 'btn btn-danger mb-3', 'Añadir fila');
+        botonAnadir.type = 'button';
+
+        const contenedorTabla = crearElemento('div', 'table-responsive');
+        const tabla = crearElemento('table', 'table table-bordered align-middle');
+        const cabecera = crearElemento('thead', 'table-light');
+        const encabezado = crearElemento('tr');
+
+        ['Nº', 'Cantidad', 'Descripción', 'Precio', 'IVA %', 'Importe',
+            'Importe IVA', 'Total línea', 'Borrar'].forEach(texto => {
+            const th = crearElemento('th', '', texto);
+            encabezado.appendChild(th);
+        });
+
+        cabecera.appendChild(encabezado);
+        const cuerpo = crearElemento('tbody');
+        cuerpo.id = 'invoiceLines';
+        tabla.appendChild(cabecera);
+        tabla.appendChild(cuerpo);
+        contenedorTabla.appendChild(tabla);
+
+        // --- Crear la tabla con los totales de los tres IVA ---
+        const tituloTotales = crearElemento('h3', 'h5 mt-3', 'Totales por IVA');
+        const tablaTotales = crearElemento('table', 'table table-bordered w-auto');
+        const encabezadoTotales = crearElemento('tr');
+
+        ['IVA', 'Base imponible', 'Cuota IVA'].forEach(texto => {
+            encabezadoTotales.appendChild(crearElemento('th', '', texto));
+        });
+
+        const cuerpoTotales = crearElemento('tbody');
+        const salidasTotales = {};
+
+        [4, 10, 21].forEach(iva => {
+            const fila = crearElemento('tr');
+            const porcentaje = crearElemento('th', '', iva + '%');
+            const base = crearElemento('td', '', formatearMoneda(0));
+            const cuota = crearElemento('td', '', formatearMoneda(0));
+            fila.appendChild(porcentaje);
+            fila.appendChild(base);
+            fila.appendChild(cuota);
+            cuerpoTotales.appendChild(fila);
+            salidasTotales[iva] = { base, cuota };
+        });
+
+        tablaTotales.appendChild(encabezadoTotales);
+        tablaTotales.appendChild(cuerpoTotales);
+        const totalFactura = crearElemento('p', 'fw-bold fs-5', 'TOTAL FACTURA: 0,00 €');
+
+        seccionFactura.appendChild(tituloFactura);
+        seccionFactura.appendChild(botonAnadir);
+        seccionFactura.appendChild(contenedorTabla);
+        seccionFactura.appendChild(tituloTotales);
+        seccionFactura.appendChild(tablaTotales);
+        seccionFactura.appendChild(totalFactura);
+
+        // El botón Enviar que ya estaba en el HTML permanece debajo de la factura.
+        if (contenedorEnviar) {
+            contenedorEnviar.insertAdjacentElement('beforebegin', seccionFactura);
+        } else {
+            columnaFormulario.appendChild(seccionFactura);
+        }
+
+        // --- Funciones para construir una línea ---
+        function crearCampoLinea(clase, maximo, mensaje, etiqueta) {
+            const contenedor = crearElemento('div');
+            const campo = crearElemento('input', 'form-control ' + clase);
+            campo.type = 'text';
+            campo.maxLength = maximo;
+            campo.placeholder = etiqueta;
+            campo.setAttribute('aria-label', etiqueta);
+
+            if (clase !== 'description-input') {
+                campo.inputMode = 'decimal';
+            }
+
+            const error = crearElemento('div', 'invalid-feedback', mensaje);
+            contenedor.appendChild(campo);
+            contenedor.appendChild(error);
+            return { contenedor, campo };
+        }
+
+        function crearCelda(contenido) {
+            const celda = crearElemento('td');
+            celda.appendChild(contenido);
+            return celda;
+        }
+
+        // --- Comprobaciones de los campos de cada línea (estilo del profesor) ---
+        function comprobarCantidad(fila, mostrar = false) {
+            const campo = fila.querySelector('.quantity-input');
+            const correcto = validarDecimal(campo.value, 3, 2, false);
+            if (mostrar || campo.dataset.tocado === 'si') {
+                mostrarValidacion(campo, correcto,
+                    'Cantidad: de 0,01 a 999,99; máximo 2 decimales.');
+            }
+            return correcto;
+        }
+
+        function comprobarDescripcion(fila, mostrar = false) {
+            const campo = fila.querySelector('.description-input');
+            const correcto = validarTexto(campo.value, 1, 50);
+            if (mostrar || campo.dataset.tocado === 'si') {
+                mostrarValidacion(campo, correcto,
+                    'Escribe una descripción de 1 a 50 caracteres.');
+            }
+            return correcto;
+        }
+
+        function comprobarPrecio(fila, mostrar = false) {
+            const campo = fila.querySelector('.price-input');
+            const correcto = validarDecimal(campo.value, 3, 2, true);
+            if (mostrar || campo.dataset.tocado === 'si') {
+                mostrarValidacion(campo, correcto,
+                    'Precio: de 0 a 999,99; máximo 2 decimales.');
+            }
+            return correcto;
+        }
+
+        function comprobarLinea(fila, mostrar = false) {
+            // Se ejecutan las tres comprobaciones, aunque falle alguna.
+            const cantidadCorrecta = comprobarCantidad(fila, mostrar);
+            const descripcionCorrecta = comprobarDescripcion(fila, mostrar);
+            const precioCorrecto = comprobarPrecio(fila, mostrar);
+            return cantidadCorrecta && descripcionCorrecta && precioCorrecto;
+        }
+
+        // --- Calcular el importe de una línea ---
+        function calcularImportesLinea(fila) {
+            if (!comprobarLinea(fila)) {
+                return { base: 0, cuota: 0, total: 0 };
+            }
+
+            const cantidad = aNumero(fila.querySelector('.quantity-input').value);
+            const precio = aNumero(fila.querySelector('.price-input').value);
+            const iva = Number(fila.querySelector('.vat-select').value);
+            const base = redondear(cantidad * precio);
+            const cuota = redondear(base * iva / 100);
+            return { base, cuota, total: redondear(base + cuota) };
+        }
+
+        function actualizarImportesLinea(fila) {
+            const importes = calcularImportesLinea(fila);
+            fila.querySelector('.line-amount').textContent = formatearMoneda(importes.base);
+            fila.querySelector('.line-vat').textContent = formatearMoneda(importes.cuota);
+            fila.querySelector('.line-total').textContent = formatearMoneda(importes.total);
+        }
+
+        // --- Calcular los totales de IVA y de la factura ---
+        function actualizarTotalesFactura() {
+            const acumulados = {
+                4: { base: 0, cuota: 0 },
+                10: { base: 0, cuota: 0 },
+                21: { base: 0, cuota: 0 }
+            };
+
+            cuerpo.querySelectorAll('tr').forEach(fila => {
+                const iva = Number(fila.querySelector('.vat-select').value);
+                const importes = calcularImportesLinea(fila);
+                // Los acumulados se guardan en céntimos para evitar errores de decimales.
+                acumulados[iva].base += Math.round(importes.base * 100);
+                acumulados[iva].cuota += Math.round(importes.cuota * 100);
+            });
+
+            let totalCentimos = 0;
+            [4, 10, 21].forEach(iva => {
+                const base = acumulados[iva].base;
+                const cuota = acumulados[iva].cuota;
+                salidasTotales[iva].base.textContent = formatearMoneda(base / 100);
+                salidasTotales[iva].cuota.textContent = formatearMoneda(cuota / 100);
+                totalCentimos += base + cuota;
+            });
+
+            totalFactura.textContent = 'TOTAL FACTURA: ' + formatearMoneda(totalCentimos / 100);
+        }
+
+        function actualizarNumerosLineas() {
+            cuerpo.querySelectorAll('tr').forEach((fila, indice) => {
+                fila.querySelector('.line-number').textContent = indice + 1;
+            });
+        }
+
+        // --- Añadir y borrar filas ---
+        function anadirFila() {
+            const filas = cuerpo.querySelectorAll('tr');
+
+            if (filas.length > 0) {
+                const ultimaFila = filas[filas.length - 1];
+                if (!comprobarLinea(ultimaFila, true)) {
+                    const primerError = ultimaFila.querySelector('.is-invalid');
+                    if (primerError) primerError.focus();
+                    return;
+                }
+            }
+
+            const fila = crearElemento('tr');
+            const numero = crearElemento('span', 'line-number');
+            const cantidad = crearCampoLinea('quantity-input', 6,
+                'Cantidad: de 0,01 a 999,99; máximo 2 decimales.', 'Cantidad');
+            const descripcion = crearCampoLinea('description-input', 50,
+                'Descripción obligatoria (máximo 50 caracteres).', 'Descripción');
+            const precio = crearCampoLinea('price-input', 6,
+                'Precio: de 0 a 999,99; máximo 2 decimales.', 'Precio');
+
+            const iva = crearElemento('select', 'form-select vat-select');
+            iva.setAttribute('aria-label', 'Porcentaje de IVA');
+            [4, 10, 21].forEach(valor => {
+                const opcion = crearElemento('option', '', valor + '%');
+                opcion.value = String(valor);
+                if (valor === 21) opcion.selected = true;
+                iva.appendChild(opcion);
+            });
+
+            const base = crearElemento('span', 'line-amount', formatearMoneda(0));
+            const cuota = crearElemento('span', 'line-vat', formatearMoneda(0));
+            const total = crearElemento('span', 'line-total', formatearMoneda(0));
+            const borrar = crearElemento('button', 'btn btn-danger btn-sm borrar-linea', 'Borrar');
+            borrar.type = 'button';
+
+            fila.appendChild(crearCelda(numero));
+            fila.appendChild(crearCelda(cantidad.contenedor));
+            fila.appendChild(crearCelda(descripcion.contenedor));
+            fila.appendChild(crearCelda(precio.contenedor));
+            fila.appendChild(crearCelda(iva));
+            fila.appendChild(crearCelda(base));
+            fila.appendChild(crearCelda(cuota));
+            fila.appendChild(crearCelda(total));
+            fila.appendChild(crearCelda(borrar));
+            cuerpo.appendChild(fila);
+
+            actualizarNumerosLineas();
+            actualizarTotalesFactura();
+            cantidad.campo.focus();
+        }
+
+        function borrarFila(fila) {
+            fila.remove();
+            actualizarNumerosLineas();
+            actualizarTotalesFactura();
+        }
+
+        // --- Funciones que responden a los eventos ---
+        function comprobarCambiosFila(evento) {
+            const campo = evento.target;
+            if (!campo.matches('.quantity-input, .description-input, .price-input')) return;
+            const fila = campo.closest('tr');
+            comprobarLinea(fila);
+            actualizarImportesLinea(fila);
+            actualizarTotalesFactura();
+        }
+
+        function comprobarSalidaCampo(evento) {
+            const campo = evento.target;
+            if (!campo.matches('.quantity-input, .description-input, .price-input')) return;
+            campo.dataset.tocado = 'si';
+            comprobarLinea(campo.closest('tr'));
+        }
+
+        function comprobarCambioIva(evento) {
+            if (!evento.target.matches('.vat-select')) return;
+            const fila = evento.target.closest('tr');
+            actualizarImportesLinea(fila);
+            actualizarTotalesFactura();
+        }
+
+        function comprobarBorrado(evento) {
+            const boton = evento.target.closest('button.borrar-linea');
+            if (!boton || !cuerpo.contains(boton)) return;
+            borrarFila(boton.closest('tr'));
+        }
+
+        // --- Conexión de los eventos, como en el ejercicio del profesor ---
+        botonAnadir.addEventListener('click', anadirFila);
+        // Se usa el tbody porque las filas nuevas se crean después de iniciar la página.
+        cuerpo.addEventListener('input', comprobarCambiosFila);
+        cuerpo.addEventListener('focusout', comprobarSalidaCampo);
+        cuerpo.addEventListener('change', comprobarCambioIva);
+        cuerpo.addEventListener('click', comprobarBorrado);
+
+        // La factura empieza con una fila vacía.
+        anadirFila();
+    </script>
+</body>
+</html> 

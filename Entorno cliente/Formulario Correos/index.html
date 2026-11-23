@@ -32,11 +32,11 @@
                     <div class="input-group">
                         <span class="input-group-text">Nombre</span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" maxlength="100" minlength="2" required>
+                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" maxlength="100">
                             <label for="nombre">Tu nombre</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorNombre" data-error-for="nombre">El nombre debe tener entre 2 y 100 caracteres.</div>
+                    <div class="invalid-feedback" id="errorNombre" data-error-for="nombre">Debes escribir nombre o empresa (al menos uno de los dos).</div>
                 </div>
 
                 <!-- Campo: Primer apellido. Primer apellido del destinatario. -->
@@ -44,11 +44,11 @@
                     <div class="input-group">
                         <span class="input-group-text">Primer apellido</span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="primerApellido" placeholder="Primer apellido" maxlength="100" minlength="2" required>
+                            <input type="text" class="form-control" id="primerApellido" placeholder="Primer apellido" maxlength="100">
                             <label for="primerApellido">Tu primer apellido</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorPrimerApellido" data-error-for="primerApellido">El primer apellido debe tener entre 2 y 100 caracteres.</div>
+                    <div class="invalid-feedback" id="errorPrimerApellido" data-error-for="primerApellido">Primer apellido no válido.</div>
                 </div>
 
                 <!-- Campo: Segundo apellido. Segundo apellido del destinatario. -->
@@ -56,40 +56,40 @@
                     <div class="input-group">
                         <span class="input-group-text">Segundo apellido</span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="segundoApellido" placeholder="Segundo apellido" maxlength="100" minlength="2" required>
+                            <input type="text" class="form-control" id="segundoApellido" placeholder="Segundo apellido" maxlength="100">
                             <label for="segundoApellido">Tu segundo apellido</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorSegundoApellido" data-error-for="segundoApellido">El segundo apellido debe tener entre 2 y 100 caracteres.</div>
+                    <div class="invalid-feedback" id="errorSegundoApellido" data-error-for="segundoApellido">Segundo apellido no válido.</div>
                 </div>
 
-                <!-- Campo: Empresa. Empresa destinataria; se mantiene como obligatorio igual que en la base original. -->
+                <!-- Campo: Empresa. Empresa destinataria; opcional si se rellena el nombre. -->
                 <div class="col-12 col-md-6">
                     <div class="input-group">
                         <span class="input-group-text">Empresa</span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="empresa" placeholder="Empresa" maxlength="100" minlength="2" required>
+                            <input type="text" class="form-control" id="empresa" placeholder="Empresa" maxlength="100">
                             <label for="empresa">Nombre de la empresa</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorEmpresa" data-error-for="empresa">El nombre de la empresa debe tener entre 2 y 100 caracteres.</div>
+                    <div class="invalid-feedback" id="errorEmpresa" data-error-for="empresa">Debes escribir nombre o empresa (al menos uno de los dos).</div>
                 </div>
 
-                <!-- Campo: Tipo de documento. Selección del tipo de documento; se corrige el valor interno de CIF. -->
+                <!-- Campo: Tipo de documento. Selección del tipo de documento; se ofrecen NIF, NIE y CIF. -->
                 <div class="col-12 col-md-6">
                     <div class="input-group">
                         <span class="input-group-text">Tipo de documento</span>
                         <div class="form-floating">
-                            <select class="form-select" id="tipoDocumento" required>
-                                <option value="" selected disabled>Selecciona una opción</option>
+                            <select class="form-select" id="tipoDocumento">
+                                <option value="" selected>Selecciona una opción</option>
                                 <option value="NIF">NIF</option>
-                                <option value="DNI">DNI</option>
+                                <option value="NIE">NIE</option>
                                 <option value="CIF">CIF</option>
                             </select>
                             <label for="tipoDocumento">Tipo de documento</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorTipoDocumento" data-error-for="tipoDocumento">Debes seleccionar un tipo de documento.</div>
+                    <div class="invalid-feedback" id="errorTipoDocumento" data-error-for="tipoDocumento">Selecciona un tipo si introduces un número de documento.</div>
                 </div>
 
                 <!-- Campo: Número de documento. Número de documento de la persona o empresa. -->
@@ -97,11 +97,11 @@
                     <div class="input-group">
                         <span class="input-group-text">Número de documento</span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="documento" placeholder="Número de documento" maxlength="100" minlength="2" required>
+                            <input type="text" class="form-control" id="documento" placeholder="Número de documento" maxlength="100">
                             <label for="documento">Tu número de documento</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorDocumento" data-error-for="documento">El número de documento debe tener entre 2 y 100 caracteres.</div>
+                    <div class="invalid-feedback" id="errorDocumento" data-error-for="documento">Introduce un NIF, NIE o CIF correcto si has elegido tipo de documento.</div>
                 </div>
 
                 <!-- Campo: Tipo de vía. Se corrige el valor interno de Carretera. -->
@@ -109,17 +109,18 @@
                     <div class="input-group">
                         <span class="input-group-text">Tipo de vía</span>
                         <div class="form-floating">
-                            <select class="form-select" id="tipoVia" required>
-                                <option value="" selected disabled>Selecciona una opción</option>
+                            <select class="form-select" id="tipoVia">
+                                <option value="" selected>Selecciona una opción</option>
                                 <option value="Calle">Calle</option>
                                 <option value="Avenida">Avenida</option>
                                 <option value="Plaza">Plaza</option>
+                                <option value="Camino">Camino</option>
                                 <option value="Carretera">Carretera</option>
                             </select>
                             <label for="tipoVia">Tipo de vía</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorTipoVia" data-error-for="tipoVia">Debes seleccionar un tipo de vía.</div>
+                    <div class="invalid-feedback" id="errorTipoVia" data-error-for="tipoVia">El tipo de vía es opcional.</div>
                 </div>
 
                 <!-- Campo: Nombre de la vía. Nombre de la calle, avenida o carretera. -->
@@ -127,83 +128,83 @@
                     <div class="input-group">
                         <span class="input-group-text">Nombre de la vía</span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="nombreVia" placeholder="Nombre de la vía" maxlength="100" minlength="2" required>
+                            <input type="text" class="form-control" id="nombreVia" placeholder="Nombre de la vía" maxlength="100">
                             <label for="nombreVia">Nombre de la vía</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorNombreVia" data-error-for="nombreVia">El nombre de la vía debe tener entre 2 y 100 caracteres.</div>
+                    <div class="invalid-feedback" id="errorNombreVia" data-error-for="nombreVia">El nombre de la vía no es válido.</div>
                 </div>
 
-                <!-- Campo: Número. Dato de dirección; se conserva su obligatoriedad del HTML original. -->
+                <!-- Campo: Número. Dato de dirección; es opcional, máximo 5 caracteres. -->
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="input-group">
                         <span class="input-group-text">Número</span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="numeroVia" placeholder="Número" maxlength="10" required>
+                            <input type="text" class="form-control" id="numeroVia" placeholder="Número" maxlength="5">
                             <label for="numeroVia">Número de la vía</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorNumeroVia" data-error-for="numeroVia">El número de la vía debe tener entre 1 y 10 caracteres.</div>
+                    <div class="invalid-feedback" id="errorNumeroVia" data-error-for="numeroVia">Opcional; máximo 5 caracteres.</div>
                 </div>
 
-                <!-- Campo: Bloque. Dato de dirección; se conserva su obligatoriedad del HTML original. -->
+                <!-- Campo: Bloque. Dato de dirección; es opcional, máximo 5 caracteres. -->
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="input-group">
                         <span class="input-group-text">Bloque</span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="bloqueVia" placeholder="Bloque" maxlength="10" required>
+                            <input type="text" class="form-control" id="bloqueVia" placeholder="Bloque" maxlength="5">
                             <label for="bloqueVia">Bloque de la vía</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorBloqueVia" data-error-for="bloqueVia">El bloque de la vía debe tener entre 1 y 10 caracteres.</div>
+                    <div class="invalid-feedback" id="errorBloqueVia" data-error-for="bloqueVia">Opcional; máximo 5 caracteres.</div>
                 </div>
 
-                <!-- Campo: Portal. Dato de dirección; se conserva su obligatoriedad del HTML original. -->
+                <!-- Campo: Portal. Dato de dirección; es opcional, máximo 5 caracteres. -->
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="input-group">
                         <span class="input-group-text">Portal</span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="portalVia" placeholder="Portal" maxlength="10" required>
+                            <input type="text" class="form-control" id="portalVia" placeholder="Portal" maxlength="5">
                             <label for="portalVia">Portal de la vía</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorPortalVia" data-error-for="portalVia">El portal de la vía debe tener entre 1 y 10 caracteres.</div>
+                    <div class="invalid-feedback" id="errorPortalVia" data-error-for="portalVia">Opcional; máximo 5 caracteres.</div>
                 </div>
 
-                <!-- Campo: Piso. Dato de dirección; se conserva su obligatoriedad del HTML original. -->
+                <!-- Campo: Piso. Dato de dirección; es opcional, máximo 5 caracteres. -->
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="input-group">
                         <span class="input-group-text">Piso</span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="pisoVia" placeholder="Piso" maxlength="10" required>
+                            <input type="text" class="form-control" id="pisoVia" placeholder="Piso" maxlength="5">
                             <label for="pisoVia">Piso de la vía</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorPisoVia" data-error-for="pisoVia">El piso de la vía debe tener entre 1 y 10 caracteres.</div>
+                    <div class="invalid-feedback" id="errorPisoVia" data-error-for="pisoVia">Opcional; máximo 5 caracteres.</div>
                 </div>
 
-                <!-- Campo: Escalera. Dato de dirección; se conserva su obligatoriedad del HTML original. -->
+                <!-- Campo: Escalera. Dato de dirección; es opcional, máximo 5 caracteres. -->
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="input-group">
                         <span class="input-group-text">Escalera</span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="escaleraVia" placeholder="Escalera" maxlength="10" required>
+                            <input type="text" class="form-control" id="escaleraVia" placeholder="Escalera" maxlength="5">
                             <label for="escaleraVia">Escalera de la vía</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorEscaleraVia" data-error-for="escaleraVia">La escalera de la vía debe tener entre 1 y 10 caracteres.</div>
+                    <div class="invalid-feedback" id="errorEscaleraVia" data-error-for="escaleraVia">Opcional; máximo 5 caracteres.</div>
                 </div>
 
-                <!-- Campo: Puerta. Dato de dirección; se conserva su obligatoriedad del HTML original. -->
+                <!-- Campo: Puerta. Dato de dirección; es opcional, máximo 5 caracteres. -->
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="input-group">
                         <span class="input-group-text">Puerta</span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="puertaVia" placeholder="Puerta" maxlength="10" required>
+                            <input type="text" class="form-control" id="puertaVia" placeholder="Puerta" maxlength="5">
                             <label for="puertaVia">Puerta de la vía</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorPuertaVia" data-error-for="puertaVia">La puerta de la vía debe tener entre 1 y 10 caracteres.</div>
+                    <div class="invalid-feedback" id="errorPuertaVia" data-error-for="puertaVia">Opcional; máximo 5 caracteres.</div>
                 </div>
 
                 <!-- Campo: Dirección complemento. Texto adicional de la dirección; ID original conservado. -->
@@ -211,11 +212,11 @@
                     <div class="input-group">
                         <span class="input-group-text">Dirección complemento</span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="direccionCompleta" placeholder="Dirección complemento" maxlength="100" minlength="2" required>
+                            <input type="text" class="form-control" id="direccionCompleta" placeholder="Dirección complemento" maxlength="100">
                             <label for="direccionCompleta">Información adicional de la dirección</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorDireccionCompleta" data-error-for="direccionCompleta">La dirección completa debe tener entre 2 y 100 caracteres.</div>
+                    <div class="invalid-feedback" id="errorDireccionCompleta" data-error-for="direccionCompleta">El complemento es opcional.</div>
                 </div>
 
                 <!-- Campo: Código postal. Cinco dígitos; se asigna la provincia automáticamente a partir de los dos primeros. -->
@@ -223,7 +224,7 @@
                     <div class="input-group">
                         <span class="input-group-text">Código postal</span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="codigoPostal" placeholder="Código postal" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" required>
+                            <input type="text" class="form-control" id="codigoPostal" placeholder="Código postal" maxlength="5" inputmode="numeric" pattern="[0-9]{5}">
                             <label for="codigoPostal">Tu código postal</label>
                         </div>
                     </div>
@@ -235,11 +236,11 @@
                     <div class="input-group">
                         <span class="input-group-text">Localidad</span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="localidad" placeholder="Localidad" maxlength="100" required>
+                            <input type="text" class="form-control" id="localidad" placeholder="Localidad" maxlength="100">
                             <label for="localidad">Tu localidad</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorLocalidad" data-error-for="localidad">La localidad es obligatoria.</div>
+                    <div class="invalid-feedback" id="errorLocalidad" data-error-for="localidad">La localidad es opcional.</div>
                 </div>
 
                 <!-- Campo: Provincia. Se rellena automáticamente con el prefijo del código postal. -->
@@ -253,16 +254,16 @@
                     </div>
                 </div>
 
-                <!-- Campo: Móvil envío SMS. Teléfono móvil opcional para avisos; comienza por 6 o 7. -->
+                <!-- Campo: Móvil envío SMS. Teléfono opcional para SMS; empieza por 6, 7 o 9. -->
                 <div class="col-12">
                     <div class="input-group">
                         <span class="input-group-text">Móvil envío SMS</span>
                         <div class="form-floating">
-                            <input type="tel" class="form-control" id="movilSms" placeholder="Móvil envío SMS" maxlength="9" inputmode="tel" pattern="[67][0-9]{8}">
+                            <input type="tel" class="form-control" id="movilSms" placeholder="Móvil envío SMS" maxlength="9" inputmode="tel" pattern="[679][0-9]{8}">
                             <label for="movilSms">Móvil para avisos SMS</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorMovilSms" data-error-for="movilSms">Debe tener 9 dígitos y comenzar por 6 o 7.</div>
+                    <div class="invalid-feedback" id="errorMovilSms" data-error-for="movilSms">Debe tener 9 dígitos y comenzar por 6, 7 o 9.</div>
                 </div>
 
                 <!-- Campo: Email. Correo electrónico del destinatario; campo opcional. -->
@@ -301,16 +302,16 @@
                 <p class="text-secondary mb-0">Introduce el peso y las dimensiones del paquete.</p>
             </header>
             <div class="row g-3">
-                <!-- Campo: Peso (kg) (*). Peso real en kilogramos. -->
+                <!-- Campo: Peso (kg). Opcional; se valida si se introduce. -->
                 <div class="col-12 col-md-6">
                     <div class="input-group">
-                        <span class="input-group-text">Peso (kg) (*)</span>
+                        <span class="input-group-text">Peso (kg)</span>
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="peso" placeholder="Peso (kg) (*)" min="0.01" step="0.01" required>
+                            <input type="number" class="form-control" id="peso" placeholder="Peso (kg)" min="0.01" step="0.01">
                             <label for="peso">Peso del envío en kg</label>
                         </div>
                     </div>
-                    <div class="invalid-feedback" id="errorPeso" data-error-for="peso">Introduce un peso mayor que cero.</div>
+                    <div class="invalid-feedback" id="errorPeso" data-error-for="peso">Si escribes un peso, debe ser positivo, con dos decimales (ej.: 2.50).</div>
                 </div>
 
                 <!-- Campo: Peso volumétrico. Resultado automático del cálculo, solo lectura. -->
@@ -324,37 +325,37 @@
                     </div>
                 </div>
 
-                <!-- Campo: Alto (cm) (*). Medida en centímetros; es obligatoria para calcular el volumen. -->
+                <!-- Campo: Alto (cm). Medida opcional en centímetros para calcular el volumen. -->
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="input-group">
-                        <span class="input-group-text">Alto (cm) (*)</span>
+                        <span class="input-group-text">Alto (cm)</span>
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="alto" placeholder="Alto (cm) (*)" min="0.1" step="0.1" required>
-                            <label for="alto">Alto (cm) (*)</label>
+                            <input type="number" class="form-control" id="alto" placeholder="Alto (cm)" min="0.1" step="0.1">
+                            <label for="alto">Alto (cm)</label>
                         </div>
                     </div>
                     <div class="invalid-feedback" id="errorAlto" data-error-for="alto">Introduce un valor válido para alto (cm) (*).</div>
                 </div>
 
-                <!-- Campo: Ancho (cm) (*). Medida en centímetros; es obligatoria para calcular el volumen. -->
+                <!-- Campo: Ancho (cm). Medida opcional en centímetros para calcular el volumen. -->
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="input-group">
-                        <span class="input-group-text">Ancho (cm) (*)</span>
+                        <span class="input-group-text">Ancho (cm)</span>
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="ancho" placeholder="Ancho (cm) (*)" min="0.1" step="0.1" required>
-                            <label for="ancho">Ancho (cm) (*)</label>
+                            <input type="number" class="form-control" id="ancho" placeholder="Ancho (cm)" min="0.1" step="0.1">
+                            <label for="ancho">Ancho (cm)</label>
                         </div>
                     </div>
                     <div class="invalid-feedback" id="errorAncho" data-error-for="ancho">Introduce un valor válido para ancho (cm) (*).</div>
                 </div>
 
-                <!-- Campo: Largo (cm) (*). Medida en centímetros; es obligatoria para calcular el volumen. -->
+                <!-- Campo: Largo (cm). Medida opcional en centímetros para calcular el volumen. -->
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="input-group">
-                        <span class="input-group-text">Largo (cm) (*)</span>
+                        <span class="input-group-text">Largo (cm)</span>
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="largo" placeholder="Largo (cm) (*)" min="0.1" step="0.1" required>
-                            <label for="largo">Largo (cm) (*)</label>
+                            <input type="number" class="form-control" id="largo" placeholder="Largo (cm)" min="0.1" step="0.1">
+                            <label for="largo">Largo (cm)</label>
                         </div>
                     </div>
                     <div class="invalid-feedback" id="errorLargo" data-error-for="largo">Introduce un valor válido para largo (cm) (*).</div>
@@ -470,12 +471,12 @@
                     </div>
                 </div>
 
-                <!-- Campo: Mercancía (*). Descripción obligatoria cuando se activa Entrega con recogida. -->
+                <!-- Campo: Mercancía. Descripción opcional cuando se activa Entrega con recogida. -->
                 <div class="col-12">
                     <div class="input-group">
-                        <span class="input-group-text">Mercancía (*)</span>
+                        <span class="input-group-text">Mercancía</span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="mercancia" placeholder="Mercancía (*)" maxlength="150" disabled>
+                            <input type="text" class="form-control" id="mercancia" placeholder="Mercancía" maxlength="150" disabled>
                             <label for="mercancia">Descripción de la mercancía</label>
                         </div>
                     </div>
@@ -493,16 +494,16 @@
                 <p class="text-secondary mb-0">Si deseas mostrar alguna indicación en la etiqueta, escríbela aquí.</p>
             </header>
             <div class="row g-3">
-                <!-- Campo: Observaciones. Texto que se mostrará en la etiqueta del envío. -->
+                <!-- Campo: Observaciones. Observaciones opcionales, máximo 150 caracteres. -->
                 <div class="col-12">
                     <label class="form-label" for="observaciones">Observaciones</label>
-                    <textarea class="form-control" id="observaciones" rows="3" maxlength="250" placeholder="Observaciones para la etiqueta"></textarea>
-                    <div class="form-text">Hasta 250 caracteres.</div>
+                    <textarea class="form-control" id="observaciones" rows="3" placeholder="Observaciones para la etiqueta" maxlength="150"></textarea>
+                    <div class="form-text">Hasta 150 caracteres.</div>
                 </div>
-                <!-- Campo: Condiciones. Checkbox obligatorio de la base original. -->
+                <!-- Campo: Condiciones. Casilla opcional que se conserva de la base original. -->
                 <div class="col-12">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="condiciones" required>
+                        <input class="form-check-input" type="checkbox" id="condiciones">
                         <label class="form-check-label" for="condiciones">
                             Acepto las <a href="#modalCondiciones" data-bs-toggle="modal" data-bs-target="#modalCondiciones">condiciones</a>.
                         </label>
@@ -543,44 +544,89 @@
         </div>
     </div>
 
+    <!-- Modal de validación: muestra los errores o todos los datos. -->
+    <div class="modal fade" id="modalResultado" tabindex="-1" aria-labelledby="tituloModalResultado" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="tituloModalResultado">Resultado del formulario</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body" id="contenidoModalResultado"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Necesario para que funcione el modal de Bootstrap. -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="validar.js"></script>
     <script>
         // ============================================================
-        // JAVASCRIPT: comportamiento de los campos del formulario.
+        // EVENTOS Y VALIDACIONES ESPECÍFICAS DE ESTE FORMULARIO
+        // Las funciones generales se encuentran en validar.js.
         // ============================================================
         const formulario = document.getElementById('formulario');
-        const resultadoFormulario = document.getElementById('resultadoFormulario');
+        const campo = id => document.getElementById(id);
 
-        // Campo: Código postal -> Provincia. Rellena la provincia de modo automático.
-        // El prefijo provincial solo identifica la provincia, no verifica el municipio.
-        const provincias = [
-            'Álava', 'Albacete', 'Alicante', 'Almería', 'Ávila', 'Badajoz', 'Baleares',
-            'Barcelona', 'Burgos', 'Cáceres', 'Cádiz', 'Castellón', 'Ciudad Real',
-            'Córdoba', 'A Coruña', 'Cuenca', 'Girona', 'Granada', 'Guadalajara',
-            'Gipuzkoa', 'Huelva', 'Huesca', 'Jaén', 'León', 'Lleida', 'La Rioja',
-            'Lugo', 'Madrid', 'Málaga', 'Murcia', 'Navarra', 'Ourense', 'Asturias',
-            'Palencia', 'Las Palmas', 'Pontevedra', 'Salamanca', 'Santa Cruz de Tenerife',
-            'Cantabria', 'Segovia', 'Sevilla', 'Soria', 'Tarragona', 'Teruel',
-            'Toledo', 'Valencia', 'Valladolid', 'Bizkaia', 'Zamora', 'Zaragoza',
-            'Ceuta', 'Melilla'
-        ];
-        const codigoPostal = document.getElementById('codigoPostal');
-        const provincia = document.getElementById('provincia');
+        const etiquetas = {
+            nombre: 'Nombre', primerApellido: 'Primer apellido',
+            segundoApellido: 'Segundo apellido', empresa: 'Empresa',
+            tipoDocumento: 'Tipo de documento', documento: 'Número de documento',
+            tipoVia: 'Tipo de vía', nombreVia: 'Nombre de la vía',
+            numeroVia: 'Número', bloqueVia: 'Bloque', portalVia: 'Portal',
+            pisoVia: 'Piso', escaleraVia: 'Escalera', puertaVia: 'Puerta',
+            direccionCompleta: 'Dirección complemento', codigoPostal: 'Código postal',
+            localidad: 'Localidad', provincia: 'Provincia',
+            movilSms: 'Móvil SMS', email: 'Email', telefono: 'Teléfono de contacto',
+            peso: 'Peso (kg)', pesoVolumetrico: 'Peso volumétrico (kg)',
+            alto: 'Alto (cm)', ancho: 'Ancho (cm)', largo: 'Largo (cm)',
+            prepararVuelta: 'Preparar envío de vuelta', fechaVuelta: 'Fecha de vuelta',
+            seguroTodoRiesgo: 'Seguro a todo riesgo', importeSeguro: 'Importe asegurado',
+            reembolsoCuenta: 'Reembolso en cuenta', importeReembolso: 'Importe reembolso',
+            iban: 'IBAN', entregaRecogida: 'Entrega con recogida',
+            mercancia: 'Mercancía', observaciones: 'Observaciones',
+            condiciones: 'Condiciones aceptadas'
+        };
+
+        // El error se muestra debajo del campo con las clases de Bootstrap.
+        function marcarCampo(id, correcto, mensaje) {
+            const entrada = campo(id);
+            let aviso = document.querySelector('[data-error-for="' + id + '"]');
+
+            // Algunos campos condicionales no tenían invalid-feedback en el HTML.
+            if (!aviso) {
+                aviso = document.createElement('div');
+                aviso.className = 'invalid-feedback';
+                aviso.dataset.errorFor = id;
+                entrada.closest('[class*="col-"]').appendChild(aviso);
+            }
+
+            aviso.textContent = mensaje;
+            aviso.classList.toggle('d-block', !correcto);
+            entrada.classList.toggle('is-invalid', !correcto);
+            entrada.classList.toggle('is-valid', correcto && entrada.value.trim() !== '');
+            return correcto;
+        }
+
+        // Los campos opcionales que están vacíos quedan sin marcas rojas ni verdes.
+        function limpiarCampo(id) {
+            const entrada = campo(id);
+            entrada.classList.remove('is-valid', 'is-invalid');
+            const aviso = document.querySelector('[data-error-for="' + id + '"]');
+            if (aviso) aviso.classList.remove('d-block');
+        }
 
         function actualizarProvincia() {
-            const valor = codigoPostal.value.trim();
-            const prefijo = Number(valor.slice(0, 2));
-            const prefijoValido = /^[0-9]{5}$/.test(valor) && prefijo >= 1 && prefijo <= 52;
-            provincia.value = prefijoValido ? provincias[prefijo - 1] : '';
-            codigoPostal.setCustomValidity(valor && /^[0-9]{5}$/.test(valor) && !prefijoValido
-                ? 'El prefijo del código postal no corresponde a una provincia española.'
-                : '');
+            // La función reutilizable está definida en validar.js.
+            campo('provincia').value = typeof obtenerProvincia === 'function'
+                ? obtenerProvincia(campo('codigoPostal').value)
+                : '';
         }
-        codigoPostal.addEventListener('input', actualizarProvincia);
 
-        // Campos opcionales: fecha de vuelta, seguro, reembolso y mercancía.
-        // Cada checkbox habilita sus campos asociados y los hace obligatorios.
+        // Los campos se ven siempre, pero solo están habilitados con su checkbox.
         const dependencias = [
             ['prepararVuelta', ['fechaVuelta']],
             ['seguroTodoRiesgo', ['importeSeguro']],
@@ -589,74 +635,261 @@
         ];
 
         function actualizarDependencias() {
-            dependencias.forEach(([casillaId, campos]) => {
-                const activo = document.getElementById(casillaId).checked;
-                campos.forEach(campoId => {
-                    const campo = document.getElementById(campoId);
-                    campo.disabled = !activo;
-                    campo.required = activo;
-                    if (!activo) campo.value = '';
+            dependencias.forEach(([casillaId, ids]) => {
+                const marcado = campo(casillaId).checked;
+                ids.forEach(id => {
+                    const entrada = campo(id);
+                    entrada.disabled = !marcado;
+                    entrada.required = marcado && id !== 'mercancia';
+                    if (!marcado) {
+                        entrada.value = '';
+                        limpiarCampo(id);
+                    }
                 });
             });
         }
-        dependencias.forEach(([casillaId]) => {
-            document.getElementById(casillaId).addEventListener('change', actualizarDependencias);
-        });
-        actualizarDependencias();
 
-        // Campos: Alto, Ancho y Largo -> Peso volumétrico (valor orientativo).
-        document.getElementById('calcularPeso').addEventListener('click', () => {
-            const alto = Number(document.getElementById('alto').value);
-            const ancho = Number(document.getElementById('ancho').value);
-            const largo = Number(document.getElementById('largo').value);
-            const resultado = document.getElementById('pesoVolumetrico');
-            resultado.value = alto > 0 && ancho > 0 && largo > 0
-                ? ((alto * ancho * largo) / 6000).toFixed(2)
-                : '';
-        });
-
-        // Validación: muestra los mensajes de los campos incorrectos al intentar Aceptar.
-        function mostrarErrores() {
-            document.querySelectorAll('[data-error-for]').forEach(mensaje => {
-                const campo = document.getElementById(mensaje.dataset.errorFor);
-                mensaje.classList.toggle('d-block', !campo.checkValidity());
-            });
+        function actualizarPesoVolumetrico() {
+            const alto = campo('alto').value;
+            const ancho = campo('ancho').value;
+            const largo = campo('largo').value;
+            const resultado = typeof calcularPesoVolumetrico === 'function'
+                ? calcularPesoVolumetrico(alto, ancho, largo)
+                : null;
+            campo('pesoVolumetrico').value = resultado === null ? '' : resultado.toFixed(2);
         }
-        formulario.addEventListener('input', () => {
-            if (formulario.classList.contains('was-validated')) mostrarErrores();
+
+        // Comprueba todas las reglas, pero solo pinta los campos solicitados.
+        // En Aceptar se pintan todos; en blur/input se pinta el campo editado.
+        function comprobarFormulario(camposAPintar = null) {
+            const errores = [];
+
+            // Si falta validar.js o se está usando una versión antigua, avisamos
+            // en el modal en lugar de dejar los botones sin respuesta.
+            const funciones = [
+                'validarLongitud', 'obtenerProvincia', 'validarCodigoPostal',
+                'validarDocumento', 'validarTelefono', 'validarEmail',
+                'validarPeso', 'validarNumeroPositivo', 'validarFechaPosterior',
+                'validarIban', 'calcularPesoVolumetrico'
+            ];
+            if (funciones.some(nombre => typeof window[nombre] !== 'function')) {
+                return ['No se ha cargado el validar.js correcto. Coloca el validar.js entregado junto a index.html y vuelve a abrir la página.'];
+            }
+
+            const valor = id => campo(id).value.trim();
+
+            function comprobar(id, correcto, mensaje, mostrarSiVacio = false) {
+                if (camposAPintar === null || camposAPintar.has(id)) {
+                    if (correcto && !mostrarSiVacio && valor(id) === '') limpiarCampo(id);
+                    else marcarCampo(id, correcto, mensaje);
+                }
+                if (!correcto) errores.push(etiquetas[id] + ': ' + mensaje);
+            }
+
+            // Nombre O empresa: basta uno de los dos, no ambos.
+            const nombre = valor('nombre');
+            const empresa = valor('empresa');
+            if (!nombre && !empresa) {
+                const mensaje = 'Debes completar al menos el nombre o la empresa.';
+                if (camposAPintar === null || camposAPintar.has('nombre')) marcarCampo('nombre', false, mensaje);
+                if (camposAPintar === null || camposAPintar.has('empresa')) marcarCampo('empresa', false, mensaje);
+                errores.push('Nombre / Empresa: ' + mensaje);
+            } else {
+                comprobar('nombre', !nombre || validarLongitud(nombre, 1, 100), 'El nombre no es válido.');
+                comprobar('empresa', !empresa || validarLongitud(empresa, 1, 100), 'La empresa no es válida.');
+            }
+
+            // Apellidos no obligatorios.
+            ['primerApellido', 'segundoApellido'].forEach(id => {
+                comprobar(id, !valor(id) || validarLongitud(valor(id), 1, 100), 'Máximo 100 caracteres.');
+            });
+
+            // Documento: solo es necesario si se selecciona un tipo.
+            const tipo = valor('tipoDocumento');
+            const numero = valor('documento');
+            comprobar('tipoDocumento', !numero || !!tipo, 'Selecciona el tipo de documento.');
+            comprobar('documento', (!tipo && !numero) || (!!tipo && !!numero && validarDocumento(tipo, numero)),
+                'Introduce un NIF, NIE o CIF correcto para el tipo seleccionado.');
+
+            // Dirección y código postal: OPCIONALES; se revisan solo si se rellenan.
+            comprobar('nombreVia', valor('nombreVia') === '' || validarLongitud(valor('nombreVia'), 1, 100), 'El nombre de la vía no es válido.');
+            comprobar('codigoPostal', valor('codigoPostal') === '' || validarCodigoPostal(valor('codigoPostal')), 'Introduce cinco cifras con provincia entre 01 y 52.');
+            ['numeroVia', 'bloqueVia', 'portalVia', 'pisoVia', 'escaleraVia', 'puertaVia'].forEach(id => {
+                comprobar(id, valor(id).length <= 5, 'Máximo 5 caracteres.');
+            });
+            comprobar('direccionCompleta', valor('direccionCompleta').length <= 100, 'Máximo 100 caracteres.');
+            comprobar('localidad', valor('localidad').length <= 100, 'Máximo 100 caracteres.');
+
+            // Contacto: campos opcionales, pero válidos si están rellenos.
+            ['movilSms', 'telefono'].forEach(id => {
+                comprobar(id, !valor(id) || validarTelefono(valor(id)), 'Debe tener 9 cifras y comenzar por 6, 7 o 9.');
+            });
+            comprobar('email', !valor('email') || validarEmail(valor('email')), 'Introduce un email válido.');
+
+            // Peso OPCIONAL. Si se introduce, debe llevar dos decimales.
+            comprobar('peso', valor('peso') === '' || validarPeso(valor('peso')), 'Introduce un peso positivo con dos decimales (ej.: 2.50).');
+
+            // Dimensiones opcionales: se validan si se introducen.
+            ['alto', 'ancho', 'largo'].forEach(id => {
+                comprobar(id, !valor(id) || validarNumeroPositivo(valor(id)), 'Introduce una medida positiva.');
+            });
+
+            // Servicios: solo se exigen datos cuando se marca la casilla.
+            comprobar('fechaVuelta', !campo('prepararVuelta').checked ||
+                validarFechaPosterior(valor('fechaVuelta'), 7),
+                'Selecciona una fecha posterior a 7 días desde hoy.');
+            comprobar('importeSeguro', !campo('seguroTodoRiesgo').checked ||
+                validarNumeroPositivo(valor('importeSeguro')),
+                'El importe asegurado es obligatorio y debe ser positivo.');
+            comprobar('importeReembolso', !campo('reembolsoCuenta').checked ||
+                validarNumeroPositivo(valor('importeReembolso')),
+                'Introduce un importe de reembolso positivo.');
+            comprobar('iban', !campo('reembolsoCuenta').checked || validarIban(valor('iban')),
+                'Introduce un IBAN válido.');
+
+            // Mercancía es un campo extra del HTML original; no es obligatoria.
+            comprobar('mercancia', valor('mercancia').length <= 150, 'Máximo 150 caracteres.');
+            comprobar('observaciones', valor('observaciones').length <= 150, 'Máximo 150 caracteres.');
+
+            return errores;
+        }
+
+        // Modal sencillo: lista de errores o solo los campos rellenados.
+        function mostrarModal(errores) {
+            const titulo = campo('tituloModalResultado');
+            const contenido = campo('contenidoModalResultado');
+            contenido.replaceChildren();
+            const lista = document.createElement('ul');
+            lista.className = 'list-group list-group-flush';
+
+            if (errores.length) {
+                titulo.textContent = 'Errores del formulario';
+                errores.forEach(error => {
+                    const item = document.createElement('li');
+                    item.className = 'list-group-item';
+                    item.textContent = error;
+                    lista.appendChild(item);
+                });
+            } else {
+                titulo.textContent = 'Formulario enviado';
+                Object.entries(etiquetas).forEach(([id, nombreCampo]) => {
+                    const entrada = campo(id);
+                    if (!entrada || entrada.disabled) return;
+
+                    // No mostrar campos vacíos ni opciones sin marcar.
+                    let dato;
+                    if (entrada.type === 'checkbox') {
+                        if (!entrada.checked) return;
+                        dato = 'Sí';
+                    } else {
+                        dato = entrada.value.trim();
+                        if (dato === '') return;
+                    }
+
+                    const item = document.createElement('li');
+                    item.className = 'list-group-item';
+                    item.textContent = nombreCampo + ': ' + dato;
+                    lista.appendChild(item);
+                });
+            }
+            contenido.appendChild(lista);
+
+            // Bootstrap se encarga del modal normalmente.
+            const modal = campo('modalResultado');
+            if (window.bootstrap && bootstrap.Modal) {
+                bootstrap.Modal.getOrCreateInstance(modal).show();
+            } else {
+                // Respaldo sencillo si falla la carga del JS de Bootstrap.
+                modal.classList.add('show');
+                modal.style.cssText = 'display:block;position:fixed;inset:0;z-index:1055;overflow:auto';
+                modal.removeAttribute('aria-hidden');
+                modal.setAttribute('aria-modal', 'true');
+                document.body.classList.add('modal-open');
+                if (!document.getElementById('fondoModalResultado')) {
+                    const fondo = document.createElement('div');
+                    fondo.id = 'fondoModalResultado';
+                    fondo.className = 'modal-backdrop fade show';
+                    fondo.style.cssText = 'position:fixed;inset:0;z-index:1050;background:rgba(0,0,0,.5)';
+                    document.body.appendChild(fondo);
+                }
+            }
+        }
+
+        function cerrarModalRespaldo() {
+            if (window.bootstrap && bootstrap.Modal) return;
+            const modal = campo('modalResultado');
+            modal.classList.remove('show');
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+            modal.removeAttribute('aria-modal');
+            document.body.classList.remove('modal-open');
+            document.getElementById('fondoModalResultado')?.remove();
+        }
+
+        campo('modalResultado').querySelectorAll('[data-bs-dismiss="modal"]').forEach(boton => {
+            boton.addEventListener('click', cerrarModalRespaldo);
         });
-        formulario.addEventListener('change', () => {
-            if (formulario.classList.contains('was-validated')) mostrarErrores();
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') cerrarModalRespaldo();
         });
 
-        // Botón: Aceptar. Valida en el navegador sin enviar información al servidor.
+        // Eventos: se quedan aquí, no en validar.js.
+        formulario.addEventListener('input', event => {
+            const id = event.target.id;
+            if (id === 'codigoPostal') actualizarProvincia();
+            if (['alto', 'ancho', 'largo'].includes(id)) actualizarPesoVolumetrico();
+            const relacionados = id === 'nombre' || id === 'empresa' ? ['nombre', 'empresa']
+                : id === 'tipoDocumento' || id === 'documento' ? ['tipoDocumento', 'documento'] : [id];
+            comprobarFormulario(new Set(relacionados));
+        });
+
+        formulario.addEventListener('change', event => {
+            const id = event.target.id;
+            if (['prepararVuelta', 'seguroTodoRiesgo', 'reembolsoCuenta', 'entregaRecogida'].includes(id)) {
+                actualizarDependencias();
+                const relacionados = dependencias.find(([casilla]) => casilla === id)[1];
+                comprobarFormulario(new Set(relacionados));
+            } else {
+                comprobarFormulario(new Set(id === 'tipoDocumento' ? ['tipoDocumento', 'documento'] : [id]));
+            }
+        });
+
+        formulario.addEventListener('focusout', event => {
+            const id = event.target.id;
+            if (id && etiquetas[id]) comprobarFormulario(new Set(
+                ['nombre', 'empresa'].includes(id) ? ['nombre', 'empresa'] :
+                ['tipoDocumento', 'documento'].includes(id) ? ['tipoDocumento', 'documento'] : [id]
+            ));
+        });
+
+        campo('calcularPeso').addEventListener('click', () => {
+            actualizarPesoVolumetrico();
+            comprobarFormulario(new Set(['alto', 'ancho', 'largo']));
+        });
+
         formulario.addEventListener('submit', event => {
             event.preventDefault();
             actualizarProvincia();
-            formulario.classList.add('was-validated');
-            mostrarErrores();
-            resultadoFormulario.classList.add('d-none');
-            if (!formulario.checkValidity()) {
-                formulario.querySelector(':invalid')?.focus();
-                return;
-            }
-            resultadoFormulario.textContent = 'Formulario validado correctamente. Esta maqueta no envía datos a ningún servidor.';
-            resultadoFormulario.classList.remove('d-none');
+            actualizarPesoVolumetrico();
+            const errores = comprobarFormulario();
+            mostrarModal(errores);
         });
 
-        // Botón: Cancelar. Restablece la provincia, el cálculo y los campos opcionales.
         formulario.addEventListener('reset', () => {
             setTimeout(() => {
                 actualizarDependencias();
                 actualizarProvincia();
-                document.getElementById('pesoVolumetrico').value = '';
-                formulario.classList.remove('was-validated');
-                document.querySelectorAll('[data-error-for]').forEach(mensaje => {
-                    mensaje.classList.remove('d-block');
+                campo('pesoVolumetrico').value = '';
+                formulario.querySelectorAll('input, select, textarea').forEach(entrada => {
+                    entrada.classList.remove('is-invalid', 'is-valid');
                 });
-                resultadoFormulario.classList.add('d-none');
+                document.querySelectorAll('[data-error-for]').forEach(aviso => aviso.classList.remove('d-block'));
             }, 0);
         });
+
+        actualizarDependencias();
+        actualizarProvincia();
+
     </script>
 </body>
 </html>
