@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 
 																					// Funciones reutilizables. No hay eventos, modales ni acceso al HTML.
+=======
+// Funciones reutilizables. No hay eventos, modales ni acceso al HTML.
+>>>>>>> 60e8691085e28e8837259c3b896f328dca85de28
 
 function validarLongitud(texto, minimo, maximo) {
     const longitud = String(texto).trim().length;
@@ -22,21 +26,44 @@ function validarNie(texto) {
 function validarCif(texto) {
     const cif = String(texto).trim().toUpperCase();
     if (!/^[ABCDEFGHJNPQRSUVW]\d{7}[0-9A-J]$/.test(cif)) return false;
+<<<<<<< HEAD
     let suma = 0;
     for (let i = 1; i <= 7; i++) {
         const numero = Number(cif[i]);
         if (i % 2 === 0) suma += numero;
         else {
+=======
+
+    let suma = 0;
+
+    for (let i = 1; i <= 7; i++) {
+        const numero = Number(cif[i]);
+
+        if (i % 2 === 0) {
+            suma += numero;
+        } else {
+>>>>>>> 60e8691085e28e8837259c3b896f328dca85de28
             const doble = numero * 2;
             suma += Math.floor(doble / 10) + doble % 10;
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 60e8691085e28e8837259c3b896f328dca85de28
     const control = (10 - suma % 10) % 10;
     const ultimo = cif[8];
     const cifra = String(control);
     const letra = "JABCDEFGHI"[control];
+<<<<<<< HEAD
     if ("ABEH".includes(cif[0])) return ultimo === cifra;
     if ("NPQRSW".includes(cif[0])) return ultimo === letra;
+=======
+
+    if ("ABEH".includes(cif[0])) return ultimo === cifra;
+    if ("NPQRSW".includes(cif[0])) return ultimo === letra;
+
+>>>>>>> 60e8691085e28e8837259c3b896f328dca85de28
     return ultimo === cifra || ultimo === letra;
 }
 
@@ -47,6 +74,11 @@ function validarDocumento(tipo, numero) {
     return false;
 }
 
+<<<<<<< HEAD
+=======
+// PROVINCIAS ESPAÑOLAS
+
+>>>>>>> 60e8691085e28e8837259c3b896f328dca85de28
 const PROVINCIAS = [
     "Álava", "Albacete", "Alicante", "Almería", "Ávila", "Badajoz",
     "Illes Balears", "Barcelona", "Burgos", "Cáceres", "Cádiz", "Castellón",
@@ -61,14 +93,30 @@ const PROVINCIAS = [
 
 function validarCodigoPostal(texto) {
     const cp = String(texto).trim();
+<<<<<<< HEAD
     return /^\d{5}$/.test(cp) && Number(cp.slice(0, 2)) >= 1 && Number(cp.slice(0, 2)) <= 52;
+=======
+
+    return /^\d{5}$/.test(cp) &&
+        Number(cp.slice(0, 2)) >= 1 &&
+        Number(cp.slice(0, 2)) <= 52;
+>>>>>>> 60e8691085e28e8837259c3b896f328dca85de28
 }
 
 function obtenerProvincia(codigoPostal) {
     if (!validarCodigoPostal(codigoPostal)) return "";
+<<<<<<< HEAD
     return PROVINCIAS[Number(String(codigoPostal).slice(0, 2)) - 1];
 }
 
+=======
+
+    return PROVINCIAS[Number(String(codigoPostal).slice(0, 2)) - 1];
+}
+
+// TELÉFONO Y EMAIL
+
+>>>>>>> 60e8691085e28e8837259c3b896f328dca85de28
 function validarTelefono(texto) {
     return /^[679]\d{8}$/.test(String(texto).trim());
 }
@@ -77,6 +125,7 @@ function validarEmail(texto) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(texto).trim());
 }
 
+<<<<<<< HEAD
 // Peso con parte entera y exactamente dos decimales: 1.25 o 1,25.
 function validarPeso(texto) {
     const valor = String(texto).trim();
@@ -108,6 +157,69 @@ function validarFechaPosterior(texto, dias = 7, hoy = new Date()) {
 }
 
 // IBAN: comprobación de país, longitud y módulo 97.
+=======
+// PESO: PARTE ENTERA Y DOS DECIMALES
+
+function validarPeso(texto) {
+    const valor = String(texto).trim();
+
+    return /^\d+[.,]\d{2}$/.test(valor) &&
+        Number(valor.replace(",", ".")) > 0;
+}
+
+// NÚMEROS POSITIVOS: IMPORTES Y DIMENSIONES
+
+function validarNumeroPositivo(texto) {
+    const valor = String(texto).trim();
+
+    return /^\d+(?:[.,]\d+)?$/.test(valor) &&
+        Number(valor.replace(",", ".")) > 0;
+}
+
+// CÁLCULO DEL PESO VOLUMÉTRICO
+
+function calcularPesoVolumetrico(alto, ancho, largo) {
+    const valores = [alto, ancho, largo].map(
+        v => Number(String(v).replace(",", "."))
+    );
+
+    if (!valores.every(v => Number.isFinite(v) && v > 0)) {
+        return null;
+    }
+
+    return valores[0] * valores[1] * valores[2] / 6000;
+}
+
+// VALIDACIÓN DE FECHA POSTERIOR A 7 DÍAS
+
+function validarFechaPosterior(texto, dias = 7, hoy = new Date()) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(texto)) return false;
+
+    const [anio, mes, dia] = texto.split("-").map(Number);
+    const fecha = new Date(anio, mes - 1, dia);
+
+    if (
+        fecha.getFullYear() !== anio ||
+        fecha.getMonth() !== mes - 1 ||
+        fecha.getDate() !== dia
+    ) {
+        return false;
+    }
+
+    const limite = new Date(
+        hoy.getFullYear(),
+        hoy.getMonth(),
+        hoy.getDate()
+    );
+
+    limite.setDate(limite.getDate() + dias);
+
+    return fecha > limite;
+}
+
+// VALIDACIÓN DE IBAN
+
+>>>>>>> 60e8691085e28e8837259c3b896f328dca85de28
 function validarIban(texto) {
     const longitudes = {
         AD:24, AE:23, AL:28, AT:20, AZ:28, BA:20, BE:16, BG:22,
@@ -121,6 +233,7 @@ function validarIban(texto) {
         SE:24, SI:19, SK:24, SM:27, ST:25, SV:28, TL:23, TN:24,
         TR:26, UA:29, VA:22, VG:24, XK:20
     };
+<<<<<<< HEAD
     const iban = String(texto).replace(/\s/g, "").toUpperCase();
     if (!/^[A-Z]{2}\d{2}[A-Z0-9]+$/.test(iban)) return false;
     if (iban.length !== longitudes[iban.slice(0, 2)]) return false;
@@ -130,5 +243,29 @@ function validarIban(texto) {
         const digitos = /[A-Z]/.test(caracter) ? String(caracter.charCodeAt(0) - 55) : caracter;
         for (const digito of digitos) resto = (resto * 10 + Number(digito)) % 97;
     }
+=======
+
+    const iban = String(texto).replace(/\s/g, "").toUpperCase();
+
+    if (!/^[A-Z]{2}\d{2}[A-Z0-9]+$/.test(iban)) return false;
+
+    if (iban.length !== longitudes[iban.slice(0, 2)]) {
+        return false;
+    }
+
+    const reorganizado = iban.slice(4) + iban.slice(0, 4);
+    let resto = 0;
+
+    for (const caracter of reorganizado) {
+        const digitos = /[A-Z]/.test(caracter)
+            ? String(caracter.charCodeAt(0) - 55)
+            : caracter;
+
+        for (const digito of digitos) {
+            resto = (resto * 10 + Number(digito)) % 97;
+        }
+    }
+
+>>>>>>> 60e8691085e28e8837259c3b896f328dca85de28
     return resto === 1;
 }
