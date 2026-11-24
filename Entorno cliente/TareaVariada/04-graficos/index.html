@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Google Charts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body class="container mt-4">
+    <h2>Google Charts</h2>
+    <h4>A. Temperaturas durante el día</h4>
+    <div id="lineas" style="width:100%; max-width:600px; height:350px"></div>
+    <div id="barras" style="width:100%; max-width:600px; height:350px"></div>
+    <div id="area" style="width:100%; max-width:600px; height:350px"></div>
+    <hr>
+    <h4>D. Mapa con marcadores y temperaturas</h4>
+    <p>Datos de ejemplo. Pulsa un marcador para ver la ciudad y su temperatura.</p>
+    <div id="mapa" style="width:100%; max-width:700px; height:450px"></div>
+    <p id="valorMapa"></p>
+    <p id="error" style="color:red"></p>
+    <script>
+        // Google Charts (W3Schools) y galería de Google Charts
+        if (typeof google === 'undefined') {
+            document.getElementById('error').textContent = 'No se pudo cargar Google Charts. Comprueba la conexión.';
+        } else {
+            google.charts.load('current', {packages: ['corechart', 'geochart']});
+            google.charts.setOnLoadCallback(dibujar);
+        }
+        function dibujar() {
+            var datos = google.visualization.arrayToDataTable([
+                ['Hora', 'Temperatura'],
+                ['08:00', 10], ['10:00', 15], ['12:00', 20], ['14:00', 25], ['16:00', 23], ['18:00', 18]
+            ]);
+            new google.visualization.LineChart(document.getElementById('lineas')).draw(datos, {title: 'Gráfico de líneas', vAxis: {title: 'Temperatura (°C)'}});
+            new google.visualization.ColumnChart(document.getElementById('barras')).draw(datos, {title: 'Gráfico de barras', vAxis: {title: 'Temperatura (°C)'}});
+            new google.visualization.AreaChart(document.getElementById('area')).draw(datos, {title: 'Gráfico de área', vAxis: {title: 'Temperatura (°C)'}});
+            // GeoChart en modo marcadores con coordenadas, sin clave de Maps.
+            var ciudades = google.visualization.arrayToDataTable([
+                ['Latitud', 'Longitud', 'Temperatura (°C)'],
+                [40.4168, -3.7038, 12],
+                [41.3874, 2.1686, 18],
+                [37.3891, -5.9845, 25],
+                [43.2630, -2.9350, 9],
+                [39.4699, -0.3763, 20]
+            ]);
+            var nombres = ['Madrid', 'Barcelona', 'Sevilla', 'Bilbao', 'Valencia'];
+            var mapa = new google.visualization.GeoChart(document.getElementById('mapa'));
+            google.visualization.events.addListener(mapa, 'select', function () {
+                var seleccion = mapa.getSelection();
+                if (seleccion.length > 0) {
+                    var fila = seleccion[0].row;
+                    document.getElementById('valorMapa').textContent = nombres[fila] + ': ' + ciudades.getValue(fila, 2) + ' °C';
+                }
+            });
+            mapa.draw(ciudades, {region: 'ES', displayMode: 'markers', colorAxis: {colors: ['blue', 'red']}});
+        }
+    </script>
+</body>
+</html>

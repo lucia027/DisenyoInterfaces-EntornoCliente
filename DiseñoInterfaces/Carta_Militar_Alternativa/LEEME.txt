@@ -1,0 +1,45 @@
+CARTA A UN MILITAR — EDICIÓN ALTERNATIVA / PROYECTO ACADÉMICO
+==========================================================
+ABRIR EN TU ORDENADOR (MÁS FÁCIL)
+1. Descomprime el ZIP "Carta_Militar_Alternativa.zip".
+2. Entra en la carpeta "Carta_Militar_Alternativa".
+3. Haz DOBLE CLIC en "index.html".
+4. Se abrirá en Chrome, Edge, Firefox o tu navegador predeterminado.
+
+NOTA: Necesitas conexión a Internet para cargar Bootstrap 5 y las fuentes de Google.
+El diseño y las imágenes locales están dentro de la carpeta descargada.
+
+ABRIR CON VISUAL STUDIO CODE
+1. Abre Visual Studio Code > Archivo > Abrir carpeta.
+2. Selecciona "Carta_Militar_Alternativa".
+3. Abre "index.html" y haz clic derecho > "Open with Live Server" si tienes esa extensión.
+   También funciona con doble clic, sin instalar extensiones.
+
+CAMBIAR IMÁGENES
+Los originales del folleto y recortes están en img/.
+- hero-mujeres.jpg: portada, ilustración principal.
+- folleto-portada.jpg, folleto-resultados.jpg, folleto-testimonios.jpg,
+  folleto-profesion.jpg: diapositivas y secciones del folleto.
+- acto-premios.jpg: foto del folleto.
+Para sustituir, guarda tu foto con el mismo nombre, o modifica el atributo src del HTML.
+
+ARCHIVOS
+index.html        Página completa.
+css/estilos.css   Colores, estampado militar, responsive, tipografías.
+js/main.js        Menú móvil, estado de navegación y formulario.
+img/              Imágenes del folleto facilitadas para este ejercicio.
+
+FUNCIONALIDAD DEL FORMULARIO
+Se validan nombre, email, asunto, mensaje y aceptación.
+Al enviarlo se DESCARGA un archivo mi-mensaje.txt con los campos introducidos.
+No transmite datos a ninguna web ni a un correo. No es formulario de inscripción.
+
+CONTENIDOS
+La página se refiere a la VI edición, curso 2018–19.
+495 centros y más de 11.300 alumnos, cifras históricas.
+No se han añadido fechas ni requisitos de inscripción no documentados.
+
+DISEÑO
+Inspiración visual de TopicListing (plantilla gratuita de ThemeWagon),
+reinterpretada con CSS propio y componentes de Bootstrap 5. No se distribuye
+el código de terceros de la plantilla TopicListing.

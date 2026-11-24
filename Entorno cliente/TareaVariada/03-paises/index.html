@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Países</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .autocomplete { position: relative; max-width: 350px; }
+        .autocomplete-items { position: absolute; border: 1px solid #ccc; background: white; width: 100%; z-index: 9; }
+        .autocomplete-items div { padding: 8px; cursor: pointer; border-bottom: 1px solid #ccc; }
+        .autocomplete-items div:hover, .autocomplete-active { background: #ddd; }
+        #caps { display: none; color: red; }
+    </style>
+</head>
+<body class="container mt-4">
+    <h2>Países</h2>
+    <h4>A. Autocomplete y Caps Lock</h4>
+    <div class="autocomplete">
+        <input type="text" id="pais" class="form-control" placeholder="Escribe un país" autocomplete="off">
+        <div id="sugerencias" class="autocomplete-items" hidden></div>
+    </div>
+    <p id="caps">Bloq Mayús activado</p>
+    <hr>
+    <h4>B. Filter Table</h4>
+    <input type="text" id="filtroTabla" class="form-control mb-2" placeholder="Buscar país" onkeyup="filtrarTabla()" style="max-width: 350px">
+    <table class="table table-bordered" id="tabla" style="max-width: 350px">
+        <thead><tr><th>País</th></tr></thead>
+        <tbody id="cuerpoTabla"></tbody>
+    </table>
+    <hr>
+    <h4>C. Filter List</h4>
+    <input type="text" id="filtroLista" class="form-control mb-2" placeholder="Buscar país" onkeyup="filtrarLista()" style="max-width: 350px">
+    <ul id="lista"></ul>
+    <script>
+        var paises = ['Alemania', 'Argentina', 'Australia', 'Brasil', 'Canadá', 'Chile', 'China', 'Colombia', 'España', 'Estados Unidos', 'Francia', 'Italia', 'Japón', 'México', 'Portugal', 'Reino Unido'];
+        var input = document.getElementById('pais');
+        var sugerencias = document.getElementById('sugerencias');
+        var actual = -1;
+
+        // Autocomplete (W3Schools), adaptado al array de países
+        input.addEventListener('input', function () {
+            sugerencias.innerHTML = '';
+            actual = -1;
+            var valor = this.value;
+            sugerencias.hidden = true;
+            if (!valor) return;
+            for (var i = 0; i < paises.length; i++) {
+                if (paises[i].toUpperCase().startsWith(valor.toUpperCase())) {
+                    var opcion = document.createElement('div');
+                    opcion.textContent = paises[i];
+                    opcion.onclick = function () {
+                        input.value = this.textContent;
+                        sugerencias.hidden = true;
+                    };
+                    sugerencias.appendChild(opcion);
+                }
+            }
+            sugerencias.hidden = sugerencias.children.length === 0;
+        });
+
+        input.addEventListener('keydown', function (event) {
+            var opciones = sugerencias.children;
+            if (sugerencias.hidden || !opciones.length) return;
+            if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+                event.preventDefault();
+                if (event.key === 'ArrowDown') actual = (actual + 1) % opciones.length;
+                else actual = actual <= 0 ? opciones.length - 1 : actual - 1;
+                for (var i = 0; i < opciones.length; i++) opciones[i].classList.remove('autocomplete-active');
+                opciones[actual].classList.add('autocomplete-active');
+            } else if (event.key === 'Enter' && actual >= 0) {
+                opciones[actual].click();
+            } else if (event.key === 'Escape') sugerencias.hidden = true;
+        });
+        document.addEventListener('click', function (event) {
+            if (event.target !== input && !sugerencias.contains(event.target)) sugerencias.hidden = true;
+        });
+
+        // Detect Caps Lock (W3Schools)
+        function detectarMayus(event) {
+            document.getElementById('caps').style.display = event.getModifierState('CapsLock') ? 'block' : 'none';
+        }
+        input.addEventListener('keydown', detectarMayus);
+        input.addEventListener('keyup', detectarMayus);
+        input.onblur = function () { document.getElementById('caps').style.display = 'none'; };
+
+        // Cargar los países en la tabla y la lista
+        for (var i = 0; i < paises.length; i++) {
+            var fila = document.getElementById('cuerpoTabla').insertRow();
+            fila.insertCell().textContent = paises[i];
+            var li = document.createElement('li');
+            li.textContent = paises[i];
+            document.getElementById('lista').appendChild(li);
+        }
+
+        // Filter Table (W3Schools)
+        function filtrarTabla() {
+            var filtro = document.getElementById('filtroTabla').value.toUpperCase();
+            var filas = document.getElementById('cuerpoTabla').getElementsByTagName('tr');
+            for (var i = 0; i < filas.length; i++) {
+                var texto = filas[i].cells[0].textContent;
+                filas[i].style.display = texto.toUpperCase().indexOf(filtro) > -1 ? '' : 'none';
+            }
+        }
+
+        // Filter List (W3Schools)
+        function filtrarLista() {
+            var filtro = document.getElementById('filtroLista').value.toUpperCase();
+            var elementos = document.getElementById('lista').getElementsByTagName('li');
+            for (var i = 0; i < elementos.length; i++) {
+                elementos[i].style.display = elementos[i].textContent.toUpperCase().indexOf(filtro) > -1 ? '' : 'none';
+            }
+        }
+    </script>
+</body>
+</html>

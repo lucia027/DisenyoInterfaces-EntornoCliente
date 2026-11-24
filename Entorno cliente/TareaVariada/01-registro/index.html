@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .input-container { display: flex; margin-bottom: 15px; }
+        .icon { padding: 12px; background: dodgerblue; color: white; min-width: 45px; text-align: center; }
+        .input-field { width: 100%; padding: 8px; }
+        #message { display: none; background: #f1f1f1; padding: 15px; margin-top: 10px; }
+        .valid { color: green; }
+        .valid:before { content: '✔ '; }
+        .invalid { color: red; }
+        .invalid:before { content: '✖ '; }
+    </style>
+</head>
+<body class="container mt-4">
+    <h2>Sign Up Form</h2>
+    <!-- Basado en Form with Icons y Signup Form de W3Schools -->
+    <form id="registro" style="max-width: 500px">
+        <label for="email">Email</label>
+        <div class="input-container">
+            <i class="fa fa-envelope icon"></i>
+            <input class="input-field" type="email" id="email" placeholder="Email" required>
+        </div>
+        <label for="psw">Password</label>
+        <div class="input-container">
+            <i class="fa fa-key icon"></i>
+            <input class="input-field" type="password" id="psw" placeholder="Password" required>
+        </div>
+        <label for="repeat">Repeat password</label>
+        <div class="input-container">
+            <i class="fa fa-key icon"></i>
+            <input class="input-field" type="password" id="repeat" placeholder="Repeat password" required>
+        </div>
+        <input type="checkbox" id="mostrar" onclick="mostrarPassword()">
+        <label for="mostrar">Mostrar contraseñas</label>
+        <br><br>
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+        <p id="resultado" class="mt-2"></p>
+    </form>
+    <div id="message" style="max-width: 500px">
+        <h4>La contraseña debe tener:</h4>
+        <p id="letter" class="invalid">Una minúscula</p>
+        <p id="capital" class="invalid">Una mayúscula</p>
+        <p id="number" class="invalid">Un número</p>
+        <p id="length" class="invalid">8 caracteres como mínimo</p>
+        <p id="igual" class="invalid">Las contraseñas deben coincidir</p>
+    </div>
+    <script>
+        // Password Validation y Toggle Password Visibility (W3Schools)
+        var psw = document.getElementById('psw');
+        var repeat = document.getElementById('repeat');
+        var message = document.getElementById('message');
+        var resultado = document.getElementById('resultado');
+
+        function mostrarPassword() {
+            var tipo = psw.type === 'password' ? 'text' : 'password';
+            psw.type = tipo;
+            repeat.type = tipo;
+        }
+
+        function cambiarEstado(id, valido) {
+            document.getElementById(id).className = valido ? 'valid' : 'invalid';
+        }
+
+        function validar() {
+            var minuscula = /[a-z]/.test(psw.value);
+            var mayuscula = /[A-Z]/.test(psw.value);
+            var numero = /[0-9]/.test(psw.value);
+            var longitud = psw.value.length >= 8;
+            var iguales = psw.value !== '' && psw.value === repeat.value;
+            cambiarEstado('letter', minuscula);
+            cambiarEstado('capital', mayuscula);
+            cambiarEstado('number', numero);
+            cambiarEstado('length', longitud);
+            cambiarEstado('igual', iguales);
+            return minuscula && mayuscula && numero && longitud && iguales;
+        }
+
+        psw.onfocus = repeat.onfocus = function () { message.style.display = 'block'; };
+        psw.oninput = repeat.oninput = validar;
+        document.getElementById('registro').onsubmit = function (event) {
+            event.preventDefault();
+            message.style.display = 'block';
+            if (validar()) {
+                resultado.style.color = 'green';
+                resultado.textContent = 'Formulario correcto';
+            } else {
+                resultado.style.color = 'red';
+                resultado.textContent = 'Revisa las contraseñas';
+            }
+        };
+    </script>
+</body>
+</html>
