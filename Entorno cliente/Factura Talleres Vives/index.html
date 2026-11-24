@@ -129,11 +129,11 @@
     </div>
 
    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="validar.js"></script>
     <script>
-        // --- Funciones generales que vienen del archivo validar.js ---
-        const { crearElemento, validarTexto, validarDecimal, aNumero,
-            redondear, formatearMoneda, mostrarValidacion } = Validar;
+        // Las funciones de validar.js se pueden llamar directamente.
+        // Por ejemplo: validarLongitud(nombre.value, 2, 100).
 
         // --- Referencias a los elementos del HTML ---
         const columnaFormulario = document.querySelector('main > .col-9');
@@ -243,7 +243,7 @@
 
         function comprobarDescripcion(fila, mostrar = false) {
             const campo = fila.querySelector('.description-input');
-            const correcto = validarTexto(campo.value, 1, 50);
+            const correcto = validarLongitud(campo.value, 1, 50);
             if (mostrar || campo.dataset.tocado === 'si') {
                 mostrarValidacion(campo, correcto,
                     'Escribe una descripción de 1 a 50 caracteres.');
@@ -388,6 +388,7 @@
             const campo = evento.target;
             if (!campo.matches('.quantity-input, .description-input, .price-input')) return;
             const fila = campo.closest('tr');
+            campo.dataset.tocado = 'si';
             comprobarLinea(fila);
             actualizarImportesLinea(fila);
             actualizarTotalesFactura();
@@ -413,6 +414,182 @@
             borrarFila(boton.closest('tr'));
         }
 
+        // --- Referencias a los campos del cliente ---
+        const nombre = document.getElementById('nombre');
+        const direccion = document.getElementById('direccion');
+        const codigoPostal = document.getElementById('codigoPostal');
+        const provincia = document.getElementById('provincia');
+        const ciudad = document.getElementById('ciudad');
+        const documento = document.getElementById('documento');
+        const email = document.getElementById('email');
+        const captcha = document.getElementById('captcha');
+        const captchaAleatorio = document.getElementById('captcha-aleatorio');
+        const botonEnviar = contenedorEnviar.querySelector('button');
+
+        // --- Mostrar validación con las clases de Bootstrap ---
+        function marcarErrorCliente(campo, correcto, idError, mensaje) {
+            campo.classList.toggle('is-invalid', !correcto);
+            campo.classList.toggle('is-valid', correcto);
+            // En tu HTML, los avisos están fuera del input-group.
+            const aviso = document.getElementById(idError);
+            if (aviso) {
+                aviso.textContent = mensaje;
+                aviso.classList.toggle('d-block', !correcto);
+            }
+            return correcto;
+        }
+
+        // --- Comprobar cada campo: estilo del ejercicio del profesor ---
+        function comprobarNombre() {
+            return marcarErrorCliente(nombre, validarLongitud(nombre.value, 2, 100),
+                'errorNombre', 'El nombre debe tener entre 2 y 100 caracteres.');
+        }
+
+        function comprobarDireccion() {
+            return marcarErrorCliente(direccion, validarLongitud(direccion.value, 2, 100),
+                'errorDireccion', 'La dirección debe tener entre 2 y 100 caracteres.');
+        }
+
+        function comprobarCodigoPostal() {
+            const correcto = validarCodigoPostal(codigoPostal.value);
+            provincia.value = obtenerProvincia(codigoPostal.value);
+            provincia.classList.toggle('is-valid', correcto);
+            provincia.classList.remove('is-invalid');
+            return marcarErrorCliente(codigoPostal, correcto, 'errorCodigoPostal',
+                'Introduce cinco dígitos y un prefijo provincial válido (01-52).');
+        }
+
+        function comprobarCiudad() {
+            return marcarErrorCliente(ciudad, validarLongitud(ciudad.value, 2, 100),
+                'errorCiudad', 'La ciudad debe tener entre 2 y 100 caracteres.');
+        }
+
+        function comprobarDocumento() {
+            return marcarErrorCliente(documento, validarDocumento(documento.value),
+                'errorDocumento', 'Introduce un NIF, NIE o CIF con control correcto.');
+        }
+
+        function comprobarEmail() {
+            return marcarErrorCliente(email, validarEmail(email.value),
+                'errorEmail', 'Introduce una dirección de correo válida.');
+        }
+
+        // Captcha: suma de dos dígitos aleatorios, no fija.
+        const primerNumero = Math.floor(Math.random() * 10);
+        const segundoNumero = Math.floor(Math.random() * 10);
+        captchaAleatorio.textContent = ': ' + primerNumero + ' + ' + segundoNumero;
+
+        function comprobarCaptcha() {
+            const respuesta = captcha.value.trim();
+            const correcto = /^\d{1,2}$/.test(respuesta) &&
+                Number(respuesta) === primerNumero + segundoNumero;
+            return marcarErrorCliente(captcha, correcto, 'errorCaptcha',
+                'Resuelve correctamente la suma del captcha.');
+        }
+
+        // --- Recoger todos los errores sin detener las comprobaciones ---
+        function obtenerErrores() {
+            const errores = [];
+            if (!comprobarNombre()) errores.push('Nombre: debe tener entre 2 y 100 caracteres.');
+            if (!comprobarDireccion()) errores.push('Dirección: debe tener entre 2 y 100 caracteres.');
+            if (!comprobarCodigoPostal()) errores.push('Código postal: introduce uno válido de España.');
+            if (!comprobarCiudad()) errores.push('Ciudad: debe tener entre 2 y 100 caracteres.');
+            if (!comprobarDocumento()) errores.push('Documento: el NIF, NIE o CIF es incorrecto.');
+            if (!comprobarEmail()) errores.push('Email: introduce un correo válido.');
+            if (!comprobarCaptcha()) errores.push('Captcha: la suma es incorrecta.');
+
+            const filas = cuerpo.querySelectorAll('tr');
+            if (filas.length === 0) errores.push('La factura debe tener al menos una línea.');
+            filas.forEach((fila, indice) => {
+                if (!comprobarLinea(fila, true)) {
+                    errores.push('Línea ' + (indice + 1) + ': revisa cantidad, descripción y precio.');
+                }
+            });
+            return errores;
+        }
+
+        // --- Modal Bootstrap creado desde el script ---
+        const modal = crearElemento('div', 'modal fade');
+        modal.id = 'modalFactura';
+        modal.tabIndex = -1;
+        modal.setAttribute('aria-hidden', 'true');
+        const dialogo = crearElemento('div', 'modal-dialog modal-lg modal-dialog-scrollable');
+        const contenidoModal = crearElemento('div', 'modal-content');
+        const cabeceraModal = crearElemento('div', 'modal-header');
+        const tituloModal = crearElemento('h2', 'modal-title fs-5');
+        tituloModal.id = 'tituloModalFactura';
+        modal.setAttribute('aria-labelledby', tituloModal.id);
+        const cerrarX = crearElemento('button', 'btn-close');
+        cerrarX.type = 'button';
+        cerrarX.setAttribute('data-bs-dismiss', 'modal');
+        cerrarX.setAttribute('aria-label', 'Cerrar');
+        cabeceraModal.append(tituloModal, cerrarX);
+        const cuerpoModal = crearElemento('div', 'modal-body');
+        const pieModal = crearElemento('div', 'modal-footer');
+        const cerrar = crearElemento('button', 'btn btn-danger', 'Cerrar');
+        cerrar.type = 'button';
+        cerrar.setAttribute('data-bs-dismiss', 'modal');
+        pieModal.appendChild(cerrar);
+        contenidoModal.append(cabeceraModal, cuerpoModal, pieModal);
+        dialogo.appendChild(contenidoModal);
+        modal.appendChild(dialogo);
+        document.body.appendChild(modal);
+
+        function anadirDato(contenedor, etiqueta, valor) {
+            const parrafo = crearElemento('p', 'mb-1');
+            const titulo = crearElemento('strong', '', etiqueta + ': ');
+            parrafo.append(titulo, document.createTextNode(valor));
+            contenedor.appendChild(parrafo);
+        }
+
+        // --- Mostrar errores o el resumen de factura en el modal ---
+        function mostrarModalFactura() {
+            const errores = obtenerErrores();
+            cuerpoModal.innerHTML = ''; 
+
+            if (errores.length > 0) {
+                tituloModal.textContent = 'Errores en la factura';
+                cuerpoModal.appendChild(crearElemento('p', 'text-danger fw-bold',
+                    'No se puede generar la factura. Corrige lo siguiente:'));
+                const lista = crearElemento('ul', 'mb-0');
+                errores.forEach(error => lista.appendChild(crearElemento('li', '', error)));
+                cuerpoModal.appendChild(lista);
+            } else {
+                tituloModal.textContent = 'Factura generada correctamente';
+                cuerpoModal.appendChild(crearElemento('h3', 'h5', 'Datos del cliente'));
+                anadirDato(cuerpoModal, 'Nombre', nombre.value.trim());
+                anadirDato(cuerpoModal, 'Dirección', direccion.value.trim());
+                anadirDato(cuerpoModal, 'Código postal', codigoPostal.value.trim());
+                anadirDato(cuerpoModal, 'Provincia', provincia.value);
+                anadirDato(cuerpoModal, 'Ciudad', ciudad.value.trim());
+                anadirDato(cuerpoModal, 'NIF / NIE / CIF', documento.value.trim().toUpperCase());
+                anadirDato(cuerpoModal, 'Email', email.value.trim());
+                cuerpoModal.appendChild(crearElemento('h3', 'h5 mt-3', 'Líneas de factura'));
+                const listaLineas = crearElemento('ol', 'ps-3');
+                cuerpo.querySelectorAll('tr').forEach(fila => {
+                    const importes = calcularImportesLinea(fila);
+                    const cantidad = fila.querySelector('.quantity-input').value;
+                    const descripcion = fila.querySelector('.description-input').value.trim();
+                    const precio = fila.querySelector('.price-input').value;
+                    const iva = fila.querySelector('.vat-select').value;
+                    const li = crearElemento('li', 'mb-2');
+                    li.textContent = descripcion + ' — ' + cantidad + ' × ' +
+                        formatearMoneda(aNumero(precio)) + ' — IVA ' + iva + '% — ' +
+                        formatearMoneda(importes.total);
+                    listaLineas.appendChild(li);
+                });
+                cuerpoModal.appendChild(listaLineas);
+                cuerpoModal.appendChild(crearElemento('h3', 'h5 mt-3', 'Totales por IVA'));
+                [4, 10, 21].forEach(iva => {
+                    anadirDato(cuerpoModal, 'IVA ' + iva + '%',
+                        'Base ' + salidasTotales[iva].base.textContent +
+                        ' · Cuota ' + salidasTotales[iva].cuota.textContent);
+                });
+                cuerpoModal.appendChild(crearElemento('p', 'fw-bold fs-5 mt-3', totalFactura.textContent));
+            }
+            bootstrap.Modal.getOrCreateInstance(modal).show();
+        }
+
         // --- Conexión de los eventos, como en el ejercicio del profesor ---
         botonAnadir.addEventListener('click', anadirFila);
         // Se usa el tbody porque las filas nuevas se crean después de iniciar la página.
@@ -420,6 +597,16 @@
         cuerpo.addEventListener('focusout', comprobarSalidaCampo);
         cuerpo.addEventListener('change', comprobarCambioIva);
         cuerpo.addEventListener('click', comprobarBorrado);
+
+        // --- Validaciones inline y botón Enviar ---
+        nombre.addEventListener('input', comprobarNombre);
+        direccion.addEventListener('input', comprobarDireccion);
+        codigoPostal.addEventListener('input', comprobarCodigoPostal);
+        ciudad.addEventListener('input', comprobarCiudad);
+        documento.addEventListener('input', comprobarDocumento);
+        email.addEventListener('input', comprobarEmail);
+        captcha.addEventListener('input', comprobarCaptcha);
+        botonEnviar.addEventListener('click', mostrarModalFactura);
 
         // La factura empieza con una fila vacía.
         anadirFila();
