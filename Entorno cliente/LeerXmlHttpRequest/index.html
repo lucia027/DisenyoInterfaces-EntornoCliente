@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Provincias</title>
+</head>
+<body>
+
+    <h1>Listado de provincias</h1>
+    <div id="out"></div>
+
+
+    <h1>Listado de provincias</h1>
+    <div id="out"></div>
+
+    <script>
+        function xmlXhr(out) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'provincias.xml');
+            xhr.overrideMimeType('text/xml');
+
+            xhr.onload = function () {
+                const xml = xhr.responseXML;
+                const provincias = xml.getElementsByTagName('provincia');
+                const ul = document.createElement('ul');
+
+                for (const provincia of provincias) {
+                    const codigo = provincia.getElementsByTagName('codigo')[0].textContent;
+                    const nombre = provincia.getElementsByTagName('nombre')[0].textContent;
+
+                    const li = document.createElement('li');
+                    li.textContent = codigo + ' — ' + nombre;
+                    ul.appendChild(li);
+                }
+
+                out.replaceChildren(ul);
+            };
+
+            xhr.send();
+        }
+
+        xmlXhr(document.getElementById('out'));
+    </script>
+
+</body>
+</html>
