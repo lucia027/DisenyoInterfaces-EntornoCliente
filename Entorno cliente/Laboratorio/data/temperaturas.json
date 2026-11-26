@@ -1,0 +1,419 @@
+
+[
+    {
+        "code": "01",
+        "provincia": "Araba/Álava",
+        "capital": "Vitoria-Gasteiz",
+        "lat": 42.8467,
+        "lng": -2.6727,
+        "temperatura": 14
+    },
+    {
+        "code": "02",
+        "provincia": "Albacete",
+        "capital": "Albacete",
+        "lat": 38.9942,
+        "lng": -1.8564,
+        "temperatura": 24
+    },
+    {
+        "code": "03",
+        "provincia": "Alicante",
+        "capital": "Alicante",
+        "lat": 38.3452,
+        "lng": -0.4810,
+        "temperatura": 27
+    },
+    {
+        "code": "04",
+        "provincia": "Almería",
+        "capital": "Almería",
+        "lat": 36.8340,
+        "lng": -2.4637,
+        "temperatura": 29
+    },
+    {
+        "code": "05",
+        "provincia": "Ávila",
+        "capital": "Ávila",
+        "lat": 40.6565,
+        "lng": -4.6818,
+        "temperatura": 9
+    },
+    {
+        "code": "06",
+        "provincia": "Badajoz",
+        "capital": "Badajoz",
+        "lat": 38.8794,
+        "lng": -6.9707,
+        "temperatura": 28
+    },
+    {
+        "code": "07",
+        "provincia": "Illes Balears",
+        "capital": "Palma",
+        "lat": 39.5696,
+        "lng": 2.6502,
+        "temperatura": 24
+    },
+    {
+        "code": "08",
+        "provincia": "Barcelona",
+        "capital": "Barcelona",
+        "lat": 41.3874,
+        "lng": 2.1686,
+        "temperatura": 22
+    },
+    {
+        "code": "09",
+        "provincia": "Burgos",
+        "capital": "Burgos",
+        "lat": 42.3440,
+        "lng": -3.6969,
+        "temperatura": 9
+    },
+    {
+        "code": "10",
+        "provincia": "Cáceres",
+        "capital": "Cáceres",
+        "lat": 39.4753,
+        "lng": -6.3724,
+        "temperatura": 22
+    },
+    {
+        "code": "11",
+        "provincia": "Cádiz",
+        "capital": "Cádiz",
+        "lat": 36.5271,
+        "lng": -6.2886,
+        "temperatura": 28
+    },
+    {
+        "code": "12",
+        "provincia": "Castellón",
+        "capital": "Castellón de la Plana",
+        "lat": 39.9864,
+        "lng": -0.0513,
+        "temperatura": 23
+    },
+    {
+        "code": "13",
+        "provincia": "Ciudad Real",
+        "capital": "Ciudad Real",
+        "lat": 38.9848,
+        "lng": -3.9274,
+        "temperatura": 25
+    },
+    {
+        "code": "14",
+        "provincia": "Córdoba",
+        "capital": "Córdoba",
+        "lat": 37.8882,
+        "lng": -4.7794,
+        "temperatura": 34
+    },
+    {
+        "code": "15",
+        "provincia": "A Coruña",
+        "capital": "A Coruña",
+        "lat": 43.3623,
+        "lng": -8.4115,
+        "temperatura": 17
+    },
+    {
+        "code": "16",
+        "provincia": "Cuenca",
+        "capital": "Cuenca",
+        "lat": 40.0704,
+        "lng": -2.1374,
+        "temperatura": 17
+    },
+    {
+        "code": "17",
+        "provincia": "Girona",
+        "capital": "Girona",
+        "lat": 41.9794,
+        "lng": 2.8214,
+        "temperatura": 20
+    },
+    {
+        "code": "18",
+        "provincia": "Granada",
+        "capital": "Granada",
+        "lat": 37.1773,
+        "lng": -3.5986,
+        "temperatura": 24
+    },
+    {
+        "code": "19",
+        "provincia": "Guadalajara",
+        "capital": "Guadalajara",
+        "lat": 40.6333,
+        "lng": -3.1669,
+        "temperatura": 15
+    },
+    {
+        "code": "20",
+        "provincia": "Gipuzkoa",
+        "capital": "Donostia-San Sebastián",
+        "lat": 43.3183,
+        "lng": -1.9812,
+        "temperatura": 17
+    },
+    {
+        "code": "21",
+        "provincia": "Huelva",
+        "capital": "Huelva",
+        "lat": 37.2614,
+        "lng": -6.9447,
+        "temperatura": 27
+    },
+    {
+        "code": "22",
+        "provincia": "Huesca",
+        "capital": "Huesca",
+        "lat": 42.1401,
+        "lng": -0.4089,
+        "temperatura": 14
+    },
+    {
+        "code": "23",
+        "provincia": "Jaén",
+        "capital": "Jaén",
+        "lat": 37.7796,
+        "lng": -3.7849,
+        "temperatura": 31
+    },
+    {
+        "code": "24",
+        "provincia": "León",
+        "capital": "León",
+        "lat": 42.5987,
+        "lng": -5.5671,
+        "temperatura": 10
+    },
+    {
+        "code": "25",
+        "provincia": "Lleida",
+        "capital": "Lleida",
+        "lat": 41.6176,
+        "lng": 0.6200,
+        "temperatura": 16
+    },
+    {
+        "code": "26",
+        "provincia": "La Rioja",
+        "capital": "Logroño",
+        "lat": 42.4627,
+        "lng": -2.4449,
+        "temperatura": 16
+    },
+    {
+        "code": "27",
+        "provincia": "Lugo",
+        "capital": "Lugo",
+        "lat": 43.0121,
+        "lng": -7.5559,
+        "temperatura": 13
+    },
+    {
+        "code": "28",
+        "provincia": "Madrid",
+        "capital": "Madrid",
+        "lat": 40.4168,
+        "lng": -3.7038,
+        "temperatura": 18
+    },
+    {
+        "code": "29",
+        "provincia": "Málaga",
+        "capital": "Málaga",
+        "lat": 36.7213,
+        "lng": -4.4214,
+        "temperatura": 29
+    },
+    {
+        "code": "30",
+        "provincia": "Murcia",
+        "capital": "Murcia",
+        "lat": 37.9922,
+        "lng": -1.1307,
+        "temperatura": 29
+    },
+    {
+        "code": "31",
+        "provincia": "Navarra",
+        "capital": "Pamplona",
+        "lat": 42.8125,
+        "lng": -1.6458,
+        "temperatura": 15
+    },
+    {
+        "code": "32",
+        "provincia": "Ourense",
+        "capital": "Ourense",
+        "lat": 42.3358,
+        "lng": -7.8639,
+        "temperatura": 18
+    },
+    {
+        "code": "33",
+        "provincia": "Asturias",
+        "capital": "Oviedo",
+        "lat": 43.3614,
+        "lng": -5.8494,
+        "temperatura": 15
+    },
+    {
+        "code": "34",
+        "provincia": "Palencia",
+        "capital": "Palencia",
+        "lat": 42.0096,
+        "lng": -4.5288,
+        "temperatura": 12
+    },
+    {
+        "code": "35",
+        "provincia": "Las Palmas",
+        "capital": "Las Palmas de Gran Canaria",
+        "lat": 28.1235,
+        "lng": -15.4363,
+        "temperatura": 25
+    },
+    {
+        "code": "36",
+        "provincia": "Pontevedra",
+        "capital": "Pontevedra",
+        "lat": 42.4310,
+        "lng": -8.6444,
+        "temperatura": 21
+    },
+    {
+        "code": "37",
+        "provincia": "Salamanca",
+        "capital": "Salamanca",
+        "lat": 40.9701,
+        "lng": -5.6635,
+        "temperatura": 13
+    },
+    {
+        "code": "38",
+        "provincia": "Santa Cruz de Tenerife",
+        "capital": "Santa Cruz de Tenerife",
+        "lat": 28.4636,
+        "lng": -16.2518,
+        "temperatura": 27
+    },
+    {
+        "code": "39",
+        "provincia": "Cantabria",
+        "capital": "Santander",
+        "lat": 43.4623,
+        "lng": -3.8099,
+        "temperatura": 16
+    },
+    {
+        "code": "40",
+        "provincia": "Segovia",
+        "capital": "Segovia",
+        "lat": 40.9429,
+        "lng": -4.1088,
+        "temperatura": 14
+    },
+    {
+        "code": "41",
+        "provincia": "Sevilla",
+        "capital": "Sevilla",
+        "lat": 37.3891,
+        "lng": -5.9845,
+        "temperatura": 32
+    },
+    {
+        "code": "42",
+        "provincia": "Soria",
+        "capital": "Soria",
+        "lat": 41.7636,
+        "lng": -2.4649,
+        "temperatura": 8
+    },
+    {
+        "code": "43",
+        "provincia": "Tarragona",
+        "capital": "Tarragona",
+        "lat": 41.1189,
+        "lng": 1.2445,
+        "temperatura": 24
+    },
+    {
+        "code": "44",
+        "provincia": "Teruel",
+        "capital": "Teruel",
+        "lat": 40.3457,
+        "lng": -1.1065,
+        "temperatura": 4
+    },
+    {
+        "code": "45",
+        "provincia": "Toledo",
+        "capital": "Toledo",
+        "lat": 39.8628,
+        "lng": -4.0273,
+        "temperatura": 21
+    },
+    {
+        "code": "46",
+        "provincia": "Valencia",
+        "capital": "Valencia",
+        "lat": 39.4699,
+        "lng": -0.3763,
+        "temperatura": 26
+    },
+    {
+        "code": "47",
+        "provincia": "Valladolid",
+        "capital": "Valladolid",
+        "lat": 41.6523,
+        "lng": -4.7245,
+        "temperatura": 16
+    },
+    {
+        "code": "48",
+        "provincia": "Bizkaia",
+        "capital": "Bilbao",
+        "lat": 43.2630,
+        "lng": -2.9350,
+        "temperatura": 18
+    },
+    {
+        "code": "49",
+        "provincia": "Zamora",
+        "capital": "Zamora",
+        "lat": 41.5035,
+        "lng": -5.7467,
+        "temperatura": 11
+    },
+    {
+        "code": "50",
+        "provincia": "Zaragoza",
+        "capital": "Zaragoza",
+        "lat": 41.6488,
+        "lng": -0.8891,
+        "temperatura": 19
+    },
+    {
+        "code": "51",
+        "provincia": "Ceuta",
+        "capital": "Ceuta",
+        "lat": 35.8894,
+        "lng": -5.3213,
+        "temperatura": 30
+    },
+    {
+        "code": "52",
+        "provincia": "Melilla",
+        "capital": "Melilla",
+        "lat": 35.2923,
+        "lng": -2.9381,
+        "temperatura": 28
+    }
+]

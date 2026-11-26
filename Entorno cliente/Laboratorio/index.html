@@ -1,0 +1,104 @@
+<head>
+  <link rel="stylesheet" href="lib/leaflet.css">
+  <style>
+    #mapa { height: clamp(380px, 62vh, 680px); }      /* ¡sin altura no hay mapa! */
+    .mk { display: grid; place-items: center;         /* marcador con el valor dentro */
+          width: 38px; height: 38px; border-radius: 50%;
+          font-weight: 800; border: 2px solid #0b1433; }
+    .mk.azul, .mk.rojo { color: #fff; }               /* texto blanco sobre colores oscuros */
+  </style>
+</head>
+<body>
+  <div id="mapa"></div>
+
+    <div id="mapa"></div>
+    <div id="datos"></div>
+
+  <script src="lib/leaflet.js"></script>   <!-- primero Leaflet -->
+  <script>
+    let mapa, capaProvincias, capaMarcadores, geojson, original = [], datos = [], modo = 'ambos';
+    const porCodigo = {};   // code → dato de temperatura
+    const marcadores = {};  // code → marcador
+
+    const TRAMOS = [
+        { hasta: 10, color: '#3498db', clase: 'azul' },
+        { hasta: 20, color: '#2ecc71', clase: 'verde' },
+        { hasta: 25, color: '#f1c40f', clase: 'amarillo' },
+        { hasta: 30, color: '#e67e22', clase: 'naranja' },
+        { hasta: Infinity, color: '#e74c3c', clase: 'rojo' }
+    ];
+    
+    function crearMapa() {
+      // Sin capa de teselas: el fondo lo pone el GeoJSON de provincias
+      mapa = L.map('mapa', { zoomSnap: 0.25, attributionControl: true });
+      mapa.attributionControl.setPrefix('Leaflet');
+      mapa.attributionControl.addAttribution('Límites: IGN vía es-atlas');
+      mapa.fitBounds([[35.6, -9.6], [43.9, 4.4]]);
+    }
+    async function cargarJSON(url) {
+      const respuesta = await fetch(url);
+      if (!respuesta.ok) throw new Error('No se pudo cargar ' + url + ' (' + respuesta.status + ')');
+      return await respuesta.json();
+    }
+
+    async function iniciar() {
+        crearMapa();
+
+        try {
+            [geojson, original] = await Promise.all([
+                cargarJSON('data/provincias.geojson'),
+                cargarJSON('data/temperaturas.json')
+            ]);
+
+            datos = original.map(d => ({ ...d }));
+
+            datos.forEach(d => porCodigo[d.code] = d);
+
+            pintarProvincias();
+
+            // pintarMarcadores();
+            // actualizarResumen();
+
+        } catch (error) {
+            document.getElementById('datos').textContent =
+                'Error: ' + error.message;
+        }
+    }
+
+
+    function tramoDe(temperatura) {
+      return TRAMOS.find(t => temperatura <= t.hasta);
+    }
+
+    function estiloProvincia(feature) {
+      const dato = porCodigo[feature.properties.code];
+      const colorear = modo !== 'marcadores' && dato;
+      return {
+        fillColor: colorear ? tramoDe(dato.temperatura).color : '#1f2d63',
+        fillOpacity: colorear ? 0.85 : 1,
+        color: '#0b1433',   // borde
+        weight: 1
+      };
+    }
+
+    function pintarProvincias() {
+      capaProvincias = L.geoJSON(geojson, {
+        style: estiloProvincia,
+        onEachFeature: (feature, capa) => {
+          capa.bindTooltip(() => {
+            const dato = porCodigo[feature.properties.code];
+            return feature.properties.nombre + (dato ? ' · ' + dato.temperatura + ' °C' : '');
+          }, { sticky: true });
+          capa.on('mouseover', () => capa.setStyle({ weight: 3, color: '#eef1fb' }));
+          capa.on('mouseout', () => capaProvincias.resetStyle(capa));
+          capa.on('click', () => irA(feature.properties.code));
+        }
+      }).addTo(mapa);
+    }
+    
+    fs.writeFileSync('data/provincias.geojson', JSON.stringify(geo));
+
+    iniciar();
+
+  </script>       <!-- después el nuestro -->
+</body>
